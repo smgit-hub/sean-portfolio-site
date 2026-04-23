@@ -1,0 +1,103 @@
+---
+const colorMap: Record<string, string> = {
+  green: '#00ff88',
+  blue:  '#00b4ff',
+  red:   '#ff3366',
+};
+
+const groups = [
+  {
+    label: 'Front-End',
+    color: 'green',
+    icon: '◈',
+    skills: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'Responsive Design', 'Accessibility'],
+  },
+  {
+    label: 'Frameworks & Libraries',
+    color: 'blue',
+    icon: '◉',
+    skills: ['React', 'Astro', 'Next.js', 'Tailwind CSS', 'Bootstrap'],
+  },
+  {
+    label: 'CMS & Platforms',
+    color: 'green',
+    icon: '◈',
+    skills: ['WordPress', 'Sanity', 'Headless CMS'],
+  },
+  {
+    label: 'Back End & Data',
+    color: 'blue',
+    icon: '◉',
+    skills: ['APIs & REST', 'Databases', 'Supabase', 'PHP', 'Node.js (learning)', 'SQL (learning)'],
+  },
+  {
+    label: 'Tooling & Workflow',
+    color: 'red',
+    icon: '◇',
+    skills: ['VS Code', 'Git & GitHub', 'npm / pnpm', 'Command Line'],
+  },
+  {
+    label: 'Deployment & Hosting',
+    color: 'blue',
+    icon: '◉',
+    skills: ['Vercel', 'Netlify', 'Domain & DNS'],
+  },
+  {
+    label: 'AI-Assisted Workflow',
+    color: 'red',
+    icon: '◇',
+    skills: ['Claude Code', 'ChatGPT', 'Codex', 'AI-assisted debugging'],
+  },
+];
+---
+
+<section id="skills" class="section-padding relative overflow-hidden">
+  <!-- Background -->
+  <div
+    class="absolute bottom-0 left-0 w-[600px] h-[400px] pointer-events-none"
+    style="background: radial-gradient(ellipse at 0% 100%, rgba(0,255,136,0.04), transparent 60%);"
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Label -->
+    <div class="flex items-center gap-3 mb-4 reveal">
+      <span class="font-mono text-neon-green/60 text-xs tracking-widest uppercase">02 / Skills</span>
+      <span class="flex-1 max-w-[60px] h-px bg-neon-green/20"></span>
+    </div>
+
+    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
+      Tech stack &amp; <span class="gradient-text-green-blue">capabilities</span>
+    </h2>
+    <p class="text-white/45 max-w-xl mb-14 reveal reveal-delay-1">
+      A working toolkit built through real projects — front-end foundations, modern frameworks, and an expanding back-end skill set.
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {groups.map((group, i) => {
+        const col = colorMap[group.color];
+        const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
+        return (
+          <div class={`reveal ${delayClass} glass glass-hover rounded-xl p-5 group border border-white/5`}>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="text-sm" style={`color: ${col}`}>{group.icon}</span>
+              <h3 class="font-display font-semibold text-sm text-white/80">{group.label}</h3>
+            </div>
+            <ul class="space-y-2">
+              {group.skills.map((skill) => (
+                <li class="flex items-center gap-2 text-sm text-white/50 group-hover:text-white/60 transition-colors duration-300">
+                  <span class="w-1 h-1 rounded-full flex-shrink-0" style={`background: ${col}; opacity: 0.6;`}></span>
+                  {skill}
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Proficiency note -->
+    <p class="mt-10 text-xs text-white/25 font-mono reveal">
+      // Skills marked "learning" reflect active study — not production-ready, but in progress.
+    </p>
+  </div>
+</section>

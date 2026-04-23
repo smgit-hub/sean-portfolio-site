@@ -1,0 +1,111 @@
+---
+const links = [
+  { href: '#about',     label: 'About'    },
+  { href: '#skills',    label: 'Skills'   },
+  { href: '#projects',  label: 'Projects' },
+  { href: '#education', label: 'Education'},
+  { href: '#process',   label: 'Process'  },
+  { href: '#contact',   label: 'Contact'  },
+];
+---
+
+<nav
+  id="main-nav"
+  class="fixed top-0 left-0 right-0 z-50 border-b border-transparent"
+>
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Logo -->
+    <a
+      href="#"
+      class="font-display font-bold text-lg tracking-tight group flex items-center gap-2"
+    >
+      <span class="w-2 h-2 rounded-full bg-neon-green shadow-glow-sm-green animate-glow-pulse inline-block"></span>
+      <span class="text-white group-hover:text-neon-green transition-colors duration-300">SM</span>
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="hidden md:flex items-center gap-8">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="text-sm font-medium text-white/60 hover:text-neon-green transition-colors duration-300 relative group"
+          >
+            {link.label}
+            <span class="absolute -bottom-0.5 left-0 w-0 h-px bg-neon-green group-hover:w-full transition-all duration-300"></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA -->
+    <a
+      href="#contact"
+      class="hidden md:inline-flex items-center gap-2 text-sm font-medium px-4 py-1.5 rounded-full border border-neon-green/30 text-neon-green hover:border-neon-green hover:shadow-glow-sm-green transition-all duration-300"
+    >
+      Hire me
+    </a>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="nav-toggle"
+      class="md:hidden text-white/60 hover:text-white transition-colors p-2"
+      aria-label="Toggle menu"
+    >
+      <svg id="icon-open" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+      <svg id="icon-close" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="hidden">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden bg-black/95 backdrop-blur-xl border-t border-white/5 px-6 pb-6 pt-4"
+  >
+    <ul class="flex flex-col gap-4">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="mobile-link text-base font-medium text-white/70 hover:text-neon-green transition-colors duration-200 block"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a
+      href="#contact"
+      class="mobile-link mt-6 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full border border-neon-green/30 text-neon-green"
+    >
+      Hire me
+    </a>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu   = document.getElementById('mobile-menu');
+  const open   = document.getElementById('icon-open');
+  const close  = document.getElementById('icon-close');
+
+  toggle?.addEventListener('click', () => {
+    const isHidden = menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden', !isHidden);
+    open?.classList.toggle('hidden', !isHidden);
+    close?.classList.toggle('hidden', isHidden);
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.mobile-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+      open?.classList.remove('hidden');
+      close?.classList.add('hidden');
+    });
+  });
+</script>

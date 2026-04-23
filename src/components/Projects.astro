@@ -1,0 +1,186 @@
+---
+const projects = [
+  {
+    title:   'Level Design Australia',
+    type:    'Client Website',
+    status:  'live',
+    summary: 'A professional website for a Melbourne-based design and construction firm. Built with a focus on clean presentation, clear service communication, and strong SEO foundations.',
+    stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
+    url:     'https://leveldesign.com.au/',
+    accent:  'green',
+  },
+  {
+    title:   'Cosy Cowes Getaway',
+    type:    'Accommodation Booking Site',
+    status:  'live',
+    summary: 'A fully functional holiday rental website for a property on Phillip Island. Handles property presentation, availability information, and guest enquiries.',
+    stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
+    url:     'https://cosycowesgetaway.com/',
+    accent:  'blue',
+  },
+  {
+    title:   'Worth a Watch',
+    type:    'Web Application',
+    status:  'live',
+    summary: 'A movie and TV series discovery app utilising two APIs, OMDb and Watchmode. Search any title and get back details, ratings, cast, and where to watch — all rendered dynamically without a page reload.',
+    stack:   ['Next.js', 'React', 'Tailwind CSS'],
+    url:     'https://worth-a-watch.netlify.app/',
+    accent:  'red',
+  },
+  {
+    title:   'Auto Sales Training Module',
+    type:    'Interactive Web App',
+    status:  'in-progress',
+    summary: 'A structured training tool for automotive sales teams. Covers product knowledge, sales techniques, and compliance — presented as a modular, interactive learning experience.',
+    stack:   ['React', 'JavaScript', 'Tailwind CSS'],
+    url:     null,
+    accent:  'green',
+  },
+  {
+    title:   'Traffic Management Site',
+    type:    'Industry Website',
+    status:  'in-progress',
+    summary: 'A service and compliance website for a traffic management company. Focuses on clear service presentation, regulatory information, and lead generation for a trade audience.',
+    stack:   ['Astro', 'Tailwind CSS', 'Sanity CMS'],
+    url:     null,
+    accent:  'blue',
+  },
+];
+
+const accentMap: Record<string, { border: string; tag: string; glow: string; dot: string }> = {
+  green: {
+    border: 'rgba(0,255,136,0.2)',
+    tag:    'green',
+    glow:   'rgba(0,255,136,0.1)',
+    dot:    '#00ff88',
+  },
+  blue: {
+    border: 'rgba(0,180,255,0.2)',
+    tag:    'blue',
+    glow:   'rgba(0,180,255,0.1)',
+    dot:    '#00b4ff',
+  },
+  red: {
+    border: 'rgba(255,51,102,0.2)',
+    tag:    'red',
+    glow:   'rgba(255,51,102,0.08)',
+    dot:    '#ff3366',
+  },
+};
+---
+
+<section id="projects" class="section-padding relative overflow-hidden">
+  <div
+    class="absolute top-1/4 right-0 w-[400px] h-[400px] pointer-events-none"
+    style="background: radial-gradient(circle at 100% 50%, rgba(0,180,255,0.05), transparent 60%);"
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Label -->
+    <div class="flex items-center gap-3 mb-4 reveal">
+      <span class="font-mono text-neon-green/60 text-xs tracking-widest uppercase">03 / Projects</span>
+      <span class="flex-1 max-w-[60px] h-px bg-neon-green/20"></span>
+    </div>
+
+    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
+      Work I've <span class="gradient-text-green-blue">shipped</span>
+    </h2>
+    <p class="text-white/45 max-w-xl mb-14 reveal reveal-delay-1">
+      A mix of live client sites, personal apps, and projects currently in development.
+    </p>
+
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+      {projects.map((project, i) => {
+        const a = accentMap[project.accent];
+        const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
+        return (
+          <article
+            class={`reveal ${delayClass} group relative glass rounded-2xl p-6 flex flex-col border transition-all duration-400 cursor-default`}
+            style={`border-color: rgba(255,255,255,0.06);`}
+            data-accent={project.accent}
+          >
+            <!-- Hover glow overlay -->
+            <div
+              class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              style={`background: radial-gradient(ellipse at 50% 0%, ${a.glow}, transparent 70%);`}
+            ></div>
+
+            <!-- Top row -->
+            <div class="flex items-start justify-between mb-4">
+              <span
+                class="text-xs font-mono px-2.5 py-1 rounded-full border"
+                style={`color: ${a.dot}; border-color: ${a.border}; background: ${a.glow};`}
+              >
+                {project.type}
+              </span>
+              <span
+                class="flex items-center gap-1.5 text-xs font-medium"
+                style={`color: ${project.status === 'live' ? '#00ff88' : '#ff3366'};`}
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full animate-glow-pulse inline-block"
+                  style={`background: ${project.status === 'live' ? '#00ff88' : '#ff3366'};`}
+                ></span>
+                {project.status === 'live' ? 'Live' : 'In Progress'}
+              </span>
+            </div>
+
+            <!-- Title -->
+            <h3 class="font-display font-semibold text-lg text-white mb-2 group-hover:text-neon-green transition-colors duration-300">
+              {project.title}
+            </h3>
+
+            <!-- Summary -->
+            <p class="text-sm text-white/45 leading-relaxed mb-5 flex-1">
+              {project.summary}
+            </p>
+
+            <!-- Stack -->
+            <div class="flex flex-wrap gap-1.5 mb-5">
+              {project.stack.map((tech) => (
+                <span class={`tech-tag ${a.tag === 'green' ? '' : a.tag}`}>{tech}</span>
+              ))}
+            </div>
+
+            <!-- Link -->
+            {project.url ? (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-300 group/link"
+                style={`color: ${a.dot}; opacity: 0.7;`}
+              >
+                View live site
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">
+                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                </svg>
+              </a>
+            ) : (
+              <span class="text-sm text-white/20 font-medium">Work in progress</span>
+            )}
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Dynamic border color on hover
+  document.querySelectorAll('[data-accent]').forEach((card) => {
+    const el = card as HTMLElement;
+    const accent = el.dataset.accent;
+    const colorMap: Record<string, string> = {
+      green: 'rgba(0,255,136,0.3)',
+      blue:  'rgba(0,180,255,0.3)',
+      red:   'rgba(255,51,102,0.25)',
+    };
+    el.addEventListener('mouseenter', () => {
+      el.style.borderColor = colorMap[accent ?? 'green'] ?? '';
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.borderColor = 'rgba(255,255,255,0.06)';
+    });
+  });
+</script>

@@ -1,0 +1,95 @@
+---
+const stats = [
+  { value: '2+',    label: 'Years Building' },
+  { value: '5+',    label: 'Live Projects'  },
+  { value: '10+',   label: 'Technologies'   },
+  { value: '∞',     label: 'Always Learning'},
+];
+---
+
+<section id="about" class="section-padding relative overflow-hidden">
+  <!-- Background accent -->
+  <div
+    class="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
+    style="background: radial-gradient(circle at 80% 20%, rgba(0,180,255,0.05), transparent 60%);"
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Section label -->
+    <div class="flex items-center gap-3 mb-4 reveal">
+      <span class="font-mono text-neon-green/60 text-xs tracking-widest uppercase">01 / About</span>
+      <span class="flex-1 max-w-[60px] h-px bg-neon-green/20"></span>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: text -->
+      <div>
+        <h2 class="font-display text-4xl md:text-5xl font-bold leading-tight mb-6 reveal">
+          Building with purpose.<br />
+          <span class="gradient-text-green-blue">Growing with intention.</span>
+        </h2>
+
+        <div class="space-y-5 text-white/55 leading-relaxed reveal reveal-delay-1">
+          <p>
+            I'm a web developer based in Melbourne, currently completing a Diploma of Information Technology in Back End Web Development at Lumify Learn — building on a Certificate IV from Holmesglen TAFE I've already earned. More importantly, I've been shipping real work throughout my studies, not waiting until I'm "qualified" to start.
+          </p>
+          <p>
+            From live client sites to personal apps and tools, I approach every project with the same mindset: write clean code, design for the user, and continuously improve. I work across the full stack — comfortable with front-end interfaces and growing into databases, APIs, and server-side logic.
+          </p>
+          <p>
+            I use modern tools the way they're meant to be used, including AI assistants like Claude Code and ChatGPT as part of a considered workflow — not as a crutch, but as a genuine productivity layer for ideation, debugging, and iteration.
+          </p>
+        </div>
+
+        <div class="mt-8 flex items-center gap-4 reveal reveal-delay-2">
+          <a
+            href="#projects"
+            class="text-sm font-medium text-neon-green hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+          >
+            See what I've built
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover:translate-x-1">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: stats + code aesthetic -->
+      <div class="flex flex-col gap-5 reveal reveal-delay-1">
+        <!-- Stat grid -->
+        <div class="grid grid-cols-2 gap-4">
+          {stats.map((stat, i) => (
+            <div class="glass glass-hover rounded-xl p-5 glow-border group">
+              <p
+                class="font-display font-bold text-3xl mb-1 group-hover:text-glow-green transition-all duration-300"
+                style={`color: ${i % 2 === 0 ? '#00ff88' : '#00b4ff'}`}
+              >
+                {stat.value}
+              </p>
+              <p class="text-sm text-white/40 font-medium">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Code snippet aesthetic -->
+        <div class="glass rounded-xl p-5 font-mono text-xs leading-relaxed border border-white/5">
+          <div class="flex items-center gap-1.5 mb-4">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-500/60"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-yellow-400/60"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-green-400/60"></span>
+            <span class="ml-2 text-white/20 text-[10px]">developer.ts</span>
+          </div>
+          <div class="space-y-1">
+            <p><span class="text-neon-blue/70">const</span> <span class="text-white/70">developer</span> <span class="text-white/30">=</span> <span class="text-white/30">&#123;</span></p>
+            <p>&nbsp;&nbsp;<span class="text-neon-green/70">name</span><span class="text-white/30">:</span> <span class="text-orange-300/70">'Sean Millard'</span><span class="text-white/30">,</span></p>
+            <p>&nbsp;&nbsp;<span class="text-neon-green/70">location</span><span class="text-white/30">:</span> <span class="text-orange-300/70">'Melbourne, AU'</span><span class="text-white/30">,</span></p>
+            <p>&nbsp;&nbsp;<span class="text-neon-green/70">status</span><span class="text-white/30">:</span> <span class="text-orange-300/70">'available'</span><span class="text-white/30">,</span></p>
+            <p>&nbsp;&nbsp;<span class="text-neon-green/70">focus</span><span class="text-white/30">:</span> <span class="text-orange-300/70">'full-stack web'</span><span class="text-white/30">,</span></p>
+            <p>&nbsp;&nbsp;<span class="text-neon-green/70">learning</span><span class="text-white/30">:</span> <span class="text-neon-blue/70">true</span><span class="text-white/30">,</span></p>
+            <p><span class="text-white/30">&#125;;</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-white/5 py-10">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <span class="w-1.5 h-1.5 rounded-full bg-neon-green animate-glow-pulse"></span>
+      <span class="font-display font-bold text-white/70 text-sm">Sean Millard</span>
+    </div>
+
+    <p class="text-xs text-white/25 font-mono text-center">
+      &copy; {year} — Built with Astro &amp; Tailwind CSS
+    </p>
+
+    <a
+      href="#hero"
+      class="group flex items-center gap-2 text-xs text-white/30 hover:text-neon-green transition-colors duration-300 font-mono"
+    >
+      Back to top
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover:-translate-y-1">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+      </svg>
+    </a>
+  </div>
+</footer>

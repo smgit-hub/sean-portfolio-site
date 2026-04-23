@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero       from '../components/Hero.astro';
+import About      from '../components/About.astro';
+import Skills     from '../components/Skills.astro';
+import Projects   from '../components/Projects.astro';
+import Education  from '../components/Education.astro';
+import Process    from '../components/Process.astro';
+import Contact    from '../components/Contact.astro';
+import Footer     from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<BaseLayout
+  title="Sean Millard — Web Developer"
+  description="Web developer building modern websites and web applications. Melbourne, Australia."
+>
+  <Navigation />
+  <main>
+    <Hero />
+
+    <!-- Divider -->
+    <div class="relative h-px mx-auto max-w-7xl px-6">
+      <div class="h-px bg-gradient-to-r from-transparent via-neon-green/20 to-transparent"></div>
+    </div>
+
+    <About />
+
+    <div class="relative h-px mx-auto max-w-7xl px-6">
+      <div class="h-px bg-gradient-to-r from-transparent via-neon-blue/15 to-transparent"></div>
+    </div>
+
+    <Skills />
+
+    <div class="relative h-px mx-auto max-w-7xl px-6">
+      <div class="h-px bg-gradient-to-r from-transparent via-neon-green/15 to-transparent"></div>
+    </div>
+
+    <Projects />
+
+    <div class="relative h-px mx-auto max-w-7xl px-6">
+      <div class="h-px bg-gradient-to-r from-transparent via-neon-blue/15 to-transparent"></div>
+    </div>
+
+    <Education />
+
+    <div class="relative h-px mx-auto max-w-7xl px-6">
+      <div class="h-px bg-gradient-to-r from-transparent via-neon-red/15 to-transparent"></div>
+    </div>
+
+    <Process />
+
+    <div class="relative h-px mx-auto max-w-7xl px-6">
+      <div class="h-px bg-gradient-to-r from-transparent via-neon-green/20 to-transparent"></div>
+    </div>
+
+    <Contact />
+  </main>
+  <Footer />
+</BaseLayout>

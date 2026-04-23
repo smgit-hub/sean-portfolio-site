@@ -1,0 +1,100 @@
+---
+---
+
+<section
+  id="hero"
+  class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black"
+>
+  <!-- Background grid -->
+  <div class="absolute inset-0 bg-grid opacity-40 pointer-events-none"></div>
+
+  <!-- Ambient glow blobs -->
+  <div
+    class="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full pointer-events-none"
+    style="background: radial-gradient(circle, rgba(0,255,136,0.07) 0%, transparent 70%);"
+  ></div>
+  <div
+    class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full pointer-events-none"
+    style="background: radial-gradient(circle, rgba(0,180,255,0.07) 0%, transparent 70%);"
+  ></div>
+  <div
+    class="absolute top-[30%] right-[20%] w-[300px] h-[300px] rounded-full pointer-events-none"
+    style="background: radial-gradient(circle, rgba(255,51,102,0.04) 0%, transparent 70%);"
+  ></div>
+
+  <!-- Scanline strip -->
+  <div
+    class="absolute left-0 right-0 h-px pointer-events-none animate-scan opacity-80"
+    style="background: linear-gradient(90deg, transparent, rgba(0,255,136,1), transparent);"
+  ></div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-5xl mx-auto px-6 pb-24 text-center">
+    <!-- Status badge -->
+    <div class="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full border border-neon-green/20 bg-neon-green/5 text-sm font-mono text-neon-green/80 animate-fade-up">
+      <span class="w-1.5 h-1.5 rounded-full bg-neon-green animate-glow-pulse inline-block"></span>
+      Available for work
+    </div>
+
+    <!-- Name -->
+    <h1 class="font-display font-bold leading-none mb-3 animate-fade-up" style="font-size: clamp(2.8rem, 9vw, 6rem); animation-delay: 0.1s;">
+      <span class="block text-white">Sean</span>
+      <span class="block gradient-text">Millard</span>
+    </h1>
+
+    <!-- Title -->
+    <div class="flex items-center justify-center gap-3 mb-5 animate-fade-up" style="animation-delay: 0.2s;">
+      <span class="w-8 h-px bg-neon-green/40"></span>
+      <span class="font-mono text-neon-green/70 text-sm tracking-widest uppercase">Web Developer</span>
+      <span class="w-8 h-px bg-neon-green/40"></span>
+    </div>
+
+    <!-- Tagline -->
+    <p class="max-w-xl mx-auto text-white/55 text-base leading-relaxed mb-8 animate-fade-up" style="animation-delay: 0.3s;">
+      I build fast, secure websites and web applications — clean code, thoughtful design, and a genuine focus on craft. Currently completing a Diploma in Back End Development and shipping real work alongside it.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-wrap items-center justify-center gap-4 animate-fade-up" style="animation-delay: 0.4s;">
+      <a
+        href="#projects"
+        class="group relative inline-flex items-center gap-2 px-7 py-3 rounded-full bg-neon-green text-black font-semibold text-sm transition-all duration-300 hover:shadow-glow-green hover:scale-105"
+      >
+        View my work
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform duration-300 group-hover:translate-x-1">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a
+        href="#contact"
+        class="group inline-flex items-center gap-2 px-7 py-3 rounded-full border border-white/15 text-white/70 font-medium text-sm transition-all duration-300 hover:border-neon-blue/40 hover:text-neon-blue hover:shadow-glow-blue"
+      >
+        Get in touch
+      </a>
+    </div>
+
+    <!-- Tech hint row -->
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-3 animate-fade-up" style="animation-delay: 0.55s;">
+      {['Astro', 'React', 'Next.js', 'Tailwind', 'JavaScript', 'WordPress'].map((t) => (
+        <span class="tech-tag">{t}</span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-2 animate-float">
+    <span class="text-xs font-mono text-neon-green/70 tracking-widest uppercase">Scroll</span>
+    <div class="w-px h-10 bg-gradient-to-b from-neon-green/60 to-transparent"></div>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-up {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+</style>
