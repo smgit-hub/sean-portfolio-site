@@ -11,3 +11,7 @@ yarn-error.log*
 .env
 .env.*
 !.env.example
+
+# Local tooling/build caches
+.netlify/
+.playwright-browsers/
