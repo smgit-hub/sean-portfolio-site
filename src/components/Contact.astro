@@ -86,7 +86,6 @@ const links = [
           class="glass rounded-2xl p-7 border border-white/5 space-y-5"
         >
           <input type="hidden" name="form-name" value="contact" />
-          <input type="hidden" name="subject" value="New portfolio contact form submission" />
           <p class="hidden" aria-hidden="true">
             <label>
               Don't fill this out
@@ -144,13 +143,16 @@ const links = [
 
           <button
             type="submit"
-            class="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-neon-green text-black font-semibold text-sm transition-all duration-300 hover:shadow-glow-green hover:scale-[1.02] active:scale-[0.98]"
+            class="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-neon-green text-black font-semibold text-sm transition-all duration-300 hover:shadow-glow-green hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+            data-submit-button
           >
             Send message
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
             </svg>
           </button>
+
+          <p class="text-xs text-white/40 text-center font-mono min-h-[1rem]" data-form-status aria-live="polite"></p>
 
           <p class="text-xs text-white/25 text-center font-mono">
             // Contact form enabled with spam honeypot protection.
@@ -160,3 +162,68 @@ const links = [
     </div>
   </div>
 </section>
+
+<script>
+  const contactForm = document.querySelector('#contact-form');
+
+  if (contactForm instanceof HTMLFormElement) {
+    const submitButton = contactForm.querySelector('[data-submit-button]');
+    const statusText = contactForm.querySelector('[data-form-status]');
+
+    const defaultLabel = submitButton instanceof HTMLButtonElement ? submitButton.innerHTML : '';
+
+    const setStatus = (message, tone = 'neutral') => {
+      if (!(statusText instanceof HTMLElement)) return;
+      statusText.textContent = message;
+
+      statusText.classList.remove('text-white/40', 'text-neon-green/80', 'text-red-300');
+      if (tone === 'success') statusText.classList.add('text-neon-green/80');
+      if (tone === 'error') statusText.classList.add('text-red-300');
+      if (tone === 'neutral') statusText.classList.add('text-white/40');
+    };
+
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (!(submitButton instanceof HTMLButtonElement)) return;
+      if (submitButton.disabled) return;
+
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+      setStatus('Submitting your message...', 'neutral');
+
+      const formData = new FormData(contactForm);
+      const encoded = new URLSearchParams();
+
+      for (const [key, value] of formData.entries()) {
+        if (typeof value === 'string') encoded.append(key, value);
+      }
+
+      try {
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: encoded.toString(),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Unexpected status: ${response.status}`);
+        }
+
+        setStatus('Message sent. Redirecting...', 'success');
+        contactForm.reset();
+        submitButton.textContent = 'Sent';
+
+        window.setTimeout(() => {
+          window.location.assign('/thank-you');
+        }, 700);
+      } catch {
+        submitButton.disabled = false;
+        submitButton.innerHTML = defaultLabel;
+        setStatus('Could not send right now. Please try again in a moment.', 'error');
+      }
+    });
+  }
+</script>
