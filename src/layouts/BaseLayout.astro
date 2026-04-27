@@ -68,19 +68,9 @@ const {
           requestAnimationFrame(animate);
         };
 
-        document.addEventListener('mousemove', (e) => {
+        document.addEventListener('pointermove', (e) => {
           updateTarget(e.clientX, e.clientY);
         });
-        document.addEventListener(
-          'touchmove',
-          (e) => {
-            const touch = e.touches[0];
-            if (touch) {
-              updateTarget(touch.clientX, touch.clientY);
-            }
-          },
-          { passive: true }
-        );
 
         animate();
       }

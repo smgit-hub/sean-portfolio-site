@@ -161,3 +161,8 @@ body {
   color: rgba(255,51,102,0.8);
   border-color: rgba(255,51,102,0.15);
 }
+.tech-tag.red:hover {
+  background: rgba(255,51,102,0.15);
+  border-color: rgba(255,51,102,0.4);
+  box-shadow: 0 0 8px rgba(255,51,102,0.2);
+}

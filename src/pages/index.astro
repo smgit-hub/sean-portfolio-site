@@ -10,6 +10,16 @@ import Process    from '../components/Process.astro';
 import Contact    from '../components/Contact.astro';
 import Footer     from '../components/Footer.astro';
 import '../styles/global.css';
+
+const sections = [
+  { Component: Hero, divider: 'via-neon-green/20' },
+  { Component: About, divider: 'via-neon-blue/15' },
+  { Component: Skills, divider: 'via-neon-green/15' },
+  { Component: Projects, divider: 'via-neon-blue/15' },
+  { Component: Education, divider: 'via-neon-red/15' },
+  { Component: Process, divider: 'via-neon-green/20' },
+  { Component: Contact, divider: null },
+];
 ---
 
 <BaseLayout
@@ -18,44 +28,16 @@ import '../styles/global.css';
 >
   <Navigation />
   <main>
-    <Hero />
-
-    <!-- Divider -->
-    <div class="relative h-px mx-auto max-w-7xl px-6">
-      <div class="h-px bg-gradient-to-r from-transparent via-neon-green/20 to-transparent"></div>
-    </div>
-
-    <About />
-
-    <div class="relative h-px mx-auto max-w-7xl px-6">
-      <div class="h-px bg-gradient-to-r from-transparent via-neon-blue/15 to-transparent"></div>
-    </div>
-
-    <Skills />
-
-    <div class="relative h-px mx-auto max-w-7xl px-6">
-      <div class="h-px bg-gradient-to-r from-transparent via-neon-green/15 to-transparent"></div>
-    </div>
-
-    <Projects />
-
-    <div class="relative h-px mx-auto max-w-7xl px-6">
-      <div class="h-px bg-gradient-to-r from-transparent via-neon-blue/15 to-transparent"></div>
-    </div>
-
-    <Education />
-
-    <div class="relative h-px mx-auto max-w-7xl px-6">
-      <div class="h-px bg-gradient-to-r from-transparent via-neon-red/15 to-transparent"></div>
-    </div>
-
-    <Process />
-
-    <div class="relative h-px mx-auto max-w-7xl px-6">
-      <div class="h-px bg-gradient-to-r from-transparent via-neon-green/20 to-transparent"></div>
-    </div>
-
-    <Contact />
+    {sections.map(({ Component, divider }) => (
+      <>
+        <Component />
+        {divider && (
+          <div class="relative h-px mx-auto max-w-7xl px-6">
+            <div class={`h-px bg-gradient-to-r from-transparent ${divider} to-transparent`}></div>
+          </div>
+        )}
+      </>
+    ))}
   </main>
   <Footer />
 </BaseLayout>

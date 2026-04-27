@@ -1,49 +1,64 @@
 ---
 const projects = [
   {
-    title:   'Level Design Australia',
-    type:    'Client Website',
+    title:   'Andrea Flower Shop',
+    type:    'Multilingual Client Website',
     status:  'live',
-    summary: 'A professional website for a Melbourne-based design and construction firm. Built with a focus on clean presentation, clear service communication, and strong SEO foundations.',
+    summary: 'A multilingual website for a flower shop focused on lead generation and strong SEO foundations, helping attract local customers and convert visits into enquiries.',
+    image: '/images/projects/pages/andrea-1.jpg',
+    stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
+    url:     'https://kvetinarstvoandrea.com/',
+    accent:  'green',
+  },
+  {
+    title:   'Level Design Australia',
+    type:    'Custom Timber Furniture Website',
+    status:  'live',
+    summary: 'A professional website for a custom timber furniture business. Built with a focus on clean presentation, clear service communication, and strong SEO foundations.',
+    image: '/images/projects/pages/level-1.jpg',
     stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
     url:     'https://leveldesign.com.au/',
-    accent:  'green',
+    accent:  'blue',
   },
   {
     title:   'Cosy Cowes Getaway',
     type:    'Accommodation Booking Site',
     status:  'live',
     summary: 'A fully functional holiday rental website for a property on Phillip Island. Handles property presentation, availability information, and guest enquiries.',
+    image: '/images/projects/pages/cosy-1.jpg',
     stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
     url:     'https://cosycowesgetaway.com/',
-    accent:  'blue',
+    accent:  'red',
   },
   {
     title:   'Worth a Watch',
     type:    'Web Application',
     status:  'live',
-    summary: 'A movie and TV series discovery app utilising two APIs, OMDb and Watchmode. Search any title and get back details, ratings, cast, and where to watch — all rendered dynamically without a page reload.',
+    summary: 'A movie and TV series discovery app utilising OMDb and Watchmode APIs, plus OpenAI to generate tailored watch recommendations from qualifying user questions. Search any title and get details, ratings, cast, and where to watch — all rendered dynamically without a page reload.',
+    image: '/images/projects/pages/worth-1.jpg',
     stack:   ['Next.js', 'React', 'Tailwind CSS'],
     url:     'https://worth-a-watch.netlify.app/',
-    accent:  'red',
+    accent:  'green',
   },
   {
     title:   'Auto Sales Training Module',
     type:    'Interactive Web App',
     status:  'in-progress',
     summary: 'A structured training tool for automotive sales teams. Covers product knowledge, sales techniques, and compliance — presented as a modular, interactive learning experience.',
+    image: '/images/projects/pages/auto-sales-1.jpg',
     stack:   ['React', 'JavaScript', 'Tailwind CSS'],
     url:     null,
-    accent:  'green',
+    accent:  'blue',
   },
   {
     title:   'Traffic Management Site',
     type:    'Industry Website',
     status:  'in-progress',
     summary: 'A service and compliance website for a traffic management company. Focuses on clear service presentation, regulatory information, and lead generation for a trade audience.',
-    stack:   ['Astro', 'Tailwind CSS', 'Sanity CMS'],
+    image: '/images/projects/pages/traffic-1.jpg',
+    stack:   ['Next.js', 'Tailwind CSS', 'Sanity CMS'],
     url:     null,
-    accent:  'blue',
+    accent:  'red',
   },
 ];
 
@@ -95,15 +110,30 @@ const accentMap: Record<string, { border: string; tag: string; glow: string; dot
         const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
         return (
           <article
-            class={`reveal ${delayClass} group relative glass rounded-2xl p-6 flex flex-col border transition-all duration-400 cursor-default`}
-            style={`border-color: rgba(255,255,255,0.06);`}
-            data-accent={project.accent}
+            class={`project-card reveal ${delayClass} group relative glass rounded-2xl p-6 flex flex-col border transition-all duration-400 cursor-default`}
+            style={`--project-border: ${a.border}; border-color: rgba(255,255,255,0.06);`}
           >
             <!-- Hover glow overlay -->
             <div
               class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
               style={`background: radial-gradient(ellipse at 50% 0%, ${a.glow}, transparent 70%);`}
             ></div>
+
+            <!-- Project thumbnail -->
+            <div class="project-thumb mb-5" style={`--shot-color: ${a.dot};`}>
+              {project.image ? (
+                <img
+                  src={project.image}
+                  alt={`${project.title} preview`}
+                  loading="lazy"
+                  class="project-shot-image"
+                />
+              ) : (
+                <div class="project-shot">
+                  <span>Coming Soon</span>
+                </div>
+              )}
+            </div>
 
             <!-- Top row -->
             <div class="flex items-start justify-between mb-4">
@@ -166,21 +196,72 @@ const accentMap: Record<string, { border: string; tag: string; glow: string; dot
   </div>
 </section>
 
-<script>
-  // Dynamic border color on hover
-  document.querySelectorAll('[data-accent]').forEach((card) => {
-    const el = card as HTMLElement;
-    const accent = el.dataset.accent;
-    const colorMap: Record<string, string> = {
-      green: 'rgba(0,255,136,0.3)',
-      blue:  'rgba(0,180,255,0.3)',
-      red:   'rgba(255,51,102,0.25)',
-    };
-    el.addEventListener('mouseenter', () => {
-      el.style.borderColor = colorMap[accent ?? 'green'] ?? '';
-    });
-    el.addEventListener('mouseleave', () => {
-      el.style.borderColor = 'rgba(255,255,255,0.06)';
-    });
-  });
-</script>
+<style>
+  .project-card:hover {
+    border-color: var(--project-border);
+  }
+
+  .project-thumb {
+    height: 160px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    border: 1px solid color-mix(in oklab, var(--shot-color) 26%, white 6%);
+    background:
+      radial-gradient(100% 70% at 10% 0%, color-mix(in oklab, var(--shot-color) 28%, transparent), transparent 70%),
+      linear-gradient(140deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.01) 50%, rgba(0, 0, 0, 0.12)),
+      #0b0f0d;
+  }
+
+  .project-shot {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .project-shot::before,
+  .project-thumb::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    left: 0.55rem;
+    width: 2.1rem;
+    height: 0.3rem;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--shot-color) 55%, #ffffff 12%);
+    opacity: 0.7;
+  }
+
+  .project-shot::after,
+  .project-thumb::after {
+    content: '';
+    position: absolute;
+    inset: auto 0.55rem 0.65rem;
+    height: 0.34rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .project-shot span {
+    position: absolute;
+    left: 0.58rem;
+    bottom: 1.2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.66);
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+    z-index: 2;
+  }
+
+  .project-shot-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    opacity: 0.9;
+  }
+</style>

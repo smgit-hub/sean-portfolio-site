@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">SM Logo</title>
+  <defs>
+    <linearGradient id="smStroke" x1="6" y1="6" x2="38" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00ff88" />
+      <stop offset="1" stop-color="#00b4ff" />
+    </linearGradient>
+  </defs>
+
+  <rect x="1.5" y="1.5" width="41" height="41" rx="11" fill="#020604" />
+  <rect x="1.5" y="1.5" width="41" height="41" rx="11" fill="none" stroke="url(#smStroke)" stroke-width="1.5" opacity="0.75" />
+
+  <path
+    d="M18.9 12C17.7 10.9 16.1 10.3 14.3 10.3C11.7 10.3 10 11.6 10 13.7C10 15.6 11.4 16.7 14.1 17.2L15.9 17.5C18 17.9 19.1 18.8 19.1 20.4C19.1 22.6 17.2 24.1 14.5 24.1C12.5 24.1 10.8 23.4 9.5 22.1"
+    fill="none"
+    stroke="#00ff88"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <circle cx="16.7" cy="30.7" r="2.2" fill="#00ff88" />
+  <path
+    d="M24 32V11L28.5 20L33 11V32"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
