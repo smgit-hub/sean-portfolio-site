@@ -146,7 +146,7 @@ const links = [
             class="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-neon-green text-black font-semibold text-sm transition-all duration-300 hover:shadow-glow-green hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
             data-submit-button
           >
-            Send message
+            <span data-submit-label>Send message</span>
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
             </svg>
@@ -168,9 +168,9 @@ const links = [
 
   if (contactForm instanceof HTMLFormElement) {
     const submitButton = contactForm.querySelector('[data-submit-button]');
+    const submitLabel = contactForm.querySelector('[data-submit-label]');
     const statusText = contactForm.querySelector('[data-form-status]');
-
-    const defaultLabel = submitButton instanceof HTMLButtonElement ? submitButton.innerHTML : '';
+    const defaultLabel = submitLabel instanceof HTMLElement ? submitLabel.textContent : 'Send message';
 
     const setStatus = (message, tone = 'neutral') => {
       if (!(statusText instanceof HTMLElement)) return;
@@ -187,9 +187,10 @@ const links = [
 
       if (!(submitButton instanceof HTMLButtonElement)) return;
       if (submitButton.disabled) return;
+      if (!(submitLabel instanceof HTMLElement)) return;
 
       submitButton.disabled = true;
-      submitButton.textContent = 'Sending...';
+      submitLabel.textContent = 'Sending...';
       setStatus('Submitting your message...', 'neutral');
 
       const formData = new FormData(contactForm);
@@ -214,14 +215,14 @@ const links = [
 
         setStatus('Message sent. Redirecting...', 'success');
         contactForm.reset();
-        submitButton.textContent = 'Sent';
+        submitLabel.textContent = 'Sent';
 
         window.setTimeout(() => {
           window.location.assign('/thank-you');
         }, 700);
       } catch {
         submitButton.disabled = false;
-        submitButton.innerHTML = defaultLabel;
+        submitLabel.textContent = defaultLabel;
         setStatus('Could not send right now. Please try again in a moment.', 'error');
       }
     });
