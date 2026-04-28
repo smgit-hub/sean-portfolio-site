@@ -24,7 +24,7 @@
 
   <!-- Scanline strip -->
   <div
-    class="absolute left-0 right-0 h-px pointer-events-none animate-scan opacity-80"
+    class="hero-scan-line absolute left-0 right-0 h-px pointer-events-none opacity-80"
     style="background: linear-gradient(90deg, transparent, rgba(0,255,136,1), transparent);"
   ></div>
 
@@ -96,5 +96,15 @@
   .animate-fade-up {
     opacity: 0;
     animation: fadeUp 0.7s ease forwards;
+  }
+
+  @keyframes heroScan {
+    from { top: 0; }
+    to { top: calc(100% - 1px); }
+  }
+
+  .hero-scan-line {
+    top: 0;
+    animation: heroScan 8s linear infinite;
   }
 </style>

@@ -11,7 +11,7 @@ const links = [
 
 <nav
   id="main-nav"
-  class="fixed top-0 left-0 right-0 z-50 border-b border-transparent"
+  class="fixed top-0 left-0 right-0 z-50 border-b border-transparent bg-transparent transition-all duration-300"
 >
   <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
     <!-- Logo -->
@@ -97,6 +97,17 @@ const links = [
   const menu   = document.getElementById('mobile-menu');
   const open   = document.getElementById('icon-open');
   const close  = document.getElementById('icon-close');
+  const nav    = document.getElementById('main-nav');
+
+  const updateNavState = () => {
+    if (!(nav instanceof HTMLElement)) return;
+    const isScrolled = window.scrollY > 12;
+    nav.classList.toggle('bg-black/90', isScrolled);
+    nav.classList.toggle('backdrop-blur-xl', isScrolled);
+    nav.classList.toggle('border-white/10', isScrolled);
+    nav.classList.toggle('shadow-[0_8px_24px_rgba(0,0,0,0.35)]', isScrolled);
+    nav.classList.toggle('border-transparent', !isScrolled);
+  };
 
   toggle?.addEventListener('click', () => {
     const isHidden = menu?.classList.contains('hidden');
@@ -113,4 +124,7 @@ const links = [
       close?.classList.add('hidden');
     });
   });
+
+  updateNavState();
+  window.addEventListener('scroll', updateNavState, { passive: true });
 </script>

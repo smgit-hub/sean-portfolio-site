@@ -43,6 +43,8 @@ const colorMap: Record<string, string> = {
   blue:  '#00b4ff',
   red:   '#ff3366',
 };
+
+const colorOrder = ['green', 'blue', 'red'] as const;
 ---
 
 <section id="process" class="section-padding relative overflow-hidden">
@@ -67,7 +69,7 @@ const colorMap: Record<string, string> = {
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {steps.map((step, i) => {
-        const col = colorMap[step.color];
+        const col = colorMap[colorOrder[i % colorOrder.length]];
         const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
         return (
           <div class={`reveal ${delayClass} group glass glass-hover rounded-2xl p-6 border border-white/5`}>

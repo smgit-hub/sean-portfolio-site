@@ -1,16 +1,6 @@
 ---
 const projects = [
   {
-    title:   'Andrea Flower Shop',
-    type:    'Multilingual Client Website',
-    status:  'live',
-    summary: 'A multilingual website for a flower shop focused on lead generation and strong SEO foundations, helping attract local customers and convert visits into enquiries.',
-    image: '/images/projects/pages/andrea-1.jpg',
-    stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
-    url:     'https://kvetinarstvoandrea.com/',
-    accent:  'green',
-  },
-  {
     title:   'Level Design Australia',
     type:    'Custom Timber Furniture Website',
     status:  'live',
@@ -21,16 +11,6 @@ const projects = [
     accent:  'blue',
   },
   {
-    title:   'Cosy Cowes Getaway',
-    type:    'Accommodation Booking Site',
-    status:  'live',
-    summary: 'A holiday rental website for a property on Phillip Island. Handles property presentation, availability information, and guest enquiries.',
-    image: '/images/projects/pages/cosy-1.jpg',
-    stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
-    url:     'https://cosycowesgetaway.com/',
-    accent:  'red',
-  },
-  {
     title:   'Worth a Watch',
     type:    'Web Application',
     status:  'live',
@@ -39,6 +19,26 @@ const projects = [
     stack:   ['Next.js', 'React', 'Tailwind CSS'],
     url:     'https://worth-a-watch.netlify.app/',
     accent:  'green',
+  },
+  {
+    title:   'Andrea Flower Shop',
+    type:    'Multilingual Client Website',
+    status:  'live',
+    summary: 'A multilingual website for a flower shop focused on lead generation and strong SEO foundations, helping attract local customers and convert visits into enquiries.',
+    image: '/images/projects/pages/andrea-1.jpg',
+    stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
+    url:     'https://kvetinarstvoandrea.com/en/',
+    accent:  'green',
+  },
+  {
+    title:   'Cosy Cowes Getaway',
+    type:    'Accomodation Website',
+    status:  'live',
+    summary: 'A holiday rental website for a property on Phillip Island. Handles property presentation, availability information, and guest enquiries.',
+    image: '/images/projects/pages/cosy-1.jpg',
+    stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
+    url:     'https://cosycowesgetaway.com/',
+    accent:  'red',
   },
   {
     title:   'Automotive Sales Resources & Training Hub',
@@ -52,7 +52,7 @@ const projects = [
   },
   {
     title:   'Traffic Management Site',
-    type:    'Industry Website',
+    type:    'Website + Dashboard',
     status:  'in-progress',
     summary: 'A traffic signal fault reporting platform with an operations dashboard to triage issues, assign contractors, and track repairs through to verified completion.',
     image: '/images/projects/pages/traffic-1.jpg',
@@ -82,6 +82,8 @@ const accentMap: Record<string, { border: string; tag: string; glow: string; dot
     dot:    '#ff3366',
   },
 };
+
+const accentOrder = ['green', 'blue', 'red'] as const;
 ---
 
 <section id="projects" class="section-padding relative overflow-hidden">
@@ -106,7 +108,7 @@ const accentMap: Record<string, { border: string; tag: string; glow: string; dot
 
     <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
       {projects.map((project, i) => {
-        const a = accentMap[project.accent];
+        const a = accentMap[accentOrder[i % accentOrder.length]];
         const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
         return (
           <article
@@ -202,7 +204,7 @@ const accentMap: Record<string, { border: string; tag: string; glow: string; dot
   }
 
   .project-thumb {
-    height: 160px;
+    height: 200px;
     position: relative;
     overflow: hidden;
     border-radius: 0.75rem;
@@ -262,6 +264,8 @@ const accentMap: Record<string, { border: string; tag: string; glow: string; dot
     height: 100%;
     object-fit: cover;
     object-position: top center;
+    transform: scale(0.94);
+    transform-origin: top center;
     opacity: 0.9;
   }
 </style>
