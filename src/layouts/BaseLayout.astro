@@ -8,6 +8,8 @@ const {
   title = 'Sean Millard — Web Developer',
   description = 'Web developer building modern websites and web applications. Based in Melbourne, Australia.',
 } = Astro.props;
+
+const GA_MEASUREMENT_ID = 'G-PB0Z7X9EK2';
 ---
 
 <!doctype html>
@@ -33,6 +35,17 @@ const {
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+    <script is:inline>
+      {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${GA_MEASUREMENT_ID}');
+      `}
+    </script>
   </head>
 
   <body class="bg-black text-white antialiased overflow-x-hidden">
