@@ -53,12 +53,10 @@ const socialImageUrl = Astro.site ? new URL(image, Astro.site).toString() : new 
     <!-- Google tag (gtag.js) -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
     <script is:inline>
-      {`
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function(){window.dataLayer.push(arguments);};
-        window.gtag('js', new Date());
-        window.gtag('config', 'G-PB0Z7X9EK2');
-      `}
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){window.dataLayer.push(arguments);};
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-PB0Z7X9EK2');
     </script>
   </head>
 
