@@ -1,6 +1,4 @@
 ---
-const links = [];
-
 ---
 
 <section id="contact" class="section-padding relative overflow-hidden">
@@ -18,7 +16,7 @@ const links = [];
     </div>
 
     <div class="grid lg:grid-cols-2 gap-16 items-start">
-      <!-- Left: text + social links -->
+      <!-- Left: text -->
       <div>
         <h2 class="font-display text-4xl md:text-5xl font-bold leading-tight mb-6 reveal">
           Let's build<br />
@@ -34,31 +32,6 @@ const links = [];
           </p>
         </div>
 
-        <!-- Social links -->
-        <div class="space-y-3 reveal reveal-delay-2">
-          {links.map((link) => {
-            return (
-              <a
-                href={link.href}
-                target={link.label !== 'Email' ? '_blank' : undefined}
-                rel={link.label !== 'Email' ? 'noopener noreferrer' : undefined}
-                class="flex items-center gap-4 group glass glass-hover rounded-xl px-5 py-4 border border-white/5"
-              >
-                <span class="text-white/40 group-hover:text-white/80 transition-colors duration-300" set:html={link.icon}></span>
-                <div class="flex-1">
-                  <p class="text-xs text-white/30 font-mono mb-0.5">{link.label}</p>
-                  <p class="text-sm text-white/60 group-hover:text-white/80 transition-colors duration-300">{link.value}</p>
-                </div>
-                <svg
-                  width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
-                  class="text-white/20 group-hover:text-white/60 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                >
-                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                </svg>
-              </a>
-            );
-          })}
-        </div>
       </div>
 
       <!-- Right: contact form -->
@@ -149,9 +122,7 @@ const links = [];
 
           <p class="text-xs text-white/40 text-center font-mono min-h-[1rem]" data-form-status aria-live="polite"></p>
 
-          <p class="text-xs text-white/25 text-center font-mono">
-            // Contact form enabled with spam honeypot protection.
-          </p>
+          <p class="text-xs text-white/25 text-center font-mono">Spam honeypot enabled.</p>
         </form>
 
         <div
@@ -206,6 +177,73 @@ const links = [];
       return '';
     };
 
+    const setSubmittingState = (isSubmitting) => {
+      if (!(submitButton instanceof HTMLButtonElement) || !(submitLabel instanceof HTMLElement)) {
+        return;
+      }
+      submitButton.disabled = isSubmitting;
+      submitLabel.textContent = isSubmitting ? 'Sending...' : defaultLabel;
+    };
+
+    const showSuccessPanel = () => {
+      if (!(submitLabel instanceof HTMLElement)) return;
+      setStatus('Message sent successfully.', 'success');
+      contactForm.reset();
+      submitLabel.textContent = 'Sent';
+
+      if (successPanel instanceof HTMLElement) {
+        contactForm.classList.add('hidden');
+        successPanel.classList.remove('hidden');
+      }
+    };
+
+    const resetAfterSuccess = () => {
+      if (!(submitButton instanceof HTMLButtonElement) || !(submitLabel instanceof HTMLElement)) {
+        return;
+      }
+      contactForm.reset();
+      contactForm.classList.remove('hidden');
+      if (successPanel instanceof HTMLElement) successPanel.classList.add('hidden');
+      submitButton.disabled = false;
+      submitLabel.textContent = defaultLabel;
+      setStatus('', 'neutral');
+    };
+
+    const encodeForm = () => {
+      const encoded = new URLSearchParams();
+      for (const [key, value] of new FormData(contactForm).entries()) {
+        if (typeof value === 'string') encoded.append(key, value.trim());
+      }
+      return encoded.toString();
+    };
+
+    const validateForm = () => {
+      const nameValue = readField('name');
+      const emailValue = readField('email');
+      const subjectValue = readField('subject');
+      const messageValue = readField('message');
+      const botFieldValue = readField('bot-field');
+
+      if (botFieldValue) return false;
+      if (nameValue.length < 2) {
+        setStatus('Please enter your full name.', 'error');
+        return false;
+      }
+      if (!isValidEmail(emailValue)) {
+        setStatus('Please enter a valid email address.', 'error');
+        return false;
+      }
+      if (subjectValue.length > 0 && subjectValue.length < 3) {
+        setStatus('Subject should be at least 3 characters.', 'error');
+        return false;
+      }
+      if (messageValue.length < 20) {
+        setStatus('Message should be at least 20 characters.', 'error');
+        return false;
+      }
+      return true;
+    };
+
     contactForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
@@ -216,44 +254,10 @@ const links = [];
         contactForm.reportValidity();
         return;
       }
+      if (!validateForm()) return;
 
-      const nameValue = readField('name');
-      const emailValue = readField('email');
-      const subjectValue = readField('subject');
-      const messageValue = readField('message');
-      const botFieldValue = readField('bot-field');
-
-      if (botFieldValue) return;
-      if (nameValue.length < 2) {
-        setStatus('Please enter your full name.', 'error');
-        return;
-      }
-      if (!isValidEmail(emailValue)) {
-        setStatus('Please enter a valid email address.', 'error');
-        return;
-      }
-      if (subjectValue.length > 0 && subjectValue.length < 3) {
-        setStatus('Subject should be at least 3 characters.', 'error');
-        return;
-      }
-      if (messageValue.length < 20) {
-        setStatus('Message should be at least 20 characters.', 'error');
-        return;
-      }
-
-      submitButton.disabled = true;
-      submitLabel.textContent = 'Sending...';
+      setSubmittingState(true);
       setStatus('Submitting your message...', 'neutral');
-
-      const formData = new FormData(contactForm);
-      const encoded = new URLSearchParams();
-
-      for (const [key, value] of formData.entries()) {
-        if (typeof value === 'string') {
-          const trimmedValue = key === 'message' ? value.trim() : value.trim();
-          encoded.append(key, trimmedValue);
-        }
-      }
 
       try {
         const response = await fetch('/', {
@@ -261,36 +265,22 @@ const links = [];
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: encoded.toString(),
+          body: encodeForm(),
         });
 
         if (!response.ok) {
           throw new Error(`Unexpected status: ${response.status}`);
         }
 
-        setStatus('Message sent successfully.', 'success');
-        contactForm.reset();
-        submitLabel.textContent = 'Sent';
-        if (successPanel instanceof HTMLElement) {
-          contactForm.classList.add('hidden');
-          successPanel.classList.remove('hidden');
-        }
+        showSuccessPanel();
       } catch {
-        submitButton.disabled = false;
-        submitLabel.textContent = defaultLabel;
+        setSubmittingState(false);
         setStatus('Could not send right now. Please try again in a moment.', 'error');
       }
     });
 
     if (successCta instanceof HTMLAnchorElement) {
-      successCta.addEventListener('click', () => {
-        contactForm.reset();
-        contactForm.classList.remove('hidden');
-        if (successPanel instanceof HTMLElement) successPanel.classList.add('hidden');
-        submitButton.disabled = false;
-        submitLabel.textContent = defaultLabel;
-        setStatus('', 'neutral');
-      });
+      successCta.addEventListener('click', resetAfterSuccess);
     }
   }
 </script>

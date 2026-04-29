@@ -1,8 +1,8 @@
 ---
 const colorMap: Record<string, string> = {
   green: '#00ff88',
-  blue:  '#00b4ff',
-  red:   '#ff3366',
+  blue: '#00b4ff',
+  red: '#ff3366',
 };
 
 const groups = [
@@ -74,18 +74,18 @@ const groups = [
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {groups.map((group, i) => {
-        const col = colorMap[group.color];
+        const color = colorMap[group.color];
         const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
         return (
           <div class={`reveal ${delayClass} glass glass-hover rounded-xl p-5 group border border-white/5`}>
             <div class="flex items-center gap-2 mb-4">
-              <span class="text-sm" style={`color: ${col}`}>{group.icon}</span>
+              <span class="text-sm" style={`color: ${color}`}>{group.icon}</span>
               <h3 class="font-display font-semibold text-sm text-white/80">{group.label}</h3>
             </div>
             <ul class="space-y-2">
               {group.skills.map((skill) => (
                 <li class="flex items-center gap-2 text-sm text-white/50 group-hover:text-white/60 transition-colors duration-300">
-                  <span class="w-1 h-1 rounded-full flex-shrink-0" style={`background: ${col}; opacity: 0.6;`}></span>
+                  <span class="w-1 h-1 rounded-full flex-shrink-0" style={`background: ${color}; opacity: 0.6;`}></span>
                   {skill}
                 </li>
               ))}

@@ -25,6 +25,21 @@ const timeline = [
     ],
   },
 ];
+
+const statusStyles = {
+  completed: {
+    border: 'rgba(0,255,136,0.3)',
+    text: '#00ff88',
+    chipBorder: 'rgba(0,255,136,0.2)',
+    chipBg: 'rgba(0,255,136,0.05)',
+  },
+  'in-progress': {
+    border: 'rgba(0,180,255,0.3)',
+    text: '#00b4ff',
+    chipBorder: 'rgba(0,180,255,0.2)',
+    chipBg: 'rgba(0,180,255,0.05)',
+  },
+} as const;
 ---
 
 <section id="education" class="section-padding relative overflow-hidden">
@@ -53,12 +68,15 @@ const timeline = [
       <div class="hidden md:block absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-neon-green/30 via-neon-blue/20 to-transparent"></div>
 
       <div class="space-y-8">
-        {timeline.map((item, i) => (
-          <div class={`reveal reveal-delay-${i + 1} relative md:pl-20`}>
+        {timeline.map((item, i) => {
+          const statusStyle = statusStyles[item.status];
+          const statusLabel = item.status === 'completed' ? 'Completed' : 'In Progress';
+          return (
+            <div class={`reveal reveal-delay-${i + 1} relative md:pl-20`}>
             <!-- Timeline dot -->
             <div
               class="hidden md:flex absolute left-0 top-6 w-12 h-12 rounded-full glass border items-center justify-center"
-              style={`border-color: ${item.status === 'completed' ? 'rgba(0,255,136,0.3)' : 'rgba(0,180,255,0.3)'};`}
+              style={`border-color: ${statusStyle.border};`}
             >
               {item.status === 'completed' ? (
                 <svg width="16" height="16" fill="none" stroke="#00ff88" stroke-width="2.5" viewBox="0 0 24 24">
@@ -85,12 +103,12 @@ const timeline = [
                 <span
                   class="flex-shrink-0 text-xs font-mono px-3 py-1 rounded-full border"
                   style={`
-                    color: ${item.status === 'completed' ? '#00ff88' : '#00b4ff'};
-                    border-color: ${item.status === 'completed' ? 'rgba(0,255,136,0.2)' : 'rgba(0,180,255,0.2)'};
-                    background: ${item.status === 'completed' ? 'rgba(0,255,136,0.05)' : 'rgba(0,180,255,0.05)'};
+                    color: ${statusStyle.text};
+                    border-color: ${statusStyle.chipBorder};
+                    background: ${statusStyle.chipBg};
                   `}
                 >
-                  {item.status === 'completed' ? 'Completed' : 'In Progress'}
+                  {statusLabel}
                 </span>
               </div>
 
@@ -99,15 +117,16 @@ const timeline = [
                   <li class="flex items-start gap-3 text-sm text-white/45">
                     <span
                       class="mt-1.5 w-1 h-1 rounded-full flex-shrink-0"
-                      style={`background: ${item.status === 'completed' ? '#00ff88' : '#00b4ff'}; opacity: 0.6;`}
+                      style={`background: ${statusStyle.text}; opacity: 0.6;`}
                     ></span>
                     {point}
                   </li>
                 ))}
               </ul>
             </div>
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
     </div>
   </div>

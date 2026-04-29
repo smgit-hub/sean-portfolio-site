@@ -4,16 +4,16 @@
 
 /* ─── Base ──────────────────────────────────────────────── */
 :root {
-  --green:  #00ff88;
-  --blue:   #00b4ff;
-  --red:    #ff3366;
-  --bg:     #000000;
+  --green: #00ff88;
+  --blue: #00b4ff;
+  --red: #ff3366;
+  --bg: #000000;
 }
 
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: rgba(0,255,136,0.3) transparent;
+  scrollbar-color: rgba(0, 255, 136, 0.3) transparent;
 }
 
 body {
@@ -25,18 +25,18 @@ body {
 }
 
 /* ─── Scrollbar (WebKit) ─────────────────────────────────── */
-::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(0,255,136,0.25); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: rgba(0, 255, 136, 0.25); border-radius: 2px; }
 
 /* ─── Selection ─────────────────────────────────────────── */
-::selection { background: rgba(0,255,136,0.2); color: #00ff88; }
+::selection { background: rgba(0, 255, 136, 0.2); color: #00ff88; }
 
 /* ─── Reusable glow text ─────────────────────────────────── */
 @layer utilities {
-  .text-glow-green { text-shadow: 0 0 12px rgba(0,255,136,0.6); }
-  .text-glow-blue  { text-shadow: 0 0 12px rgba(0,180,255,0.6); }
-  .text-glow-red   { text-shadow: 0 0 12px rgba(255,51,102,0.6); }
+  .text-glow-green { text-shadow: 0 0 12px rgba(0, 255, 136, 0.6); }
+  .text-glow-blue  { text-shadow: 0 0 12px rgba(0, 180, 255, 0.6); }
+  .text-glow-red   { text-shadow: 0 0 12px rgba(255, 51, 102, 0.6); }
 
   .gradient-text {
     background: linear-gradient(135deg, #00ff88 0%, #00b4ff 50%, #ff3366 100%);
@@ -55,18 +55,18 @@ body {
   }
 
   .glass {
-    background: rgba(255,255,255,0.03);
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.07);
+    border: 1px solid rgba(255, 255, 255, 0.07);
   }
 
   .glass-hover {
     transition: background 0.3s ease, border-color 0.3s ease;
   }
   .glass-hover:hover {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(0,255,136,0.2);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(0, 255, 136, 0.2);
   }
 
   .section-padding {
@@ -94,8 +94,8 @@ body {
 /* ─── Grid background ────────────────────────────────────── */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
@@ -109,7 +109,7 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(0,255,136,0.4), rgba(0,180,255,0.2), rgba(255,51,102,0.2));
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.4), rgba(0, 180, 255, 0.2), rgba(255, 51, 102, 0.2));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -136,33 +136,33 @@ body {
   font-family: 'JetBrains Mono', monospace;
   letter-spacing: 0.03em;
   border-radius: 4px;
-  background: rgba(0,255,136,0.07);
-  color: rgba(0,255,136,0.8);
-  border: 1px solid rgba(0,255,136,0.15);
+  background: rgba(0, 255, 136, 0.07);
+  color: rgba(0, 255, 136, 0.8);
+  border: 1px solid rgba(0, 255, 136, 0.15);
   transition: all 0.2s ease;
 }
 .tech-tag:hover {
-  background: rgba(0,255,136,0.15);
-  border-color: rgba(0,255,136,0.4);
-  box-shadow: 0 0 8px rgba(0,255,136,0.2);
+  background: rgba(0, 255, 136, 0.15);
+  border-color: rgba(0, 255, 136, 0.4);
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.2);
 }
 .tech-tag.blue {
-  background: rgba(0,180,255,0.07);
-  color: rgba(0,180,255,0.8);
-  border-color: rgba(0,180,255,0.15);
+  background: rgba(0, 180, 255, 0.07);
+  color: rgba(0, 180, 255, 0.8);
+  border-color: rgba(0, 180, 255, 0.15);
 }
 .tech-tag.blue:hover {
-  background: rgba(0,180,255,0.15);
-  border-color: rgba(0,180,255,0.4);
-  box-shadow: 0 0 8px rgba(0,180,255,0.2);
+  background: rgba(0, 180, 255, 0.15);
+  border-color: rgba(0, 180, 255, 0.4);
+  box-shadow: 0 0 8px rgba(0, 180, 255, 0.2);
 }
 .tech-tag.red {
-  background: rgba(255,51,102,0.07);
-  color: rgba(255,51,102,0.8);
-  border-color: rgba(255,51,102,0.15);
+  background: rgba(255, 51, 102, 0.07);
+  color: rgba(255, 51, 102, 0.8);
+  border-color: rgba(255, 51, 102, 0.15);
 }
 .tech-tag.red:hover {
-  background: rgba(255,51,102,0.15);
-  border-color: rgba(255,51,102,0.4);
-  box-shadow: 0 0 8px rgba(255,51,102,0.2);
+  background: rgba(255, 51, 102, 0.15);
+  border-color: rgba(255, 51, 102, 0.4);
+  box-shadow: 0 0 8px rgba(255, 51, 102, 0.2);
 }

@@ -1,89 +1,87 @@
 ---
 const projects = [
   {
-    title:   'Level Design Australia',
-    type:    'Custom Timber Furniture Website',
-    status:  'live',
+    title: 'Level Design Australia',
+    type: 'Custom Timber Furniture Website',
+    status: 'live',
     summary: 'A professional website for a custom timber furniture business. Built with a focus on clean presentation, clear service communication, and strong SEO foundations.',
     image: '/images/projects/pages/level-1.jpg',
-    stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
-    url:     'https://leveldesign.com.au/',
-    accent:  'blue',
+    stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
+    url: 'https://leveldesign.com.au/',
   },
   {
-    title:   'Worth a Watch',
-    type:    'Web Application',
-    status:  'live',
+    title: 'Worth a Watch',
+    type: 'Web Application',
+    status: 'live',
     summary: 'A movie and TV series discovery app utilising OMDb and Watchmode APIs, plus OpenAI to generate tailored watch recommendations from qualifying user questions. Search any title and get details, ratings, cast, and where to watch — all rendered dynamically without a page reload.',
     image: '/images/projects/pages/worth-1.jpg',
-    stack:   ['Next.js', 'React', 'Tailwind CSS'],
-    url:     'https://worth-a-watch.netlify.app/',
-    accent:  'green',
+    stack: ['Next.js', 'React', 'Tailwind CSS'],
+    url: 'https://worth-a-watch.netlify.app/',
   },
   {
-    title:   'Andrea Flower Shop',
-    type:    'Multilingual Client Website',
-    status:  'live',
+    title: 'Andrea Flower Shop',
+    type: 'Multilingual Client Website',
+    status: 'live',
     summary: 'A multilingual website for a flower shop focused on lead generation and strong SEO foundations, helping attract local customers and convert visits into enquiries.',
     image: '/images/projects/pages/andrea-1.jpg',
-    stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
-    url:     'https://kvetinarstvoandrea.com/',
-    accent:  'green',
+    stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
+    url: 'https://kvetinarstvoandrea.com/',
   },
   {
-    title:   'Cosy Cowes Getaway',
-    type:    'Accomodation Website',
-    status:  'live',
+    title: 'Cosy Cowes Getaway',
+    type: 'Accommodation Website',
+    status: 'live',
     summary: 'A holiday rental website for a property on Phillip Island. Handles property presentation, availability information, and guest enquiries.',
     image: '/images/projects/pages/cosy-1.jpg',
-    stack:   ['Astro', 'Tailwind CSS', 'JavaScript'],
-    url:     'https://cosycowesgetaway.com/',
-    accent:  'red',
+    stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
+    url: 'https://cosycowesgetaway.com/',
   },
   {
-    title:   'Automotive Sales Resources & Training Hub',
-    type:    'Interactive Web App',
-    status:  'in-progress',
+    title: 'Automotive Sales Resources & Training Hub',
+    type: 'Interactive Web App',
+    status: 'in-progress',
     summary: 'A dedicated platform for automotive sales teams to access all resource videos and complete structured training modules with embedded videos and knowledge-check questions.',
     image: '/images/projects/pages/auto-sales-1.jpg',
-    stack:   ['React', 'JavaScript', 'Tailwind CSS'],
-    url:     null,
-    accent:  'blue',
+    stack: ['React', 'JavaScript', 'Tailwind CSS'],
+    url: null,
   },
   {
-    title:   'Traffic Management Site',
-    type:    'Website + Dashboard',
-    status:  'in-progress',
+    title: 'Traffic Management Site',
+    type: 'Website + Dashboard',
+    status: 'in-progress',
     summary: 'A traffic signal fault reporting platform with an operations dashboard to triage issues, assign contractors, and track repairs through to verified completion.',
     image: '/images/projects/pages/traffic-1.jpg',
-    stack:   ['Next.js', 'Tailwind CSS', 'Sanity CMS'],
-    url:     null,
-    accent:  'red',
+    stack: ['Next.js', 'Tailwind CSS', 'Sanity CMS'],
+    url: null,
   },
 ];
 
 const accentMap: Record<string, { border: string; tag: string; glow: string; dot: string }> = {
   green: {
     border: 'rgba(0,255,136,0.2)',
-    tag:    'green',
-    glow:   'rgba(0,255,136,0.1)',
-    dot:    '#00ff88',
+    tag: 'green',
+    glow: 'rgba(0,255,136,0.1)',
+    dot: '#00ff88',
   },
   blue: {
     border: 'rgba(0,180,255,0.2)',
-    tag:    'blue',
-    glow:   'rgba(0,180,255,0.1)',
-    dot:    '#00b4ff',
+    tag: 'blue',
+    glow: 'rgba(0,180,255,0.1)',
+    dot: '#00b4ff',
   },
   red: {
     border: 'rgba(255,51,102,0.2)',
-    tag:    'red',
-    glow:   'rgba(255,51,102,0.08)',
-    dot:    '#ff3366',
+    tag: 'red',
+    glow: 'rgba(255,51,102,0.08)',
+    dot: '#ff3366',
   },
 };
 
 const accentOrder = ['green', 'blue', 'red'] as const;
+const getProjectStatus = (status: string) =>
+  status === 'live'
+    ? { label: 'Live', color: '#00ff88' }
+    : { label: 'In Progress', color: '#ff3366' };
 ---
 
 <section id="projects" class="section-padding relative overflow-hidden">
@@ -108,21 +106,22 @@ const accentOrder = ['green', 'blue', 'red'] as const;
 
     <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
       {projects.map((project, i) => {
-        const a = accentMap[accentOrder[i % accentOrder.length]];
+        const accent = accentMap[accentOrder[i % accentOrder.length]];
+        const status = getProjectStatus(project.status);
         const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
         return (
           <article
             class={`project-card reveal ${delayClass} group relative glass rounded-2xl p-6 flex flex-col border transition-all duration-400 cursor-default`}
-            style={`--project-border: ${a.border}; border-color: rgba(255,255,255,0.06);`}
+            style={`--project-border: ${accent.border}; border-color: rgba(255,255,255,0.06);`}
           >
             <!-- Hover glow overlay -->
             <div
               class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-              style={`background: radial-gradient(ellipse at 50% 0%, ${a.glow}, transparent 70%);`}
+              style={`background: radial-gradient(ellipse at 50% 0%, ${accent.glow}, transparent 70%);`}
             ></div>
 
             <!-- Project thumbnail -->
-            <div class="project-thumb mb-5" style={`--shot-color: ${a.dot};`}>
+            <div class="project-thumb mb-5" style={`--shot-color: ${accent.dot};`}>
               {project.image ? (
                 <img
                   src={project.image}
@@ -141,19 +140,19 @@ const accentOrder = ['green', 'blue', 'red'] as const;
             <div class="flex items-start justify-between mb-4">
               <span
                 class="text-xs font-mono px-2.5 py-1 rounded-full border"
-                style={`color: ${a.dot}; border-color: ${a.border}; background: ${a.glow};`}
+                style={`color: ${accent.dot}; border-color: ${accent.border}; background: ${accent.glow};`}
               >
                 {project.type}
               </span>
               <span
                 class="flex items-center gap-1.5 text-xs font-medium"
-                style={`color: ${project.status === 'live' ? '#00ff88' : '#ff3366'};`}
+                style={`color: ${status.color};`}
               >
                 <span
                   class="w-1.5 h-1.5 rounded-full animate-glow-pulse inline-block"
-                  style={`background: ${project.status === 'live' ? '#00ff88' : '#ff3366'};`}
+                  style={`background: ${status.color};`}
                 ></span>
-                {project.status === 'live' ? 'Live' : 'In Progress'}
+                {status.label}
               </span>
             </div>
 
@@ -170,7 +169,7 @@ const accentOrder = ['green', 'blue', 'red'] as const;
             <!-- Stack -->
             <div class="flex flex-wrap gap-1.5 mb-5">
               {project.stack.map((tech) => (
-                <span class={`tech-tag ${a.tag === 'green' ? '' : a.tag}`}>{tech}</span>
+                <span class={`tech-tag ${accent.tag === 'green' ? '' : accent.tag}`}>{tech}</span>
               ))}
             </div>
 
@@ -181,7 +180,7 @@ const accentOrder = ['green', 'blue', 'red'] as const;
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-300 group/link"
-                style={`color: ${a.dot}; opacity: 0.7;`}
+                style={`color: ${accent.dot}; opacity: 0.7;`}
               >
                 View live site
                 <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">

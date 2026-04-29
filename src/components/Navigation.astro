@@ -1,11 +1,11 @@
 ---
 const links = [
-  { href: '#about',     label: 'About'    },
-  { href: '#skills',    label: 'Skills'   },
-  { href: '#projects',  label: 'Projects' },
-  { href: '#education', label: 'Education'},
-  { href: '#process',   label: 'Process'  },
-  { href: '#contact',   label: 'Contact'  },
+  { href: '#about', label: 'About' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#education', label: 'Education' },
+  { href: '#process', label: 'Process' },
+  { href: '#contact', label: 'Contact' },
 ];
 ---
 
@@ -93,38 +93,40 @@ const links = [
 </nav>
 
 <script>
-  const toggle = document.getElementById('nav-toggle');
-  const menu   = document.getElementById('mobile-menu');
-  const open   = document.getElementById('icon-open');
-  const close  = document.getElementById('icon-close');
-  const nav    = document.getElementById('main-nav');
+  const navToggleButton = document.getElementById('nav-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const openIcon = document.getElementById('icon-open');
+  const closeIcon = document.getElementById('icon-close');
+  const mainNav = document.getElementById('main-nav');
 
-  const updateNavState = () => {
-    if (!(nav instanceof HTMLElement)) return;
-    const isScrolled = window.scrollY > 12;
-    nav.classList.toggle('bg-black/90', isScrolled);
-    nav.classList.toggle('backdrop-blur-xl', isScrolled);
-    nav.classList.toggle('border-white/10', isScrolled);
-    nav.classList.toggle('shadow-[0_8px_24px_rgba(0,0,0,0.35)]', isScrolled);
-    nav.classList.toggle('border-transparent', !isScrolled);
+  const setMobileMenuOpen = (isOpen) => {
+    mobileMenu?.classList.toggle('hidden', !isOpen);
+    openIcon?.classList.toggle('hidden', isOpen);
+    closeIcon?.classList.toggle('hidden', !isOpen);
   };
 
-  toggle?.addEventListener('click', () => {
-    const isHidden = menu?.classList.contains('hidden');
-    menu?.classList.toggle('hidden', !isHidden);
-    open?.classList.toggle('hidden', !isHidden);
-    close?.classList.toggle('hidden', isHidden);
+  const updateNavState = () => {
+    if (!(mainNav instanceof HTMLElement)) return;
+    const isScrolled = window.scrollY > 12;
+    mainNav.classList.toggle('bg-black/90', isScrolled);
+    mainNav.classList.toggle('backdrop-blur-xl', isScrolled);
+    mainNav.classList.toggle('border-white/10', isScrolled);
+    mainNav.classList.toggle('shadow-[0_8px_24px_rgba(0,0,0,0.35)]', isScrolled);
+    mainNav.classList.toggle('border-transparent', !isScrolled);
+  };
+
+  navToggleButton?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.contains('hidden');
+    setMobileMenuOpen(Boolean(isOpen));
   });
 
-  // Close mobile menu on link click
   document.querySelectorAll('.mobile-link').forEach((link) => {
     link.addEventListener('click', () => {
-      menu?.classList.add('hidden');
-      open?.classList.remove('hidden');
-      close?.classList.add('hidden');
+      setMobileMenuOpen(false);
     });
   });
 
+  setMobileMenuOpen(false);
   updateNavState();
   window.addEventListener('scroll', updateNavState, { passive: true });
 </script>

@@ -12,8 +12,12 @@ const {
 } = Astro.props;
 
 const GA_MEASUREMENT_ID = 'G-PB0Z7X9EK2';
-const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.toString();
-const socialImageUrl = Astro.site ? new URL(image, Astro.site).toString() : new URL(image, Astro.url).toString();
+const canonicalUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).toString()
+  : Astro.url.toString();
+const socialImageUrl = Astro.site
+  ? new URL(image, Astro.site).toString()
+  : new URL(image, Astro.url).toString();
 ---
 
 <!doctype html>
@@ -54,7 +58,9 @@ const socialImageUrl = Astro.site ? new URL(image, Astro.site).toString() : new 
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function(){window.dataLayer.push(arguments);};
+      window.gtag = function gtag() {
+        window.dataLayer.push(arguments);
+      };
       window.gtag('js', new Date());
       window.gtag('config', 'G-PB0Z7X9EK2');
     </script>
@@ -72,9 +78,8 @@ const socialImageUrl = Astro.site ? new URL(image, Astro.site).toString() : new 
 
     <!-- Scroll reveal script -->
     <script>
-      // Pointer glow tracking
       const spotlight = document.getElementById('spotlight');
-      if (spotlight) {
+      if (spotlight instanceof HTMLElement) {
         let targetX = window.innerWidth / 2;
         let targetY = window.innerHeight / 2;
         let currentX = targetX;
@@ -85,64 +90,41 @@ const socialImageUrl = Astro.site ? new URL(image, Astro.site).toString() : new 
           targetY = y;
         };
 
-        const animate = () => {
+        const animateSpotlight = () => {
           currentX += (targetX - currentX) * 0.14;
           currentY += (targetY - currentY) * 0.14;
           spotlight.style.setProperty('--spotlight-x', `${currentX}px`);
           spotlight.style.setProperty('--spotlight-y', `${currentY}px`);
-          requestAnimationFrame(animate);
+          requestAnimationFrame(animateSpotlight);
         };
 
-        document.addEventListener('pointermove', (e) => {
-          updateTarget(e.clientX, e.clientY);
+        document.addEventListener('pointermove', (event) => {
+          updateTarget(event.clientX, event.clientY);
         });
 
-        animate();
+        animateSpotlight();
       }
 
-      // Hide glow for reduced-motion users
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches && spotlight) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches && spotlight instanceof HTMLElement) {
         spotlight.style.opacity = '0';
       }
 
-      // Intersection observer for .reveal elements
-      const observer = new IntersectionObserver(
+      const revealObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
+              revealObserver.unobserve(entry.target);
             }
           });
         },
         { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
       );
 
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      document.querySelectorAll('.reveal').forEach((element) => {
+        revealObserver.observe(element);
+      });
 
-      // Nav scroll state
-      const nav = document.getElementById('main-nav');
-      if (nav) {
-        window.addEventListener('scroll', () => {
-          if (window.scrollY > 40) {
-            nav.classList.add('nav-scrolled');
-          } else {
-            nav.classList.remove('nav-scrolled');
-          }
-        });
-      }
     </script>
-
-    <style>
-      #main-nav {
-        transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
-      }
-      #main-nav.nav-scrolled {
-        background: rgba(0,0,0,0.85);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-bottom-color: rgba(255,255,255,0.07);
-      }
-    </style>
   </body>
 </html>
