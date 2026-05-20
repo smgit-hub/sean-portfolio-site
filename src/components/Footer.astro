@@ -21,7 +21,7 @@ const year = new Date().getFullYear();
 
     <a
       href="#hero"
-      class="group flex items-center gap-2 text-xs text-white/30 hover:text-neon-green transition-colors duration-300 font-mono"
+      class="footer-back-link group flex items-center gap-2 text-xs font-mono transition-colors duration-300"
     >
       Back to top
       <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover:-translate-y-1">
@@ -30,3 +30,10 @@ const year = new Date().getFullYear();
     </a>
   </div>
 </footer>
+
+<style is:global>
+  .footer-back-link { color: rgba(255, 255, 255, 0.3); }
+  .footer-back-link:hover { color: var(--c1); }
+  [data-theme="light"] .footer-back-link { color: rgba(26, 26, 26, 0.3); }
+  [data-theme="light"] .footer-back-link:hover { color: var(--c1); }
+</style>

@@ -1,203 +1,236 @@
 ---
-const projects = [
+const categories = [
   {
-    title: 'Level Design Australia',
-    type: 'Custom Timber Furniture Website',
-    status: 'live',
-    summary: 'A professional website for a custom timber furniture business. Built with a focus on clean presentation, clear service communication, and strong SEO foundations.',
-    image: '/images/projects/pages/level-1.jpg',
-    stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
-    url: 'https://leveldesign.com.au/',
+    label: 'Web Applications',
+    projects: [
+      {
+        title: 'StayConnex',
+        type: 'Web Application',
+        status: 'live',
+        summary: 'Connect your Airbnb, Booking.com, Stayz, and direct booking calendars once — your cleaner gets their own login to see every upcoming checkout. When something changes, notify them in seconds. They can mark the clean done and attach photos. No group chats, no app to download.',
+        image: '/images/projects/pages/stayconnex-1.jpg',
+        stack: ['React', 'TypeScript', 'Tailwind CSS', 'Netlify Functions'],
+        url: 'https://stayconnex.com',
+      },
+      {
+        title: 'Worth a Watch',
+        type: 'Web Application',
+        status: 'live',
+        summary: 'A movie and TV series discovery app utilising OMDb and Watchmode APIs, plus OpenAI to generate tailored watch recommendations from qualifying user questions. Search any title and get details, ratings, cast, and where to watch — all rendered dynamically without a page reload.',
+        image: '/images/projects/pages/worth-1.jpg',
+        stack: ['Next.js', 'React', 'Tailwind CSS'],
+        url: 'https://worth-a-watch.netlify.app/',
+      },
+    ],
   },
   {
-    title: 'Worth a Watch',
-    type: 'Web Application',
-    status: 'live',
-    summary: 'A movie and TV series discovery app utilising OMDb and Watchmode APIs, plus OpenAI to generate tailored watch recommendations from qualifying user questions. Search any title and get details, ratings, cast, and where to watch — all rendered dynamically without a page reload.',
-    image: '/images/projects/pages/worth-1.jpg',
-    stack: ['Next.js', 'React', 'Tailwind CSS'],
-    url: 'https://worth-a-watch.netlify.app/',
+    label: 'Websites',
+    projects: [
+      {
+        title: 'Level Design Australia',
+        type: 'Custom Timber Furniture Website',
+        status: 'live',
+        summary: 'A professional website for a custom timber furniture business. Built with a focus on clean presentation, clear service communication, and strong SEO foundations.',
+        image: '/images/projects/pages/level-1.jpg',
+        stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
+        url: 'https://leveldesign.com.au/',
+      },
+      {
+        title: 'Andrea Flower Shop',
+        type: 'Multilingual Client Website',
+        status: 'live',
+        summary: 'A multilingual website for a flower shop focused on lead generation and strong SEO foundations, helping attract local customers and convert visits into enquiries.',
+        image: '/images/projects/pages/andrea-1.jpg',
+        stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
+        url: 'https://kvetinarstvoandrea.com/',
+      },
+      {
+        title: 'Cosy Cowes Getaway',
+        type: 'Accommodation Website',
+        status: 'live',
+        summary: 'A holiday rental website for a property on Phillip Island. Handles property presentation, availability information, and guest enquiries.',
+        image: '/images/projects/pages/cosy-1.jpg',
+        stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
+        url: 'https://cosycowesgetaway.com/',
+      },
+    ],
   },
   {
-    title: 'Andrea Flower Shop',
-    type: 'Multilingual Client Website',
-    status: 'live',
-    summary: 'A multilingual website for a flower shop focused on lead generation and strong SEO foundations, helping attract local customers and convert visits into enquiries.',
-    image: '/images/projects/pages/andrea-1.jpg',
-    stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
-    url: 'https://kvetinarstvoandrea.com/',
-  },
-  {
-    title: 'Cosy Cowes Getaway',
-    type: 'Accommodation Website',
-    status: 'live',
-    summary: 'A holiday rental website for a property on Phillip Island. Handles property presentation, availability information, and guest enquiries.',
-    image: '/images/projects/pages/cosy-1.jpg',
-    stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
-    url: 'https://cosycowesgetaway.com/',
-  },
-  {
-    title: 'Automotive Sales Resources & Training Hub',
-    type: 'Interactive Web App',
-    status: 'in-progress',
-    summary: 'A dedicated platform for automotive sales teams to access all resource videos and complete structured training modules with embedded videos and knowledge-check questions.',
-    image: '/images/projects/pages/auto-sales-1.jpg',
-    stack: ['React', 'JavaScript', 'Tailwind CSS'],
-    url: null,
-  },
-  {
-    title: 'Traffic Management Site',
-    type: 'Website + Dashboard',
-    status: 'in-progress',
-    summary: 'A traffic signal fault reporting platform with an operations dashboard to triage issues, assign contractors, and track repairs through to verified completion.',
-    image: '/images/projects/pages/traffic-1.jpg',
-    stack: ['Next.js', 'Tailwind CSS', 'Sanity CMS'],
-    url: null,
+    label: 'Work in Progress',
+    projects: [
+      {
+        title: 'Automotive Sales Resources & Training Hub',
+        type: 'Interactive Web App',
+        status: 'in-progress',
+        summary: 'A dedicated platform for automotive sales teams to access all resource videos and complete structured training modules with embedded videos and knowledge-check questions.',
+        image: '/images/projects/pages/auto-sales-1.jpg',
+        stack: ['React', 'JavaScript', 'Tailwind CSS'],
+        url: null,
+      },
+      {
+        title: 'Traffic Management Site',
+        type: 'Website + Dashboard',
+        status: 'in-progress',
+        summary: 'A traffic signal fault reporting platform with an operations dashboard to triage issues, assign contractors, and track repairs through to verified completion.',
+        image: '/images/projects/pages/traffic-1.jpg',
+        stack: ['Next.js', 'Tailwind CSS', 'Sanity CMS'],
+        url: null,
+      },
+    ],
   },
 ];
 
 const accentMap: Record<string, { border: string; tag: string; glow: string; dot: string }> = {
-  green: {
-    border: 'rgba(0,255,136,0.2)',
-    tag: 'green',
-    glow: 'rgba(0,255,136,0.1)',
-    dot: '#00ff88',
-  },
-  blue: {
-    border: 'rgba(0,180,255,0.2)',
-    tag: 'blue',
-    glow: 'rgba(0,180,255,0.1)',
-    dot: '#00b4ff',
-  },
-  red: {
-    border: 'rgba(255,51,102,0.2)',
-    tag: 'red',
-    glow: 'rgba(255,51,102,0.08)',
-    dot: '#ff3366',
-  },
+  green: { border: 'rgb(var(--c1-rgb) / 0.2)', tag: 'green', glow: 'rgb(var(--c1-rgb) / 0.1)', dot: 'var(--c1)' },
+  blue:  { border: 'rgb(var(--c2-rgb) / 0.2)', tag: 'blue',  glow: 'rgb(var(--c2-rgb) / 0.1)', dot: 'var(--c2)' },
+  red:   { border: 'rgb(var(--c3-rgb) / 0.2)', tag: 'red',   glow: 'rgb(var(--c3-rgb) / 0.08)', dot: 'var(--c3)' },
 };
 
 const accentOrder = ['green', 'blue', 'red'] as const;
+
 const getProjectStatus = (status: string) =>
   status === 'live'
-    ? { label: 'Live', color: '#00ff88' }
-    : { label: 'In Progress', color: '#ff3366' };
+    ? { label: 'Live', color: 'var(--c1)' }
+    : { label: 'In Progress', color: 'var(--c3)' };
 ---
 
 <section id="projects" class="section-padding relative overflow-hidden">
   <div
     class="absolute top-1/4 right-0 w-[400px] h-[400px] pointer-events-none"
-    style="background: radial-gradient(circle at 100% 50%, rgba(0,180,255,0.05), transparent 60%);"
+    style="background: radial-gradient(circle at 100% 50%, rgb(var(--c2-rgb) / 0.05), transparent 60%);"
   ></div>
 
   <div class="max-w-7xl mx-auto px-6">
     <!-- Label -->
     <div class="flex items-center gap-3 mb-4 reveal">
-      <span class="font-mono text-neon-green/60 text-xs tracking-widest uppercase">03 / Projects</span>
-      <span class="flex-1 max-w-[60px] h-px bg-neon-green/20"></span>
+      <span class="section-label font-mono text-xs tracking-widest uppercase">02 / Work</span>
+      <span class="section-label-line flex-1 max-w-[60px] h-px"></span>
     </div>
 
     <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
-      Selected <span class="gradient-text-green-blue">work</span>
+      Recent <span class="gradient-text-green-blue">releases</span>
     </h2>
-    <p class="text-white/45 max-w-xl mb-14 reveal reveal-delay-1">
-      A mix of live client sites, personal apps, and projects currently in development.
+    <p class="text-white/45 max-w-xl mb-16 reveal reveal-delay-1">
+      Live client sites, personal products, and projects currently in development.
     </p>
 
-    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-      {projects.map((project, i) => {
-        const accent = accentMap[accentOrder[i % accentOrder.length]];
-        const status = getProjectStatus(project.status);
-        const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
-        return (
-          <article
-            class={`project-card reveal ${delayClass} group relative glass rounded-2xl p-6 flex flex-col border transition-all duration-400 cursor-default`}
-            style={`--project-border: ${accent.border}; border-color: rgba(255,255,255,0.06);`}
-          >
-            <!-- Hover glow overlay -->
-            <div
-              class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-              style={`background: radial-gradient(ellipse at 50% 0%, ${accent.glow}, transparent 70%);`}
-            ></div>
-
-            <!-- Project thumbnail -->
-            <div class="project-thumb mb-5" style={`--shot-color: ${accent.dot};`}>
-              {project.image ? (
-                <img
-                  src={project.image}
-                  alt={`${project.title} preview`}
-                  loading="lazy"
-                  class="project-shot-image"
-                />
-              ) : (
-                <div class="project-shot">
-                  <span>Coming Soon</span>
-                </div>
-              )}
-            </div>
-
-            <!-- Top row -->
-            <div class="flex items-start justify-between mb-4">
-              <span
-                class="text-xs font-mono px-2.5 py-1 rounded-full border"
-                style={`color: ${accent.dot}; border-color: ${accent.border}; background: ${accent.glow};`}
-              >
-                {project.type}
-              </span>
-              <span
-                class="flex items-center gap-1.5 text-xs font-medium"
-                style={`color: ${status.color};`}
-              >
-                <span
-                  class="w-1.5 h-1.5 rounded-full animate-glow-pulse inline-block"
-                  style={`background: ${status.color};`}
-                ></span>
-                {status.label}
-              </span>
-            </div>
-
-            <!-- Title -->
-            <h3 class="font-display font-semibold text-lg text-white mb-2 group-hover:text-neon-green transition-colors duration-300">
-              {project.title}
+    <!-- Categories -->
+    <div class="space-y-16">
+      {categories.map((category, catIndex) => (
+        <div class="reveal">
+          <!-- Category heading -->
+          <div class="flex items-center gap-4 mb-8">
+            <h3 class="font-mono text-xs tracking-widest uppercase"
+              style={`color: ${accentMap[accentOrder[catIndex % accentOrder.length]].dot}; opacity: 0.7;`}>
+              {category.label}
             </h3>
+            <div class="flex-1 h-px" style={`background: ${accentMap[accentOrder[catIndex % accentOrder.length]].border};`}></div>
+          </div>
 
-            <!-- Summary -->
-            <p class="text-sm text-white/45 leading-relaxed mb-5 flex-1">
-              {project.summary}
-            </p>
+          <!-- Project cards -->
+          <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+            {category.projects.map((project, i) => {
+              const accent = accentMap[accentOrder[i % accentOrder.length]];
+              const status = getProjectStatus(project.status);
+              const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
+              return (
+                <article
+                  class={`project-card reveal ${delayClass} group relative glass rounded-2xl p-6 flex flex-col border transition-all duration-400 cursor-default`}
+                  style={`--project-border: ${accent.border}; border-color: rgba(255,255,255,0.06);`}
+                >
+                  <div
+                    class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={`background: radial-gradient(ellipse at 50% 0%, ${accent.glow}, transparent 70%);`}
+                  ></div>
 
-            <!-- Stack -->
-            <div class="flex flex-wrap gap-1.5 mb-5">
-              {project.stack.map((tech) => (
-                <span class={`tech-tag ${accent.tag === 'green' ? '' : accent.tag}`}>{tech}</span>
-              ))}
-            </div>
+                  <div class="project-thumb mb-5" style={`--shot-color: ${accent.dot};`}>
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        loading="lazy"
+                        class="project-shot-image"
+                      />
+                    ) : (
+                      <div class="project-shot">
+                        <span>Coming Soon</span>
+                      </div>
+                    )}
+                  </div>
 
-            <!-- Link -->
-            {project.url ? (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-300 group/link"
-                style={`color: ${accent.dot}; opacity: 0.7;`}
-              >
-                View live site
-                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">
-                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                </svg>
-              </a>
-            ) : (
-              <span class="text-sm text-white/20 font-medium">Work in progress</span>
-            )}
-          </article>
-        );
-      })}
+                  <div class="flex items-start justify-between mb-4">
+                    <span
+                      class="text-xs font-mono px-2.5 py-1 rounded-full border"
+                      style={`color: ${accent.dot}; border-color: ${accent.border}; background: ${accent.glow};`}
+                    >
+                      {project.type}
+                    </span>
+                    <span
+                      class="flex items-center gap-1.5 text-xs font-medium"
+                      style={`color: ${status.color};`}
+                    >
+                      <span
+                        class="w-1.5 h-1.5 rounded-full animate-glow-pulse inline-block"
+                        style={`background: ${status.color};`}
+                      ></span>
+                      {status.label}
+                    </span>
+                  </div>
+
+                  <h3 class="project-card-title font-display font-semibold text-lg mb-2">
+                    {project.title}
+                  </h3>
+
+                  <p class="text-sm text-white/45 leading-relaxed mb-5 flex-1">
+                    {project.summary}
+                  </p>
+
+                  <div class="flex flex-wrap gap-1.5 mb-5">
+                    {project.stack.map((tech) => (
+                      <span class={`tech-tag ${accent.tag === 'green' ? '' : accent.tag}`}>{tech}</span>
+                    ))}
+                  </div>
+
+                  {project.url ? (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-300 group/link"
+                      style={`color: ${accent.dot}; opacity: 0.7;`}
+                    >
+                      View live site
+                      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">
+                        <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                      </svg>
+                    </a>
+                  ) : (
+                    <span class="text-sm text-white/20 font-medium">Work in progress</span>
+                  )}
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
+  .project-card-title {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .project-card:hover .project-card-title {
+    color: var(--c1);
+  }
+  :global([data-theme="light"]) .project-card-title {
+    color: rgba(26, 26, 26, 0.9);
+  }
+  :global([data-theme="light"]) .project-card:hover .project-card-title {
+    color: var(--c1);
+  }
+
   .project-card:hover {
     border-color: var(--project-border);
   }

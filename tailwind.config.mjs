@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        'neon-green':  '#00ff88',
-        'neon-blue':   '#00b4ff',
-        'neon-red':    '#ff3366',
+        'neon-green':  'rgb(var(--c1-rgb) / <alpha-value>)',
+        'neon-blue':   'rgb(var(--c2-rgb) / <alpha-value>)',
+        'neon-red':    'rgb(var(--c3-rgb) / <alpha-value>)',
         'surface':     '#0d0d0d',
         'surface-2':   '#141414',
         'surface-3':   '#1a1a1a',
@@ -48,8 +48,8 @@ export default {
           to:   { opacity: '1', transform: 'translateY(0)' },
         },
         borderGlow: {
-          '0%, 100%': { boxShadow: '0 0 8px rgba(0,255,136,0.3)' },
-          '50%':      { boxShadow: '0 0 20px rgba(0,255,136,0.7)' },
+          '0%, 100%': { boxShadow: '0 0 8px rgb(var(--c1-rgb) / 0.3)' },
+          '50%':      { boxShadow: '0 0 20px rgb(var(--c1-rgb) / 0.7)' },
         },
       },
       backgroundSize: {

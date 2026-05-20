@@ -38,10 +38,10 @@ const steps = [
   },
 ];
 
-const colorMap: Record<string, string> = {
-  green: '#00ff88',
-  blue: '#00b4ff',
-  red: '#ff3366',
+const colorMap: Record<string, { color: string; rgb: string }> = {
+  green: { color: 'var(--c1)', rgb: 'var(--c1-rgb)' },
+  blue:  { color: 'var(--c2)', rgb: 'var(--c2-rgb)' },
+  red:   { color: 'var(--c3)', rgb: 'var(--c3-rgb)' },
 };
 
 const colorOrder = ['green', 'blue', 'red'] as const;
@@ -50,14 +50,14 @@ const colorOrder = ['green', 'blue', 'red'] as const;
 <section id="process" class="section-padding relative overflow-hidden">
   <div
     class="absolute bottom-0 right-0 w-[500px] h-[400px] pointer-events-none"
-    style="background: radial-gradient(ellipse at 100% 100%, rgba(255,51,102,0.04), transparent 60%);"
+    style="background: radial-gradient(ellipse at 100% 100%, rgb(var(--c3-rgb) / 0.04), transparent 60%);"
   ></div>
 
   <div class="max-w-7xl mx-auto px-6">
     <!-- Label -->
     <div class="flex items-center gap-3 mb-4 reveal">
-      <span class="font-mono text-neon-green/60 text-xs tracking-widest uppercase">05 / Process</span>
-      <span class="flex-1 max-w-[60px] h-px bg-neon-green/20"></span>
+      <span class="section-label font-mono text-xs tracking-widest uppercase">04 / Process</span>
+      <span class="section-label-line flex-1 max-w-[60px] h-px"></span>
     </div>
 
     <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
@@ -69,22 +69,22 @@ const colorOrder = ['green', 'blue', 'red'] as const;
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {steps.map((step, i) => {
-        const color = colorMap[colorOrder[i % colorOrder.length]];
+        const colorVars = colorMap[colorOrder[i % colorOrder.length]];
         const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
         return (
           <div class={`reveal ${delayClass} group glass glass-hover rounded-2xl p-6 border border-white/5`}>
             <div class="flex items-center justify-between mb-5">
               <span
                 class="font-mono font-bold text-3xl leading-none opacity-20 group-hover:opacity-50 transition-opacity duration-300"
-                style={`color: ${color};`}
+                style={`color: ${colorVars.color};`}
               >
                 {step.number}
               </span>
               <div
                 class="w-8 h-8 rounded-full border flex items-center justify-center opacity-40 group-hover:opacity-80 transition-all duration-300"
-                style={`border-color: ${color}; box-shadow: 0 0 10px ${color}40;`}
+                style={`border-color: ${colorVars.color}; box-shadow: 0 0 10px rgb(${colorVars.rgb} / 0.25);`}
               >
-                <span class="w-1.5 h-1.5 rounded-full" style={`background: ${color};`}></span>
+                <span class="w-1.5 h-1.5 rounded-full" style={`background: ${colorVars.color};`}></span>
               </div>
             </div>
             <h3 class="font-display font-semibold text-base text-white mb-2 group-hover:text-white transition-colors">

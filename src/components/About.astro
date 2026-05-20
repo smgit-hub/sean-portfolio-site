@@ -1,50 +1,48 @@
 ---
-const stats = [
-  { value: '2+', label: 'Years Building' },
-  { value: '5+', label: 'Live Projects' },
-  { value: '10+', label: 'Technologies' },
-  { value: '∞', label: 'Always Learning' },
+const credentials = [
+  { label: 'Cert IV — Web Development', sub: 'Holmesglen TAFE', colorVar: 'var(--c1)', rgbVar: 'var(--c1-rgb)', done: true },
+  { label: 'Diploma — Back End Web Dev', sub: 'Lumify Learn', colorVar: 'var(--c2)', rgbVar: 'var(--c2-rgb)', done: false },
+  { label: '5+ live projects shipped', sub: 'During study', colorVar: 'var(--c1)', rgbVar: 'var(--c1-rgb)', done: true },
 ];
 ---
 
 <section id="about" class="section-padding relative overflow-hidden">
-  <!-- Background accent -->
   <div
     class="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
-    style="background: radial-gradient(circle at 80% 20%, rgba(0,180,255,0.05), transparent 60%);"
+    style="background: radial-gradient(circle at 80% 20%, rgb(var(--c2-rgb) / 0.05), transparent 60%);"
   ></div>
 
   <div class="max-w-7xl mx-auto px-6">
-    <!-- Section label -->
+    <!-- Label -->
     <div class="flex items-center gap-3 mb-4 reveal">
-      <span class="font-mono text-neon-green/60 text-xs tracking-widest uppercase">01 / About</span>
-      <span class="flex-1 max-w-[60px] h-px bg-neon-green/20"></span>
+      <span class="section-label font-mono text-xs tracking-widest uppercase">03 / About</span>
+      <span class="section-label-line flex-1 max-w-[60px] h-px"></span>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-      <!-- Left: text -->
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <!-- Left: bio -->
       <div>
         <h2 class="font-display text-4xl md:text-5xl font-bold leading-tight mb-6 reveal">
-          Building with purpose.<br />
-          <span class="gradient-text-green-blue">Growing with intention.</span>
+          I build things.<br />
+          <span class="gradient-text-green-blue">Then I ship them.</span>
         </h2>
 
         <div class="space-y-5 text-white/55 leading-relaxed reveal reveal-delay-1">
           <p>
-            I'm a web developer based in Melbourne, currently completing a Diploma of Information Technology in Back End Web Development at Lumify Learn — building on a Certificate IV from Holmesglen TAFE I've already earned. More importantly, I've been shipping real work throughout my studies, not waiting until I'm "qualified" to start.
+            I'm Sean — a web developer based in Melbourne. I build sites and apps for businesses that need something that actually works. Not a template, not a page builder — something custom that fits the problem.
           </p>
           <p>
-            From live client sites to personal apps and tools, I approach every project with the same mindset: write clean code, design for the user, and continuously improve. I work across the full stack — comfortable with front-end interfaces and growing into databases, APIs, and server-side logic.
+            I'm finishing a Diploma in Back End Development and building real products alongside it. StayConnex is one of them — I had the problem, so I built the fix.
           </p>
           <p>
-            I use Figma to plan interface structure and interaction, then move into development with modern tooling to debug efficiently and iterate with purpose while keeping code quality and understanding front and centre.
+            I work across the full stack, use Figma to think through structure before I write a line of code, and care about shipping clean work over shipping fast work.
           </p>
         </div>
 
         <div class="mt-8 flex items-center gap-4 reveal reveal-delay-2">
           <a
             href="#projects"
-            class="text-sm font-medium text-neon-green hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+            class="about-built-link text-sm font-medium flex items-center gap-2 group"
           >
             See what I've built
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover:translate-x-1">
@@ -54,42 +52,76 @@ const stats = [
         </div>
       </div>
 
-      <!-- Right: stats + code aesthetic -->
-      <div class="flex flex-col gap-5 reveal reveal-delay-1">
-        <!-- Stat grid -->
-        <div class="grid grid-cols-2 gap-4">
-          {stats.map((stat, i) => (
-            <div class="glass glass-hover rounded-xl p-5 glow-border group">
-              <p
-                class="font-display font-bold text-3xl mb-1 group-hover:text-glow-green transition-all duration-300"
-                style={`color: ${i % 2 === 0 ? '#00ff88' : '#00b4ff'}`}
-              >
-                {stat.value}
-              </p>
-              <p class="text-sm text-white/40 font-medium">{stat.label}</p>
+      <!-- Right: credentials -->
+      <div class="flex flex-col gap-4 reveal reveal-delay-1">
+        {credentials.map((c) => (
+          <div
+            class="glass glass-hover rounded-xl px-6 py-5 border border-white/5 flex items-center gap-5 group"
+          >
+            <div
+              class="w-9 h-9 rounded-full border flex-shrink-0 flex items-center justify-center"
+              style={`border-color: rgb(${c.rgbVar} / 0.25);`}
+            >
+              {c.done ? (
+                <svg width="14" height="14" fill="none" stroke={c.colorVar} stroke-width="2.5" viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              ) : (
+                <span
+                  class="w-2 h-2 rounded-full animate-glow-pulse inline-block"
+                  style={`background: ${c.colorVar};`}
+                ></span>
+              )}
             </div>
-          ))}
-        </div>
+            <div>
+              <p class="credential-label text-sm font-medium">
+                {c.label}
+              </p>
+              <p class="credential-sub text-xs font-mono mt-0.5">{c.sub}</p>
+            </div>
+          </div>
+        ))}
 
-        <!-- Code snippet aesthetic -->
-        <div class="glass rounded-xl p-5 font-mono text-xs leading-relaxed border border-white/5">
-          <div class="flex items-center gap-1.5 mb-4">
+        <!-- Stack note -->
+        <div class="glass rounded-xl p-5 border border-white/5 font-mono text-xs leading-relaxed mt-1">
+          <div class="flex items-center gap-1.5 mb-3">
             <span class="w-2.5 h-2.5 rounded-full bg-red-500/60"></span>
             <span class="w-2.5 h-2.5 rounded-full bg-yellow-400/60"></span>
             <span class="w-2.5 h-2.5 rounded-full bg-green-400/60"></span>
-            <span class="ml-2 text-white/20 text-[10px]">developer.ts</span>
+            <span class="ml-2 text-white/20 text-[10px]">sean.ts</span>
           </div>
           <div class="space-y-1">
-            <p><span class="text-neon-blue/70">const</span> <span class="text-white/70">developer</span> <span class="text-white/30">=</span> <span class="text-white/30">&#123;</span></p>
-            <p>&nbsp;&nbsp;<span class="text-neon-green/70">name</span><span class="text-white/30">:</span> <span class="text-orange-300/70">'Sean Millard'</span><span class="text-white/30">,</span></p>
-            <p>&nbsp;&nbsp;<span class="text-neon-green/70">location</span><span class="text-white/30">:</span> <span class="text-orange-300/70">'Melbourne, AU'</span><span class="text-white/30">,</span></p>
-            <p>&nbsp;&nbsp;<span class="text-neon-green/70">status</span><span class="text-white/30">:</span> <span class="text-orange-300/70">'available'</span><span class="text-white/30">,</span></p>
-            <p>&nbsp;&nbsp;<span class="text-neon-green/70">focus</span><span class="text-white/30">:</span> <span class="text-orange-300/70">'full-stack web'</span><span class="text-white/30">,</span></p>
-            <p>&nbsp;&nbsp;<span class="text-neon-green/70">learning</span><span class="text-white/30">:</span> <span class="text-neon-blue/70">true</span><span class="text-white/30">,</span></p>
-            <p><span class="text-white/30">&#125;;</span></p>
+            <p><span class="code-keyword">const</span> <span class="code-base">sean</span> <span class="code-muted">= &#123;</span></p>
+            <p>&nbsp;&nbsp;<span class="code-key">location</span><span class="code-muted">:</span> <span class="code-string">'Melbourne, AU'</span><span class="code-muted">,</span></p>
+            <p>&nbsp;&nbsp;<span class="code-key">status</span><span class="code-muted">:</span> <span class="code-string">'available'</span><span class="code-muted">,</span></p>
+            <p>&nbsp;&nbsp;<span class="code-key">stack</span><span class="code-muted">:</span> <span class="code-string">'full-stack'</span><span class="code-muted">,</span></p>
+            <p>&nbsp;&nbsp;<span class="code-key">ships</span><span class="code-muted">:</span> <span class="code-keyword">true</span><span class="code-muted">,</span></p>
+            <p><span class="code-muted">&#125;;</span></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style is:global>
+  .about-built-link { color: var(--c1); }
+  .about-built-link:hover { color: #fff; }
+  [data-theme="light"] .about-built-link:hover { color: rgba(26, 26, 26, 0.9); }
+
+  .credential-label { color: rgba(255, 255, 255, 0.8); }
+  .credential-sub   { color: rgba(255, 255, 255, 0.3); }
+  [data-theme="light"] .credential-label { color: rgba(26, 26, 26, 0.8); }
+  [data-theme="light"] .credential-sub   { color: rgba(26, 26, 26, 0.35); }
+
+  /* Code block tokens */
+  .code-keyword { color: rgb(var(--c2-rgb) / 0.75); }
+  .code-key     { color: rgb(var(--c1-rgb) / 0.75); }
+  .code-string  { color: rgb(200 120 40 / 0.8); }
+  .code-base    { color: rgba(255, 255, 255, 0.75); }
+  .code-muted   { color: rgba(255, 255, 255, 0.3); }
+
+  [data-theme="light"] .code-string { color: rgb(150 80 20 / 0.85); }
+  [data-theme="light"] .code-base   { color: rgba(26, 26, 26, 0.75); }
+  [data-theme="light"] .code-muted  { color: rgba(26, 26, 26, 0.3); }
+</style>
