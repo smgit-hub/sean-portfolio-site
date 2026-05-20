@@ -99,11 +99,3 @@ const colorOrder = ['green', 'blue', 'red'] as const;
     </div>
   </div>
 </section>
-
-<style is:global>
-  /* Light mode: step numbers and circles are too faint at dark-mode opacity levels */
-  [data-theme="light"] #process .opacity-20 { opacity: 0.45; }
-  [data-theme="light"] #process .opacity-40 { opacity: 0.65; }
-  [data-theme="light"] #process .group:hover .group-hover\:opacity-50 { opacity: 0.8; }
-  [data-theme="light"] #process .group:hover .group-hover\:opacity-80 { opacity: 1; }
-</style>
