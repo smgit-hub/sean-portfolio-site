@@ -1,149 +1,137 @@
 ---
-const projects = [
+const categories = [
   {
-    title: 'StayConnex',
-    type: 'Web Application',
-    status: 'live',
-    summary: 'A booking coordination platform that unifies Airbnb, Booking.com, VRBO/Stayz, and direct booking calendars so cleaning teams can see upcoming jobs in one place and avoid missed cleans.',
-    image: '/images/projects/pages/stayconnex-1.jpg',
-    stack: ['Next.js', 'React', 'Tailwind CSS'],
-    url: 'https://stayconnex.com/',
+    label: 'Web Applications',
+    projects: [
+      {
+        title: 'StayConnex',
+        type: 'Web Application',
+        status: 'live',
+        summary: 'A booking coordination platform that unifies Airbnb, Booking.com, VRBO/Stayz, and direct booking calendars so cleaning teams can see upcoming jobs in one place and avoid missed cleans.',
+        image: '/images/projects/pages/stayconnex-1.jpg',
+        stack: ['Next.js', 'React', 'Tailwind CSS'],
+        url: 'https://stayconnex.com/',
+      },
+      {
+        title: 'Worth a Watch',
+        type: 'Web Application',
+        status: 'live',
+        summary: 'A movie and TV series discovery app utilising OMDb and Watchmode APIs, plus OpenAI to generate tailored watch recommendations from qualifying user questions. Search any title and get details, ratings, cast, and where to watch — all rendered dynamically without a page reload.',
+        image: '/images/projects/pages/worth-1.jpg',
+        stack: ['Next.js', 'React', 'Tailwind CSS'],
+        url: 'https://worth-a-watch.netlify.app/',
+      },
+    ],
   },
   {
-    title: 'Level Design Australia',
-    type: 'Custom Timber Furniture Website',
-    status: 'live',
-    summary: 'A professional website for a custom timber furniture business. Built with a focus on clean presentation, clear service communication, and strong SEO foundations.',
-    image: '/images/projects/pages/level-1.jpg',
-    stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
-    url: 'https://leveldesign.com.au/',
+    label: 'Websites',
+    projects: [
+      {
+        title: 'Level Design Australia',
+        type: 'Custom Timber Furniture Website',
+        status: 'live',
+        summary: 'A professional website for a custom timber furniture business. Built with a focus on clean presentation, clear service communication, and strong SEO foundations.',
+        image: '/images/projects/pages/level-1.jpg',
+        stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
+        url: 'https://leveldesign.com.au/',
+      },
+      {
+        title: 'Andrea Flower Shop',
+        type: 'Multilingual Client Website',
+        status: 'live',
+        summary: 'A multilingual website for a flower shop focused on lead generation and strong SEO foundations, helping attract local customers and convert visits into enquiries.',
+        image: '/images/projects/pages/andrea-1.jpg',
+        stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
+        url: 'https://kvetinarstvoandrea.com/',
+      },
+      {
+        title: 'Cosy Cowes Getaway',
+        type: 'Accommodation Website',
+        status: 'live',
+        summary: 'A direct-booking accommodation website I built with Astro and Tailwind, focused on conversion-driven UX, clear booking pathways, and SEO content to increase qualified guest enquiries.',
+        image: '/images/projects/pages/cosy-1.jpg',
+        stack: ['Astro', 'Tailwind CSS', 'Netlify'],
+        url: 'https://cosycowesgetaway.com/',
+      },
+    ],
   },
   {
-    title: 'Worth a Watch',
-    type: 'Web Application',
-    status: 'live',
-    summary: 'A movie and TV series discovery app utilising OMDb and Watchmode APIs, plus OpenAI to generate tailored watch recommendations from qualifying user questions. Search any title and get details, ratings, cast, and where to watch — all rendered dynamically without a page reload.',
-    image: '/images/projects/pages/worth-1.jpg',
-    stack: ['Next.js', 'React', 'Tailwind CSS'],
-    url: 'https://worth-a-watch.netlify.app/',
-  },
-  {
-    title: 'Andrea Flower Shop',
-    type: 'Multilingual Client Website',
-    status: 'live',
-    summary: 'A multilingual website for a flower shop focused on lead generation and strong SEO foundations, helping attract local customers and convert visits into enquiries.',
-    image: '/images/projects/pages/andrea-1.jpg',
-    stack: ['Astro', 'Tailwind CSS', 'JavaScript'],
-    url: 'https://kvetinarstvoandrea.com/',
-  },
-  {
-    title: 'Cosy Cowes Getaway',
-    type: 'Accommodation Website',
-    status: 'live',
-    summary: 'A direct-booking accommodation website I built with Astro and Tailwind, focused on conversion-driven UX, clear booking pathways, and SEO content to increase qualified guest enquiries.',
-    image: '/images/projects/pages/cosy-1.jpg',
-    stack: ['Astro', 'Tailwind CSS', 'Netlify'],
-    url: 'https://cosycowesgetaway.com/',
-  },
-  {
-    title: 'Automotive Sales Resources & Training Hub',
-    type: 'Interactive Web App',
-    status: 'in-progress',
-    summary: 'A dedicated platform for automotive sales teams to access all resource videos and complete structured training modules with embedded videos and knowledge-check questions.',
-    image: '/images/projects/pages/auto-sales-1.jpg',
-    stack: ['React', 'JavaScript', 'Tailwind CSS'],
-    url: null,
-  },
-  {
-    title: 'Traffic Management Site',
-    type: 'Website + Dashboard',
-    status: 'in-progress',
-    summary: 'A traffic signal fault reporting platform with an operations dashboard to triage issues, assign contractors, and track repairs through to verified completion.',
-    image: '/images/projects/pages/traffic-1.jpg',
-    stack: ['Next.js', 'Tailwind CSS', 'Sanity CMS'],
-    url: null,
+    label: 'Work in Progress',
+    projects: [
+      {
+        title: 'Automotive Sales Resources & Training Hub',
+        type: 'Interactive Web App',
+        status: 'in-progress',
+        summary: 'A dedicated platform for automotive sales teams to access all resource videos and complete structured training modules with embedded videos and knowledge-check questions.',
+        image: '/images/projects/pages/auto-sales-1.jpg',
+        stack: ['React', 'JavaScript', 'Tailwind CSS'],
+        url: null,
+      },
+      {
+        title: 'Traffic Management Site',
+        type: 'Website + Dashboard',
+        status: 'in-progress',
+        summary: 'A traffic signal fault reporting platform with an operations dashboard to triage issues, assign contractors, and track repairs through to verified completion.',
+        image: '/images/projects/pages/traffic-1.jpg',
+        stack: ['Next.js', 'Tailwind CSS', 'Sanity CMS'],
+        url: null,
+      },
+    ],
   },
 ];
 
 const accentMap: Record<string, { border: string; tag: string; glow: string; dot: string }> = {
-  green: {
-    border: 'rgba(0,255,136,0.2)',
-    tag: 'green',
-    glow: 'rgba(0,255,136,0.1)',
-    dot: '#00ff88',
-  },
-  blue: {
-    border: 'rgba(0,180,255,0.2)',
-    tag: 'blue',
-    glow: 'rgba(0,180,255,0.1)',
-    dot: '#00b4ff',
-  },
-  red: {
-    border: 'rgba(255,51,102,0.2)',
-    tag: 'red',
-    glow: 'rgba(255,51,102,0.08)',
-    dot: '#ff3366',
-  },
+  green: { border: 'rgb(var(--c1-rgb) / 0.2)', tag: 'green', glow: 'rgb(var(--c1-rgb) / 0.1)', dot: 'var(--c1)' },
+  blue:  { border: 'rgb(var(--c2-rgb) / 0.2)', tag: 'blue',  glow: 'rgb(var(--c2-rgb) / 0.1)', dot: 'var(--c2)' },
+  red:   { border: 'rgb(var(--c3-rgb) / 0.2)', tag: 'red',   glow: 'rgb(var(--c3-rgb) / 0.08)', dot: 'var(--c3)' },
 };
 
 const accentOrder = ['green', 'blue', 'red'] as const;
+
 const getProjectStatus = (status: string) =>
   status === 'live'
-    ? { label: 'Live', color: '#00ff88' }
-    : { label: 'In Progress', color: '#ff3366' };
-
-const isWebApp = (type: string) => /app|application|dashboard/i.test(type);
-
-const projectGroups = [
-  {
-    title: 'Web Apps',
-    description: 'Interactive products and platform-style builds.',
-    projects: projects.filter((project) => project.status === 'live' && isWebApp(project.type)),
-  },
-  {
-    title: 'Websites',
-    description: 'Marketing, business, and service-focused websites.',
-    projects: projects.filter((project) => project.status === 'live' && !isWebApp(project.type)),
-  },
-  {
-    title: 'In Progress',
-    description: 'Active builds currently being designed and developed.',
-    projects: projects.filter((project) => project.status === 'in-progress'),
-  },
-].filter((group) => group.projects.length > 0);
+    ? { label: 'Live', color: 'var(--c1)' }
+    : { label: 'In Progress', color: 'var(--c3)' };
 ---
 
 <section id="projects" class="section-padding relative overflow-hidden">
   <div
     class="absolute top-1/4 right-0 w-[400px] h-[400px] pointer-events-none"
-    style="background: radial-gradient(circle at 100% 50%, rgba(0,180,255,0.05), transparent 60%);"
+    style="background: radial-gradient(circle at 100% 50%, rgb(var(--c2-rgb) / 0.05), transparent 60%);"
   ></div>
 
   <div class="max-w-7xl mx-auto px-6">
     <!-- Label -->
     <div class="flex items-center gap-3 mb-4 reveal">
-      <span class="font-mono text-neon-green/60 text-xs tracking-widest uppercase">03 / Projects</span>
-      <span class="flex-1 max-w-[60px] h-px bg-neon-green/20"></span>
+      <span class="section-label font-mono text-xs tracking-widest uppercase">02 / Work</span>
+      <span class="section-label-line flex-1 max-w-[60px] h-px"></span>
     </div>
 
     <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
-      Selected <span class="gradient-text-green-blue">work</span>
+      Recent <span class="gradient-text-green-blue">releases</span>
     </h2>
-    <p class="text-white/45 max-w-xl mb-14 reveal reveal-delay-1">
-      A mix of live client sites, personal apps, and projects currently in development.
+    <p class="text-white/45 max-w-xl mb-16 reveal reveal-delay-1">
+      Live client sites, personal products, and projects currently in development.
     </p>
 
-    <div class="space-y-14">
-      {projectGroups.map((group, groupIndex) => (
+    <div class="space-y-16">
+      {categories.map((category, catIndex) => (
         <div class="reveal">
-          <div class="mb-6">
-            <h3 class="font-display text-2xl md:text-3xl font-semibold text-white mb-2">{group.title}</h3>
-            <p class="text-white/40 text-sm md:text-base">{group.description}</p>
+          <!-- Category heading -->
+          <div class="flex items-center gap-4 mb-8">
+            <h3
+              class="font-mono text-xs tracking-widest uppercase"
+              style={`color: ${accentMap[accentOrder[catIndex % accentOrder.length]].dot}; opacity: 0.7;`}
+            >
+              {category.label}
+            </h3>
+            <div class="flex-1 h-px" style={`background: ${accentMap[accentOrder[catIndex % accentOrder.length]].border};`}></div>
           </div>
 
+          <!-- Project cards -->
           <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-            {group.projects.map((project, i) => {
-              const accent = accentMap[accentOrder[(groupIndex + i) % accentOrder.length]];
+            {category.projects.map((project, i) => {
+              const accent = accentMap[accentOrder[i % accentOrder.length]];
               const status = getProjectStatus(project.status);
               const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
               return (
@@ -190,9 +178,9 @@ const projectGroups = [
                     </span>
                   </div>
 
-                  <h4 class="font-display font-semibold text-lg text-white mb-2 group-hover:text-neon-green transition-colors duration-300">
+                  <h3 class="project-card-title font-display font-semibold text-lg mb-2">
                     {project.title}
-                  </h4>
+                  </h3>
 
                   <p class="text-sm text-white/45 leading-relaxed mb-5 flex-1">
                     {project.summary}
@@ -231,6 +219,19 @@ const projectGroups = [
 </section>
 
 <style>
+  .project-card-title {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .project-card:hover .project-card-title {
+    color: var(--c1);
+  }
+  :global([data-theme="light"]) .project-card-title {
+    color: rgba(26, 26, 26, 0.9);
+  }
+  :global([data-theme="light"]) .project-card:hover .project-card-title {
+    color: var(--c1);
+  }
+
   .project-card:hover {
     border-color: var(--project-border);
   }

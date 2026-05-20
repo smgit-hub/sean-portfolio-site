@@ -1,4 +1,5 @@
 ---
+import Cursor from '../components/Cursor.astro';
 export interface Props {
   title?: string;
   description?: string;
@@ -46,6 +47,14 @@ const socialImageUrl = Astro.site
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
 
+    <!-- Theme: prevent flash of wrong theme -->
+    <script is:inline>
+      (function(){
+        const t = localStorage.getItem('theme');
+        if (t && t !== 'default') document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -70,11 +79,12 @@ const socialImageUrl = Astro.site
     <!-- Pointer glow -->
     <div
       id="spotlight"
-      class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
-      style="background: radial-gradient(560px circle at var(--spotlight-x, 50vw) var(--spotlight-y, 35vh), rgba(0,255,136,0.12), rgba(0,255,136,0.04) 38%, transparent 72%);"
+      class="pointer-events-none fixed inset-0 z-30"
+      style="transition: background 0.4s ease, opacity 0.3s ease;"
     ></div>
 
     <slot />
+    <Cursor />
 
     <!-- Scroll reveal script -->
     <script>
@@ -90,9 +100,38 @@ const socialImageUrl = Astro.site
           targetY = y;
         };
 
-        const animateSpotlight = () => {
-          currentX += (targetX - currentX) * 0.14;
-          currentY += (targetY - currentY) * 0.14;
+        function spotlightDefault() {
+          return document.documentElement.getAttribute('data-theme') === 'light'
+            ? { r: 26, g: 26, b: 26 }
+            : { r: 255, g: 255, b: 255 };
+        }
+
+        let { r: accentR, g: accentG, b: accentB } = spotlightDefault();
+
+      function buildGradient(r: number, g: number, b: number) {
+        return `
+          radial-gradient(160px circle at var(--spotlight-x, 50vw) var(--spotlight-y, 35vh), rgba(${r},${g},${b},0.20), transparent 100%),
+          radial-gradient(580px circle at var(--spotlight-x, 50vw) var(--spotlight-y, 35vh), rgba(${r},${g},${b},0.07) 0%, rgba(${r},${g},${b},0.03) 50%, transparent 75%)
+        `;
+      }
+
+      spotlight.style.background = buildGradient(accentR, accentG, accentB);
+
+      window.addEventListener('cursorcolor', (e: Event) => {
+        const { r, g, b } = (e as CustomEvent).detail ?? spotlightDefault();
+        accentR = r; accentG = g; accentB = b;
+        spotlight.style.background = buildGradient(r, g, b);
+      });
+
+      window.addEventListener('themechange', () => {
+        const def = spotlightDefault();
+        accentR = def.r; accentG = def.g; accentB = def.b;
+        spotlight.style.background = buildGradient(def.r, def.g, def.b);
+      });
+
+      const animateSpotlight = () => {
+          currentX += (targetX - currentX) * 0.10;
+          currentY += (targetY - currentY) * 0.10;
           spotlight.style.setProperty('--spotlight-x', `${currentX}px`);
           spotlight.style.setProperty('--spotlight-y', `${currentY}px`);
           requestAnimationFrame(animateSpotlight);

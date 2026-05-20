@@ -1,109 +1,145 @@
 ---
-const colorMap: Record<string, string> = {
-  green: '#00ff88',
-  blue: '#00b4ff',
-  red: '#ff3366',
-};
-
-const groups = [
+const plans = [
   {
-    label: 'Front-End',
+    name: 'Starter',
+    tagline: 'Marketing site',
     color: 'green',
-    icon: '◈',
-    skills: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'Responsive Design', 'Accessibility', 'Figma to Code'],
+    accent: 'var(--c1)',
+    border: 'rgb(var(--c1-rgb) / 0.2)',
+    glow: 'rgb(var(--c1-rgb) / 0.07)',
+    featured: false,
+    features: [
+      'Up to 5 pages',
+      'Mobile-first, fast by default',
+      'SEO foundations',
+      'Contact form',
+      'Netlify deploy + DNS setup',
+      'Astro + Tailwind',
+    ],
+    cta: 'Enquire',
   },
   {
-    label: 'UI & Design',
-    color: 'red',
-    icon: '◇',
-    skills: ['Figma', 'Wireframing', 'Component Design', 'Prototyping'],
-  },
-  {
-    label: 'Frameworks & Libraries',
+    name: 'Pro',
+    tagline: 'Web app or custom site',
     color: 'blue',
-    icon: '◉',
-    skills: ['React', 'Astro', 'Next.js', 'Tailwind CSS', 'Bootstrap'],
+    accent: 'var(--c2)',
+    border: 'rgb(var(--c2-rgb) / 0.3)',
+    glow: 'rgb(var(--c2-rgb) / 0.08)',
+    featured: true,
+    features: [
+      'Everything in Starter',
+      'React or Next.js',
+      'CMS integration',
+      'API connections',
+      'Auth + database',
+      'Figma to code',
+    ],
+    cta: 'Enquire',
   },
   {
-    label: 'CMS & Platforms',
-    color: 'green',
-    icon: '◈',
-    skills: ['Custom WordPress', 'Sanity', 'Headless CMS'],
-  },
-  {
-    label: 'Back End & Data',
-    color: 'blue',
-    icon: '◉',
-    skills: ['APIs & REST', 'Databases', 'Supabase', 'PHP', 'Node.js (learning)', 'SQL (learning)'],
-  },
-  {
-    label: 'Tooling & Workflow',
+    name: 'Ongoing',
+    tagline: 'Retainer',
     color: 'red',
-    icon: '◇',
-    skills: ['VS Code', 'Git & GitHub', 'npm / pnpm', 'Command Line'],
-  },
-  {
-    label: 'Deployment & Hosting',
-    color: 'blue',
-    icon: '◉',
-    skills: ['Vercel', 'Netlify', 'Domain & DNS'],
-  },
-  {
-    label: 'Problem Solving & Iteration',
-    color: 'red',
-    icon: '◇',
-    skills: ['Rapid prototyping', 'Debugging workflows', 'Code review habits', 'Technical documentation'],
+    accent: 'var(--c3)',
+    border: 'rgb(var(--c3-rgb) / 0.2)',
+    glow: 'rgb(var(--c3-rgb) / 0.06)',
+    featured: false,
+    features: [
+      'Dedicated monthly hours',
+      'Any project, any scope',
+      'Priority turnaround',
+      'Full-stack capability',
+      'Code review + iteration',
+      'Drop in, drop out',
+    ],
+    cta: "Let's talk",
   },
 ];
 ---
 
-<section id="skills" class="section-padding relative overflow-hidden">
-  <!-- Background -->
+<section id="plans" class="section-padding relative overflow-hidden">
   <div
-    class="absolute bottom-0 left-0 w-[600px] h-[400px] pointer-events-none"
-    style="background: radial-gradient(ellipse at 0% 100%, rgba(0,255,136,0.04), transparent 60%);"
+    class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
+    style="background: radial-gradient(ellipse at 50% 0%, rgb(var(--c2-rgb) / 0.05), transparent 70%);"
   ></div>
 
   <div class="max-w-7xl mx-auto px-6">
     <!-- Label -->
     <div class="flex items-center gap-3 mb-4 reveal">
-      <span class="font-mono text-neon-green/60 text-xs tracking-widest uppercase">02 / Skills</span>
-      <span class="flex-1 max-w-[60px] h-px bg-neon-green/20"></span>
+      <span class="section-label font-mono text-xs tracking-widest uppercase">01 / Plans</span>
+      <span class="section-label-line flex-1 max-w-[60px] h-px"></span>
     </div>
 
     <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
-      Tech stack &amp; <span class="gradient-text-green-blue">capabilities</span>
+      What's <span class="gradient-text-green-blue">included</span>
     </h2>
     <p class="text-white/45 max-w-xl mb-14 reveal reveal-delay-1">
-      A working toolkit built through real projects — UI design, front-end foundations, modern frameworks, and an expanding back-end skill set.
+      All projects are quoted individually — these are the shapes they usually take.
     </p>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {groups.map((group, i) => {
-        const color = colorMap[group.color];
-        const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
-        return (
-          <div class={`reveal ${delayClass} glass glass-hover rounded-xl p-5 group border border-white/5`}>
-            <div class="flex items-center gap-2 mb-4">
-              <span class="text-sm" style={`color: ${color}`}>{group.icon}</span>
-              <h3 class="font-display font-semibold text-sm text-white/80">{group.label}</h3>
+    <div class="grid md:grid-cols-3 gap-5 items-stretch">
+      {plans.map((plan, i) => (
+        <div
+          class={`reveal reveal-delay-${i + 1} relative glass rounded-2xl p-7 flex flex-col border transition-all duration-300 group`}
+          style={`border-color: ${plan.featured ? plan.border : 'rgba(255,255,255,0.06)'};`}
+        >
+          <!-- Featured badge -->
+          {plan.featured && (
+            <div
+              class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-mono px-3 py-1 rounded-full border"
+              style={`color: ${plan.accent}; border-color: ${plan.border}; background: ${plan.glow};`}
+            >
+              most common
             </div>
-            <ul class="space-y-2">
-              {group.skills.map((skill) => (
-                <li class="flex items-center gap-2 text-sm text-white/50 group-hover:text-white/60 transition-colors duration-300">
-                  <span class="w-1 h-1 rounded-full flex-shrink-0" style={`background: ${color}; opacity: 0.6;`}></span>
-                  {skill}
-                </li>
-              ))}
-            </ul>
+          )}
+
+          <!-- Hover glow -->
+          <div
+            class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            style={`background: radial-gradient(ellipse at 50% 0%, ${plan.glow}, transparent 70%);`}
+          ></div>
+
+          <!-- Plan name -->
+          <div class="mb-6">
+            <p
+              class="font-display font-bold text-3xl mb-1"
+              style={`color: ${plan.accent};`}
+            >
+              {plan.name}
+            </p>
+            <p class="font-mono text-xs text-white/35 tracking-widest uppercase">{plan.tagline}</p>
           </div>
-        );
-      })}
+
+          <!-- Features -->
+          <ul class="space-y-3 mb-8 flex-1">
+            {plan.features.map((feature) => (
+              <li class="flex items-start gap-3 text-sm text-white/55">
+                <span
+                  class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                  style={`background: ${plan.accent}; opacity: 0.7;`}
+                ></span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          <!-- CTA -->
+          <a
+            href="#contact"
+            class="inline-flex items-center justify-center gap-2 w-full py-3 rounded-full border text-sm font-semibold transition-all duration-300 hover:scale-[1.02]"
+            style={`color: ${plan.accent}; border-color: ${plan.border}; background: ${plan.glow};`}
+          >
+            {plan.cta}
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      ))}
     </div>
 
-    <!-- Proficiency note -->
-    <p class="mt-10 text-xs text-white/25 font-mono reveal">
-      // Skills marked "learning" reflect active study — not production-ready, but in progress.
+    <p class="mt-8 text-center font-mono text-xs text-white/20 reveal">
+      // All projects quoted individually. No lock-in. No retainer required.
     </p>
   </div>
 </section>

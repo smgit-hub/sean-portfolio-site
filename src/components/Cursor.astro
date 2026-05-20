@@ -1,0 +1,213 @@
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<style is:global>
+  @media (pointer: fine) {
+    *, *::before, *::after { cursor: none !important; }
+
+    #cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: background 0.25s ease, transform 0.12s ease, opacity 0.3s ease;
+      will-change: left, top;
+    }
+
+    #cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: border-color 0.25s ease, background 0.25s ease, width 0.2s ease, height 0.2s ease, opacity 0.3s ease;
+      will-change: left, top;
+    }
+
+    #cursor-ring.is-hovering {
+      width: 44px;
+      height: 44px;
+    }
+
+    #cursor-dot.is-hidden,
+    #cursor-ring.is-hidden {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+  if (!isFinePointer) {
+    document.getElementById('cursor-dot')?.remove();
+    document.getElementById('cursor-ring')?.remove();
+  } else {
+    const dot  = document.getElementById('cursor-dot')  as HTMLElement | null;
+    const ring = document.getElementById('cursor-ring') as HTMLElement | null;
+
+    const DARK_DEFAULT  = { r: 255, g: 255, b: 255 };
+    const LIGHT_DEFAULT = { r: 26,  g: 26,  b: 26  };
+
+    function getDefault() {
+      return document.documentElement.getAttribute('data-theme') === 'light'
+        ? LIGHT_DEFAULT : DARK_DEFAULT;
+    }
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX  = mouseX;
+    let ringY  = mouseY;
+
+    type RGB = { r: number; g: number; b: number };
+
+    function getThemeNeon(): Record<string, RGB> {
+      const s = getComputedStyle(document.documentElement);
+      const parse = (v: string): RGB => {
+        const p = s.getPropertyValue(v).trim().split(' ').map(Number);
+        return { r: p[0], g: p[1], b: p[2] };
+      };
+      return { green: parse('--c1-rgb'), blue: parse('--c2-rgb'), red: parse('--c3-rgb') };
+    }
+
+    function isVivid(r: number, g: number, b: number): boolean {
+      return Math.max(r,g,b) - Math.min(r,g,b) > 60 && (r+g+b)/3 > 20 && (r+g+b)/3 < 230;
+    }
+
+    function fromRgbStr(val: string): RGB | null {
+      const m = val.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+      if (!m) return null;
+      const [r, g, b] = [+m[1], +m[2], +m[3]];
+      return isVivid(r, g, b) ? { r, g, b } : null;
+    }
+
+    function fromHex(val: string): RGB | null {
+      const m = val.match(/^#([0-9a-f]{3,6})/i);
+      if (!m) return null;
+      let hex = m[1];
+      if (hex.length === 3) hex = hex.split('').map(c => c+c).join('');
+      const r = parseInt(hex.slice(0,2),16);
+      const g = parseInt(hex.slice(2,4),16);
+      const b = parseInt(hex.slice(4,6),16);
+      return isVivid(r, g, b) ? { r, g, b } : null;
+    }
+
+    function parseAccentColor(el: Element | null): RGB | null {
+      let node = el;
+      while (node && node !== document.body) {
+        const classes = typeof (node as HTMLElement).className === 'string'
+          ? (node as HTMLElement).className : '';
+
+        // 1. Known Tailwind classes (handles CSS-transitioned hover colors)
+        if (/hover:text-neon-green|text-neon-green|bg-neon-green/.test(classes)) return getThemeNeon().green;
+        if (/hover:text-neon-blue|text-neon-blue|hover:shadow-glow-blue|border-neon-blue/.test(classes)) return getThemeNeon().blue;
+        if (/hover:text-neon-red|text-neon-red/.test(classes)) return getThemeNeon().red;
+
+        // 2. Inline style color (handles hex values like #00ff88)
+        const inlineColor = (node as HTMLElement).style?.color;
+        if (inlineColor) {
+          const result = fromHex(inlineColor) ?? fromRgbStr(inlineColor);
+          if (result) return result;
+        }
+
+        // 3. Computed style fallback (handles non-transitioned colors)
+        const computed = window.getComputedStyle(node as Element);
+        for (const prop of ['color', 'backgroundColor', 'borderLeftColor'] as const) {
+          const result = fromRgbStr(computed[prop as keyof CSSStyleDeclaration] as string);
+          if (result) return result;
+        }
+
+        node = (node as Element).parentElement;
+      }
+      return null;
+    }
+
+    function applyColor({ r, g, b }: { r: number; g: number; b: number }) {
+      if (dot)  dot.style.background = `rgb(${r},${g},${b})`;
+      if (ring) {
+        ring.style.borderColor = `rgba(${r},${g},${b},0.7)`;
+        ring.style.background  = `rgba(${r},${g},${b},0.08)`;
+      }
+      window.dispatchEvent(new CustomEvent('cursorcolor', { detail: { r, g, b } }));
+    }
+
+    function resetColor() {
+      const def = getDefault();
+      const { r, g, b } = def;
+      if (dot)  dot.style.background = `rgb(${r},${g},${b})`;
+      if (ring) {
+        ring.style.borderColor = `rgba(${r},${g},${b},0.35)`;
+        ring.style.background  = '';
+      }
+      window.dispatchEvent(new CustomEvent('cursorcolor', { detail: def }));
+    }
+
+    // Dot: exact position
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (dot) {
+        dot.style.left = `${mouseX}px`;
+        dot.style.top  = `${mouseY}px`;
+      }
+    });
+
+    // Ring: lagging lerp
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+    const animateRing = () => {
+      ringX = lerp(ringX, mouseX, 0.1);
+      ringY = lerp(ringY, mouseY, 0.1);
+      if (ring) {
+        ring.style.left = `${ringX}px`;
+        ring.style.top  = `${ringY}px`;
+      }
+      requestAnimationFrame(animateRing);
+    };
+    animateRing();
+
+    // Hover: detect + extract colour
+    document.addEventListener('mouseover', (e) => {
+      const target = (e.target as Element).closest('a, button, [role="button"], input, textarea, select, label');
+      if (target) {
+        ring?.classList.add('is-hovering');
+        dot?.classList.add('is-hovering');
+        const color = parseAccentColor(target);
+        applyColor(color ?? getDefault());
+      }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+      const target = (e.target as Element).closest('a, button, [role="button"], input, textarea, select, label');
+      if (target) {
+        ring?.classList.remove('is-hovering');
+        dot?.classList.remove('is-hovering');
+        resetColor();
+      }
+    });
+
+    // Hide when leaving window
+    document.addEventListener('mouseleave', () => {
+      dot?.classList.add('is-hidden');
+      ring?.classList.add('is-hidden');
+    });
+    document.addEventListener('mouseenter', () => {
+      dot?.classList.remove('is-hidden');
+      ring?.classList.remove('is-hidden');
+    });
+
+    // Re-apply cursor color when theme changes
+    window.addEventListener('themechange', () => {
+      resetColor();
+    });
+  }
+</script>
