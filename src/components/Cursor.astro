@@ -189,6 +189,10 @@
     document.addEventListener('mouseout', (e) => {
       const target = (e.target as Element).closest('a, button, [role="button"], input, textarea, select, label');
       if (target) {
+        // Only reset if the mouse is leaving the interactive element entirely,
+        // not just moving to a child element (e.g. SVG arrow inside a button)
+        const relatedTarget = e.relatedTarget as Element | null;
+        if (relatedTarget && target.contains(relatedTarget)) return;
         ring?.classList.remove('is-hovering');
         dot?.classList.remove('is-hovering');
         resetColor();
