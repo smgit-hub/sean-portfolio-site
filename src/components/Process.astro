@@ -75,13 +75,13 @@ const colorOrder = ['green', 'blue', 'red'] as const;
           <div class={`reveal ${delayClass} group glass glass-hover rounded-2xl p-6 border border-white/5`}>
             <div class="flex items-center justify-between mb-5">
               <span
-                class="font-mono font-bold text-3xl leading-none opacity-20 group-hover:opacity-50 transition-opacity duration-300"
+                class="font-mono font-bold text-3xl leading-none opacity-35 group-hover:opacity-70 transition-opacity duration-300"
                 style={`color: ${colorVars.color};`}
               >
                 {step.number}
               </span>
               <div
-                class="w-8 h-8 rounded-full border flex items-center justify-center opacity-40 group-hover:opacity-80 transition-all duration-300"
+                class="w-8 h-8 rounded-full border flex items-center justify-center opacity-60 group-hover:opacity-100 transition-all duration-300"
                 style={`border-color: ${colorVars.color}; box-shadow: 0 0 10px rgb(${colorVars.rgb} / 0.25);`}
               >
                 <span class="w-1.5 h-1.5 rounded-full" style={`background: ${colorVars.color};`}></span>
