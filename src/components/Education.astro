@@ -1,6 +1,18 @@
 ---
 const timeline = [
   {
+    credential: 'Level Design',
+    specialisation: 'Custom Furniture Design & Manufacture · 2016 — Present',
+    institution: 'Self-employed · Melbourne',
+    status: 'ongoing',
+    highlights: [
+      'Designed and built bespoke timber dining tables for private clients, architects, and interior designers',
+      'Worked in traditional joinery using sustainably sourced American and Australian hardwoods',
+      'Featured in Belle and Houzz for heirloom-quality, made-to-last design work',
+      'Built a design-first process that now carries directly into how I approach web development',
+    ],
+  },
+  {
     credential: 'Certificate IV in Information Technology',
     specialisation: 'Web Development',
     institution: 'Holmesglen TAFE',
@@ -39,6 +51,18 @@ const statusStyles = {
     chipBorder: 'rgb(var(--c2-rgb) / 0.2)',
     chipBg: 'rgb(var(--c2-rgb) / 0.05)',
   },
+  ongoing: {
+    border: 'rgb(var(--c3-rgb) / 0.3)',
+    text: 'var(--c3)',
+    chipBorder: 'rgb(var(--c3-rgb) / 0.2)',
+    chipBg: 'rgb(var(--c3-rgb) / 0.05)',
+  },
+} as const;
+
+const statusLabels = {
+  completed: 'Completed',
+  'in-progress': 'In Progress',
+  ongoing: 'Ongoing',
 } as const;
 ---
 
@@ -70,7 +94,7 @@ const statusStyles = {
       <div class="space-y-8">
         {timeline.map((item, i) => {
           const statusStyle = statusStyles[item.status];
-          const statusLabel = item.status === 'completed' ? 'Completed' : 'In Progress';
+          const statusLabel = statusLabels[item.status];
           return (
             <div class={`reveal reveal-delay-${i + 1} relative md:pl-20`}>
             <!-- Timeline dot -->
@@ -79,11 +103,11 @@ const statusStyles = {
               style={`border-color: ${statusStyle.border};`}
             >
               {item.status === 'completed' ? (
-                <svg width="16" height="16" fill="none" stroke="var(--c1)" stroke-width="2.5" viewBox="0 0 24 24">
+                <svg width="16" height="16" fill="none" stroke={statusStyle.text} stroke-width="2.5" viewBox="0 0 24 24">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
               ) : (
-                <span class="w-2 h-2 rounded-full animate-glow-pulse inline-block" style="background: var(--c2);"></span>
+                <span class="w-2 h-2 rounded-full animate-glow-pulse inline-block" style={`background: ${statusStyle.text};`}></span>
               )}
             </div>
 
