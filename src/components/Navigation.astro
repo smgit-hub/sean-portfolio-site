@@ -1,6 +1,6 @@
 ---
 const links = [
-  { href: '#plans', label: 'Plans' },
+  { href: '#stack', label: 'Stack' },
   { href: '#projects', label: 'Work' },
   { href: '#about', label: 'About' },
   { href: '#process', label: 'Process' },
@@ -42,15 +42,8 @@ const links = [
       ))}
     </ul>
 
-    <!-- Right: Theme toggle + CTA + mobile hamburger -->
+    <!-- Right: CTA + mobile hamburger -->
     <div class="flex items-center gap-3">
-      <!-- Theme toggle -->
-      <button id="theme-toggle" aria-label="Switch colour theme" class="hidden md:flex items-center gap-1.5 p-2 rounded-full border border-white/10 hover:border-white/20 transition-colors duration-300">
-        <span class="theme-dot w-2 h-2 rounded-full" style="background: var(--c1);"></span>
-        <span class="theme-dot w-2 h-2 rounded-full" style="background: var(--c2);"></span>
-        <span class="theme-dot w-2 h-2 rounded-full" style="background: var(--c3);"></span>
-      </button>
-
       <!-- CTA -->
       <a
         href="#contact"
@@ -58,13 +51,6 @@ const links = [
       >
         Let's work
       </a>
-
-      <!-- Mobile theme toggle -->
-      <button id="theme-toggle-mobile-header" aria-label="Switch colour theme" class="md:hidden flex items-center gap-1.5 p-2 rounded-full border border-white/10 transition-colors duration-300">
-        <span class="theme-dot w-2 h-2 rounded-full" style="background: var(--c1);"></span>
-        <span class="theme-dot w-2 h-2 rounded-full" style="background: var(--c2);"></span>
-        <span class="theme-dot w-2 h-2 rounded-full" style="background: var(--c3);"></span>
-      </button>
 
       <!-- Mobile hamburger -->
       <button
@@ -105,11 +91,6 @@ const links = [
     >
       Let's work
     </a>
-    <button id="theme-toggle-mobile" aria-label="Switch colour theme" class="mt-4 flex items-center gap-2 p-2 rounded-full border border-white/10 hover:border-white/20 transition-colors duration-300 w-fit">
-      <span class="theme-dot w-2 h-2 rounded-full" style="background: var(--c1);"></span>
-      <span class="theme-dot w-2 h-2 rounded-full" style="background: var(--c2);"></span>
-      <span class="theme-dot w-2 h-2 rounded-full" style="background: var(--c3);"></span>
-    </button>
   </div>
 </nav>
 
@@ -150,97 +131,21 @@ const links = [
   setMobileMenuOpen(false);
   updateNavState();
   window.addEventListener('scroll', updateNavState, { passive: true });
-
-  // Theme switcher
-  const themes = ['default', 'light'] as const;
-  type Theme = typeof themes[number];
-
-  function applyNavLightStyles(isLight: boolean) {
-    // Hamburger: swap hover:text-white ↔ hover:text-black
-    const hamburger = document.getElementById('nav-toggle');
-    if (hamburger) {
-      hamburger.classList.toggle('hover:text-white', !isLight);
-      hamburger.classList.toggle('hover:text-black', isLight);
-    }
-    // Nav links: at-rest opacity
-    document.querySelectorAll<HTMLElement>('nav ul a, .mobile-link').forEach(el => {
-      el.classList.toggle('text-white\\/60', !isLight);
-      el.classList.toggle('text-white\\/70', !isLight);
-      el.classList.toggle('text-black\\/55', isLight);
-    });
-    // CTA button: remove glow hover in light, keep border hover
-    const ctas = document.querySelectorAll<HTMLElement>('nav a.rounded-full');
-    ctas.forEach(el => {
-      el.classList.toggle('hover:shadow-glow-sm-green', !isLight);
-    });
-  }
-
-  function applyTheme(theme: Theme) {
-    if (theme === 'default') {
-      document.documentElement.removeAttribute('data-theme');
-    } else {
-      document.documentElement.setAttribute('data-theme', theme);
-    }
-    localStorage.setItem('theme', theme);
-    applyNavLightStyles(theme === 'light');
-    window.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
-  }
-
-  // Apply on page load
-  applyNavLightStyles(getCurrentTheme() === 'light');
-
-  function getCurrentTheme(): Theme {
-    const stored = localStorage.getItem('theme') as Theme | null;
-    return stored && themes.includes(stored) ? stored : 'default';
-  }
-
-  function cycleTheme() {
-    const current = getCurrentTheme();
-    const nextIndex = (themes.indexOf(current) + 1) % themes.length;
-    applyTheme(themes[nextIndex]);
-  }
-
-  document.getElementById('theme-toggle')?.addEventListener('click', cycleTheme);
-  document.getElementById('theme-toggle-mobile')?.addEventListener('click', cycleTheme);
-  document.getElementById('theme-toggle-mobile-header')?.addEventListener('click', cycleTheme);
 </script>
 
 <style is:global>
-  /* ── Nav link base colours (no Tailwind hover utilities involved) ── */
+  /* ── Nav link base colours ── */
   .nav-link { color: rgba(255, 255, 255, 0.6); }
-  .nav-link:hover { color: var(--c1); }
-  .nav-link-underline { background: var(--c1); }
+  .nav-link:hover { color: var(--accent); }
+  .nav-link-underline { background: var(--accent); }
 
-  [data-theme="light"] .nav-link { color: rgba(26, 26, 26, 0.6); }
-  [data-theme="light"] .nav-link:hover { color: var(--c1); }
-  [data-theme="light"] .nav-link-underline { background: var(--c1); }
-
-  /* ── CTA button (no Tailwind hover utilities) ── */
+  /* ── CTA button ── */
   .nav-cta {
-    color: var(--c1);
-    border-color: rgb(var(--c1-rgb) / 0.3);
+    color: var(--accent);
+    border-color: rgb(var(--accent-rgb) / 0.3);
   }
   .nav-cta:hover {
-    border-color: var(--c1);
-    box-shadow: 0 0 8px rgb(var(--c1-rgb) / 0.5);
-  }
-
-  [data-theme="light"] .nav-cta:hover {
-    box-shadow: 0 1px 6px rgb(var(--c1-rgb) / 0.2);
-    background: rgb(var(--c1-rgb) / 0.07);
-  }
-
-  /* ── Other light theme nav fixes ── */
-  [data-theme="light"] #nav-toggle { color: rgba(26, 26, 26, 0.6); }
-  [data-theme="light"] #nav-toggle:hover { color: rgba(26, 26, 26, 0.9); }
-
-  [data-theme="light"] #main-nav a.rounded-full:hover {
-    box-shadow: 0 1px 6px rgba(45, 122, 79, 0.18);
-    background: rgba(45, 122, 79, 0.07);
-  }
-  [data-theme="light"] #theme-toggle:hover,
-  [data-theme="light"] #theme-toggle-mobile:hover,
-  [data-theme="light"] #theme-toggle-mobile-header:hover {
-    border-color: rgba(0, 0, 0, 0.25);
+    border-color: var(--accent);
+    background: rgb(var(--accent-rgb) / 0.08);
   }
 </style>

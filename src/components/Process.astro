@@ -4,55 +4,36 @@ const steps = [
     number: '01',
     title: 'Understand the brief',
     body: "Every project starts with clarity. I take time to understand the goal, the audience, and the constraints before writing a single line of code. Good questions save hours later.",
-    color: 'green',
   },
   {
     number: '02',
     title: 'Design with intent',
     body: "Whether working from a client brief or designing independently, I map out structure, layout, and interaction before writing production code. Low-fidelity first, detail second.",
-    color: 'blue',
   },
   {
     number: '03',
     title: 'Build clean, fast, and secure',
     body: "Once direction is clear, I move quickly with a working prototype — whether that's a marketing site or a full-stack app — then refine with clean code, strong performance, and security in mind.",
-    color: 'green',
   },
   {
     number: '04',
     title: 'APIs, data, and integration',
     body: "From connecting a CMS (like Sanity or WordPress) to consuming live REST APIs, I integrate external services and build interfaces around real, dynamic content.",
-    color: 'blue',
   },
   {
     number: '05',
     title: 'Deploy and iterate',
     body: "I deploy to Vercel or Netlify, manage domains and DNS, and treat the live environment as part of the workflow — not the finish line. Apps and sites get reviewed, refined, and improved after launch.",
-    color: 'red',
   },
   {
     number: '06',
     title: 'Review, test, and improve',
     body: "I treat each release as a checkpoint, not a finish line — validating assumptions, tightening edge cases, and improving what can be made clearer, faster, or more reliable.",
-    color: 'red',
   },
 ];
-
-const colorMap: Record<string, { color: string; rgb: string }> = {
-  green: { color: 'var(--c1)', rgb: 'var(--c1-rgb)' },
-  blue:  { color: 'var(--c2)', rgb: 'var(--c2-rgb)' },
-  red:   { color: 'var(--c3)', rgb: 'var(--c3-rgb)' },
-};
-
-const colorOrder = ['green', 'blue', 'red'] as const;
 ---
 
 <section id="process" class="section-padding relative overflow-hidden">
-  <div
-    class="absolute bottom-0 right-0 w-[500px] h-[400px] pointer-events-none"
-    style="background: radial-gradient(ellipse at 100% 100%, rgb(var(--c3-rgb) / 0.04), transparent 60%);"
-  ></div>
-
   <div class="max-w-7xl mx-auto px-6">
     <!-- Label -->
     <div class="flex items-center gap-3 mb-4 reveal">
@@ -61,7 +42,7 @@ const colorOrder = ['green', 'blue', 'red'] as const;
     </div>
 
     <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
-      How I <span class="gradient-text-green-blue">work</span>
+      How I <span style="color: var(--accent);">work</span>
     </h2>
     <p class="text-white/45 max-w-xl mb-14 reveal reveal-delay-1">
       A pragmatic, iterative approach focused on real outcomes, not process theatre.
@@ -69,22 +50,21 @@ const colorOrder = ['green', 'blue', 'red'] as const;
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {steps.map((step, i) => {
-        const colorVars = colorMap[colorOrder[i % colorOrder.length]];
         const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
         return (
-          <div class={`reveal ${delayClass} group glass glass-hover rounded-2xl p-6 border border-white/5`}>
+          <div class={`reveal ${delayClass} group panel panel-hover rounded-2xl p-6 border`} style="border-color: rgba(255,255,255,0.08);">
             <div class="flex items-center justify-between mb-5">
               <span
                 class="font-mono font-bold text-3xl leading-none opacity-35 group-hover:opacity-70 transition-opacity duration-300"
-                style={`color: ${colorVars.color};`}
+                style="color: var(--accent);"
               >
                 {step.number}
               </span>
               <div
                 class="w-8 h-8 rounded-full border flex items-center justify-center opacity-60 group-hover:opacity-100 transition-all duration-300"
-                style={`border-color: ${colorVars.color}; box-shadow: 0 0 10px rgb(${colorVars.rgb} / 0.25);`}
+                style="border-color: var(--accent);"
               >
-                <span class="w-1.5 h-1.5 rounded-full" style={`background: ${colorVars.color};`}></span>
+                <span class="w-1.5 h-1.5 rounded-full" style="background: var(--accent);"></span>
               </div>
             </div>
             <h3 class="font-display font-semibold text-base text-white mb-2 group-hover:text-white transition-colors">

@@ -2,12 +2,6 @@
 ---
 
 <section id="contact" class="section-padding relative overflow-hidden">
-  <!-- Background -->
-  <div
-    class="absolute inset-0 pointer-events-none"
-    style="background: radial-gradient(ellipse at 50% 100%, rgb(var(--c1-rgb) / 0.05), transparent 60%);"
-  ></div>
-
   <div class="max-w-6xl mx-auto px-6">
     <!-- Label -->
     <div class="flex items-center gap-3 mb-4 reveal">
@@ -20,7 +14,7 @@
       <div>
         <h2 class="font-display text-4xl md:text-5xl font-bold leading-tight mb-6 reveal">
           Ready to ship<br />
-          <span class="gradient-text-green-blue">something?</span>
+          <span style="color: var(--accent);">something?</span>
         </h2>
 
         <div class="space-y-4 text-white/50 mb-10 reveal reveal-delay-1">
@@ -43,7 +37,7 @@
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
-          class="glass rounded-2xl p-7 border border-white/5 space-y-5"
+          class="panel rounded-2xl p-7 border border-white/10 space-y-5"
         >
           <input type="hidden" name="form-name" value="contact" />
           <p class="hidden" aria-hidden="true">
@@ -126,7 +120,7 @@
         </form>
 
         <div
-          class="glass rounded-2xl p-7 border border-white/5 hidden"
+          class="panel rounded-2xl p-7 border border-white/10 hidden"
           data-contact-success
         >
           <p class="section-label font-mono text-xs tracking-widest uppercase mb-3">Message Sent</p>
@@ -286,36 +280,13 @@
 </script>
 
 <style is:global>
-  .contact-cta {
-    background: var(--c1);
-    color: #000;
-  }
-  .contact-cta:hover {
-    box-shadow: 0 0 24px rgb(var(--c1-rgb) / 0.5), 0 0 0 2px rgba(255, 255, 255, 0.55);
-    filter: brightness(1.08);
-  }
-  [data-theme="light"] .contact-cta {
-    color: #fff;
-  }
-  [data-theme="light"] .contact-cta:hover {
-    box-shadow: 0 2px 12px rgb(var(--c1-rgb) / 0.35), 0 0 0 2px rgba(26, 26, 26, 0.45);
-    filter: brightness(1.08);
-  }
-
   .form-input:focus {
-    border-color: rgb(var(--c1-rgb) / 0.4);
-    box-shadow: 0 0 0 3px rgb(var(--c1-rgb) / 0.1);
-  }
-  [data-theme="light"] .form-input:focus {
-    border-color: rgb(var(--c1-rgb) / 0.5);
-    box-shadow: 0 0 0 3px rgb(var(--c1-rgb) / 0.08);
+    border-color: rgb(var(--accent-rgb) / 0.4);
+    box-shadow: 0 0 0 3px rgb(var(--accent-rgb) / 0.1);
   }
 
   .status-neutral { color: rgba(255, 255, 255, 0.4); }
-  .status-success { color: rgb(var(--c1-rgb) / 0.85); }
+  .status-success { color: rgb(var(--accent-rgb) / 0.9); }
   .status-error   { color: rgba(255, 120, 100, 0.9); }
-  [data-theme="light"] .status-neutral { color: rgba(26, 26, 26, 0.4); }
-  [data-theme="light"] .status-success { color: rgb(var(--c1-rgb) / 0.9); }
-  [data-theme="light"] .status-error   { color: rgba(160, 40, 20, 0.85); }
 </style>
 

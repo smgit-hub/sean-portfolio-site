@@ -4,51 +4,40 @@ const projects = [
     title: 'StayConnex',
     type: 'Web Application',
     status: 'live',
-    summary: 'A booking coordination platform that unifies Airbnb, Booking.com, VRBO/Stayz, and direct booking calendars so cleaning teams can see upcoming jobs in one place and avoid missed cleans.',
-    image: '/images/projects/pages/stayconnex-1.jpg',
-    stack: ['Next.js', 'React', 'Tailwind CSS'],
+    summary: "Booking and cleaner-coordination tool for short-term rental hosts. Syncs Airbnb, Booking.com, and other platform calendars via iCal into one unified view, and automatically notifies cleaners (push + email) whenever a booking is added, changed, or cancelled — so nobody's chasing screenshots or group chats to know when a clean is needed.",
+    stack: ['React', 'TypeScript', 'Supabase', 'Stripe'],
     url: 'https://stayconnex.com/',
+  },
+  {
+    title: 'Jobwrap',
+    type: 'Web Application',
+    status: 'live',
+    summary: "AI-powered service reports for HVAC technicians. Instead of typing up paperwork after every job, technicians talk through what they did and Jobwrap turns it into a polished, branded PDF report — complete with customer history and next-service reminders. Built mobile-first as an installable PWA, so it works straight from the phone a technician already has on-site.",
+    stack: ['Next.js', 'Supabase', 'Stripe', 'Tailwind CSS'],
+    url: 'https://jobwrap.app/',
   },
   {
     title: 'Cosy Cowes Getaway',
     type: 'Accommodation Website',
     status: 'live',
-    summary: 'A direct-booking accommodation website I built with Astro and Tailwind, focused on conversion-driven UX, clear booking pathways, and SEO content to increase qualified guest enquiries.',
-    image: '/images/projects/pages/cosy-1.jpg',
+    summary: "A conversion-focused marketing site for a holiday rental on Phillip Island, Victoria. It's a lead-gen funnel rather than a transactional booking platform — actual reservations happen via Airbnb, Booking.com, and Vrbo — with availability pulled from Airbnb's iCal feed at build time and SEO content built in to drive qualified guest enquiries.",
     stack: ['Astro', 'Tailwind CSS', 'Netlify'],
     url: 'https://cosycowesgetaway.com/',
   },
-  {
-    title: 'Automotive Sales Resources & Training Hub',
-    type: 'Interactive Web App',
-    status: 'in-progress',
-    summary: 'A dedicated platform for automotive sales teams to access all resource videos and complete structured training modules with embedded videos and knowledge-check questions.',
-    image: '/images/projects/pages/auto-sales-1.jpg',
-    stack: ['React', 'JavaScript', 'Tailwind CSS'],
-    url: null,
-  },
 ];
-
-const accentMap: Record<string, { border: string; tag: string; glow: string; dot: string }> = {
-  green: { border: 'rgb(var(--c1-rgb) / 0.2)', tag: 'green', glow: 'rgb(var(--c1-rgb) / 0.1)', dot: 'var(--c1)' },
-  blue:  { border: 'rgb(var(--c2-rgb) / 0.2)', tag: 'blue',  glow: 'rgb(var(--c2-rgb) / 0.1)', dot: 'var(--c2)' },
-  red:   { border: 'rgb(var(--c3-rgb) / 0.2)', tag: 'red',   glow: 'rgb(var(--c3-rgb) / 0.08)', dot: 'var(--c3)' },
-};
-
-const accentOrder = ['green', 'blue', 'red'] as const;
 
 const getProjectStatus = (status: string) =>
   status === 'live'
-    ? { label: 'Live', color: 'var(--c1)' }
-    : { label: 'In Progress', color: 'var(--c3)' };
+    ? { label: 'Live', color: 'var(--accent)' }
+    : { label: 'In Progress', color: 'rgba(255,255,255,0.4)' };
+
+// Live screenshot, refreshed automatically by the service on each cache expiry —
+// no manual screenshot retakes needed when a live site's design changes.
+const screenshotUrl = (url: string) =>
+  `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url&viewport.width=1365&viewport.height=860`;
 ---
 
 <section id="projects" class="section-padding relative overflow-hidden">
-  <div
-    class="absolute top-1/4 right-0 w-[400px] h-[400px] pointer-events-none"
-    style="background: radial-gradient(circle at 100% 50%, rgb(var(--c2-rgb) / 0.05), transparent 60%);"
-  ></div>
-
   <div class="max-w-7xl mx-auto px-6">
     <!-- Label -->
     <div class="flex items-center gap-3 mb-4 reveal">
@@ -57,7 +46,7 @@ const getProjectStatus = (status: string) =>
     </div>
 
     <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
-      Recent <span class="gradient-text-green-blue">releases</span>
+      Recent <span style="color: var(--accent);">releases</span>
     </h2>
     <p class="text-white/45 max-w-xl mb-16 reveal reveal-delay-1">
       Live client sites, personal products, and projects currently in development.
@@ -65,37 +54,27 @@ const getProjectStatus = (status: string) =>
 
     <div class="grid md:grid-cols-3 gap-5">
       {projects.map((project, i) => {
-        const accent = accentMap[accentOrder[i % accentOrder.length]];
         const status = getProjectStatus(project.status);
         return (
           <article
-            class={`project-card reveal reveal-delay-${i + 1} group relative glass rounded-2xl p-6 flex flex-col border transition-all duration-400 cursor-default`}
-            style={`--project-border: ${accent.border}; border-color: rgba(255,255,255,0.06);`}
+            class={`project-card reveal reveal-delay-${i + 1} panel panel-hover rounded-2xl p-6 flex flex-col border transition-all duration-300`}
+            style="border-color: rgba(255,255,255,0.08);"
           >
-            <div
-              class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-              style={`background: radial-gradient(ellipse at 50% 0%, ${accent.glow}, transparent 70%);`}
-            ></div>
-
-            <div class={`project-thumb mb-5 ${project.image ? 'has-image' : ''}`} style={`--shot-color: ${accent.dot};`}>
-              {project.image ? (
+            {project.url && (
+              <div class="project-thumb mb-5 rounded-xl overflow-hidden border" style="border-color: rgba(255,255,255,0.08);">
                 <img
-                  src={project.image}
+                  src={screenshotUrl(project.url)}
                   alt={`${project.title} preview`}
                   loading="lazy"
-                  class="project-shot-image"
+                  class="w-full h-full object-cover object-top"
                 />
-              ) : (
-                <div class="project-shot">
-                  <span>Coming Soon</span>
-                </div>
-              )}
-            </div>
+              </div>
+            )}
 
             <div class="flex items-start justify-between mb-4">
               <span
                 class="text-xs font-mono px-2.5 py-1 rounded-full border"
-                style={`color: ${accent.dot}; border-color: ${accent.border}; background: ${accent.glow};`}
+                style="color: var(--accent); border-color: rgb(var(--accent-rgb) / 0.2); background: rgb(var(--accent-rgb) / 0.08);"
               >
                 {project.type}
               </span>
@@ -104,7 +83,7 @@ const getProjectStatus = (status: string) =>
                 style={`color: ${status.color};`}
               >
                 <span
-                  class="w-1.5 h-1.5 rounded-full animate-glow-pulse inline-block"
+                  class="w-1.5 h-1.5 rounded-full inline-block"
                   style={`background: ${status.color};`}
                 ></span>
                 {status.label}
@@ -121,7 +100,7 @@ const getProjectStatus = (status: string) =>
 
             <div class="flex flex-wrap gap-1.5 mb-5">
               {project.stack.map((tech) => (
-                <span class={`tech-tag ${accent.tag === 'green' ? '' : accent.tag}`}>{tech}</span>
+                <span class="tech-tag">{tech}</span>
               ))}
             </div>
 
@@ -131,15 +110,15 @@ const getProjectStatus = (status: string) =>
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-300 group/link"
-                style={`color: ${accent.dot}; opacity: 0.7;`}
+                style="color: var(--accent);"
               >
-                View live site
+                Visit live site
                 <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">
                   <path d="M7 17L17 7M17 7H7M17 7v10"/>
                 </svg>
               </a>
             ) : (
-              <span class="text-sm text-white/20 font-medium">Work in progress</span>
+              <span class="text-sm text-white/30 font-medium">In development</span>
             )}
           </article>
         );
@@ -153,91 +132,13 @@ const getProjectStatus = (status: string) =>
     color: rgba(255, 255, 255, 0.9);
   }
   .project-card:hover .project-card-title {
-    color: var(--c1);
+    color: var(--accent);
   }
-  :global([data-theme="light"]) .project-card-title {
-    color: rgba(26, 26, 26, 0.9);
-  }
-  :global([data-theme="light"]) .project-card:hover .project-card-title {
-    color: var(--c1);
-  }
-
   .project-card:hover {
-    border-color: var(--project-border);
+    border-color: rgb(var(--accent-rgb) / 0.3);
   }
-
   .project-thumb {
     height: 200px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 0.75rem;
-    border: 1px solid color-mix(in oklab, var(--shot-color) 26%, white 6%);
-    background:
-      radial-gradient(100% 70% at 10% 0%, color-mix(in oklab, var(--shot-color) 28%, transparent), transparent 70%),
-      linear-gradient(140deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.01) 50%, rgba(0, 0, 0, 0.12)),
-      #0b0f0d;
-  }
-
-  .project-shot {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-
-  .project-shot::before,
-  .project-thumb::before {
-    content: '';
-    position: absolute;
-    top: 0.5rem;
-    left: 0.55rem;
-    width: 2.1rem;
-    height: 0.3rem;
-    border-radius: 999px;
-    background: color-mix(in oklab, var(--shot-color) 55%, #ffffff 12%);
-    opacity: 0.7;
-  }
-
-  .project-shot::after,
-  .project-thumb::after {
-    content: '';
-    position: absolute;
-    inset: auto 0.55rem 0.65rem;
-    height: 0.34rem;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  .project-shot span {
-    position: absolute;
-    left: 0.58rem;
-    bottom: 1.2rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.02em;
-    color: rgba(255, 255, 255, 0.66);
-    text-transform: uppercase;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
-    z-index: 2;
-  }
-
-  .project-shot-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center center;
-    opacity: 0.9;
-  }
-
-  .project-thumb.has-image::before,
-  .project-thumb.has-image::after {
-    display: none;
-  }
-
-  .project-thumb.has-image .project-shot-image {
-    top: 0.4rem;
-    bottom: auto;
-    height: calc(100% - 1.1rem);
+    background: rgba(255, 255, 255, 0.03);
   }
 </style>

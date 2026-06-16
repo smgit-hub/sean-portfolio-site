@@ -1,145 +1,55 @@
 ---
-const plans = [
+const groups = [
   {
-    name: 'Starter',
-    tagline: 'Marketing site or simple app',
-    color: 'green',
-    accent: 'var(--c1)',
-    border: 'rgb(var(--c1-rgb) / 0.2)',
-    glow: 'rgb(var(--c1-rgb) / 0.07)',
-    featured: false,
-    features: [
-      'Up to 5 pages',
-      'Mobile-first, fast by default',
-      'SEO foundations',
-      'Contact form',
-      'Vercel or Netlify deploy + DNS setup',
-      'Astro + Tailwind',
-    ],
-    cta: 'Enquire',
+    label: 'Frontend',
+    blurb: 'What users touch',
+    tools: ['React', 'Next.js', 'Astro', 'TypeScript', 'Tailwind CSS'],
   },
   {
-    name: 'Pro',
-    tagline: 'Web app or custom site',
-    color: 'blue',
-    accent: 'var(--c2)',
-    border: 'rgb(var(--c2-rgb) / 0.3)',
-    glow: 'rgb(var(--c2-rgb) / 0.08)',
-    featured: true,
-    features: [
-      'Everything in Starter',
-      'React or Next.js',
-      'CMS integration',
-      'API connections',
-      'Auth + database (Supabase)',
-      'Figma to code',
-    ],
-    cta: 'Enquire',
+    label: 'Backend & data',
+    blurb: 'Where the logic lives',
+    tools: ['Supabase', 'PHP', 'REST APIs'],
   },
   {
-    name: 'Ongoing',
-    tagline: 'Retainer',
-    color: 'red',
-    accent: 'var(--c3)',
-    border: 'rgb(var(--c3-rgb) / 0.2)',
-    glow: 'rgb(var(--c3-rgb) / 0.06)',
-    featured: false,
-    features: [
-      'Dedicated monthly hours',
-      'Any project, any scope',
-      'Priority turnaround',
-      'Full-stack capability',
-      'Code review + iteration',
-      'Drop in, drop out',
-    ],
-    cta: "Let's talk",
+    label: 'CMS & content',
+    blurb: 'Where content lives',
+    tools: ['WordPress', 'Sanity', 'Headless CMS'],
+  },
+  {
+    label: 'Workflow & design',
+    blurb: 'How it gets shipped',
+    tools: ['Figma', 'Vercel', 'Netlify', 'Git'],
   },
 ];
 ---
 
-<section id="plans" class="section-padding relative overflow-hidden">
-  <div
-    class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
-    style="background: radial-gradient(ellipse at 50% 0%, rgb(var(--c2-rgb) / 0.05), transparent 70%);"
-  ></div>
-
+<section id="stack" class="section-padding relative overflow-hidden">
   <div class="max-w-7xl mx-auto px-6">
     <!-- Label -->
     <div class="flex items-center gap-3 mb-4 reveal">
-      <span class="section-label font-mono text-xs tracking-widest uppercase">Plans</span>
+      <span class="section-label font-mono text-xs tracking-widest uppercase">Stack</span>
       <span class="section-label-line flex-1 max-w-[60px] h-px"></span>
     </div>
 
     <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
-      What's <span class="gradient-text-green-blue">included</span>
+      Tools & <span style="color: var(--accent);">technologies</span>
     </h2>
-    <p class="text-white/45 max-w-xl mb-14 reveal reveal-delay-1">
-      All projects are quoted individually — these are the shapes they usually take.
+    <p class="text-white/45 max-w-xl mb-12 reveal reveal-delay-1">
+      What I reach for day to day, picked to fit the project rather than out of habit.
     </p>
 
-    <div class="grid md:grid-cols-3 gap-5 items-stretch">
-      {plans.map((plan, i) => (
-        <div
-          class={`reveal reveal-delay-${i + 1} relative glass rounded-2xl p-7 flex flex-col border transition-all duration-300 group`}
-          style={`border-color: ${plan.featured ? plan.border : 'rgba(255,255,255,0.06)'};`}
-        >
-          <!-- Featured badge -->
-          {plan.featured && (
-            <div
-              class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-mono px-3 py-1 rounded-full border"
-              style={`color: ${plan.accent}; border-color: ${plan.border}; background: ${plan.glow};`}
-            >
-              most common
-            </div>
-          )}
-
-          <!-- Hover glow -->
-          <div
-            class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-            style={`background: radial-gradient(ellipse at 50% 0%, ${plan.glow}, transparent 70%);`}
-          ></div>
-
-          <!-- Plan name -->
-          <div class="mb-6">
-            <p
-              class="font-display font-bold text-3xl mb-1"
-              style={`color: ${plan.accent};`}
-            >
-              {plan.name}
-            </p>
-            <p class="font-mono text-xs text-white/35 tracking-widest uppercase">{plan.tagline}</p>
-          </div>
-
-          <!-- Features -->
-          <ul class="space-y-3 mb-8 flex-1">
-            {plan.features.map((feature) => (
-              <li class="flex items-start gap-3 text-sm text-white/55">
-                <span
-                  class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
-                  style={`background: ${plan.accent}; opacity: 0.7;`}
-                ></span>
-                {feature}
-              </li>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {groups.map((group, i) => (
+        <div class={`reveal reveal-delay-${i + 1} panel rounded-2xl p-6 border`} style="border-color: rgba(255,255,255,0.08);">
+          <p class="font-display font-semibold text-base text-white mb-1">{group.label}</p>
+          <p class="text-xs text-white/35 font-mono mb-5">{group.blurb}</p>
+          <div class="flex flex-wrap gap-2">
+            {group.tools.map((tool) => (
+              <span class="tech-tag">{tool}</span>
             ))}
-          </ul>
-
-          <!-- CTA -->
-          <a
-            href="#contact"
-            class="inline-flex items-center justify-center gap-2 w-full py-3 rounded-full border text-sm font-semibold transition-all duration-300 hover:scale-[1.02]"
-            style={`color: ${plan.accent}; border-color: ${plan.border}; background: ${plan.glow};`}
-          >
-            {plan.cta}
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
+          </div>
         </div>
       ))}
     </div>
-
-    <p class="mt-8 text-center font-mono text-xs text-white/20 reveal">
-      // All projects quoted individually. No lock-in. No retainer required.
-    </p>
   </div>
 </section>
