@@ -7,28 +7,58 @@
     <h2 class="text-3xl font-bold mb-8 reveal" style="color: var(--text);">Get in touch</h2>
     <p class="text-lg mb-8 reveal reveal-delay-1" style="color: var(--text-muted);">Have a project or idea? I'm available for freelance work or full-time opportunities.</p>
 
-    <form name="contact" method="POST" netlify class="reveal reveal-delay-2">
+    <form id="contact-form" name="contact" method="POST" netlify class="reveal reveal-delay-2">
       <input type="hidden" name="subject" value="New enquiry via seanmillard.com" />
 
-      <div class="mb-6">
-        <label for="name" class="block text-sm font-medium mb-2" style="color: var(--text);">Name</label>
-        <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text);" />
+      <div id="form-fields">
+        <div class="mb-6">
+          <label for="name" class="block text-sm font-medium mb-2" style="color: var(--text);">Name</label>
+          <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text);" />
+        </div>
+
+        <div class="mb-6">
+          <label for="email" class="block text-sm font-medium mb-2" style="color: var(--text);">Email</label>
+          <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text);" />
+        </div>
+
+        <div class="mb-6">
+          <label for="message" class="block text-sm font-medium mb-2" style="color: var(--text);">Message</label>
+          <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text); resize: vertical;"></textarea>
+        </div>
+
+        <button type="submit" class="px-6 py-3 border font-medium rounded transition-colors" style="border-color: var(--accent); color: var(--accent);" onmouseover="this.style.backgroundColor='rgba(34, 197, 94, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
+          Send message
+        </button>
       </div>
 
-      <div class="mb-6">
-        <label for="email" class="block text-sm font-medium mb-2" style="color: var(--text);">Email</label>
-        <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text);" />
+      <div id="success-message" style="display: none;">
+        <p class="text-lg font-medium" style="color: var(--accent);">Thanks for reaching out!</p>
+        <p class="text-sm mt-2" style="color: var(--text-muted);">I'll get back to you soon.</p>
       </div>
-
-      <div class="mb-6">
-        <label for="message" class="block text-sm font-medium mb-2" style="color: var(--text);">Message</label>
-        <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text); resize: vertical;"></textarea>
-      </div>
-
-      <button type="submit" class="px-6 py-3 border font-medium rounded transition-colors" style="border-color: var(--accent); color: var(--accent);" onmouseover="this.style.backgroundColor='rgba(34, 197, 94, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
-        Send message
-      </button>
     </form>
+
+    <script>
+      const form = document.getElementById('contact-form');
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const formData = new FormData(form);
+
+          try {
+            await fetch('/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: new URLSearchParams(formData)
+            });
+
+            document.getElementById('form-fields').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+          } catch (err) {
+            console.error('Form submission error:', err);
+          }
+        });
+      }
+    </script>
     </div>
   </div>
 </section>
