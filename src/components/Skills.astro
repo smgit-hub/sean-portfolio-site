@@ -31,21 +31,21 @@ const groups = [
       <span class="section-label-line flex-1 max-w-[60px] h-px"></span>
     </div>
 
-    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
+    <h2 class="text-3xl font-bold mb-4 reveal" style="color: var(--text);">
       Tools & <span style="color: var(--accent);">technologies</span>
     </h2>
-    <p class="text-white/45 max-w-xl mb-12 reveal reveal-delay-1">
+    <p class="text-lg max-w-xl mb-12 reveal reveal-delay-1" style="color: var(--text-muted);">
       What I reach for day to day, picked to fit the project rather than out of habit.
     </p>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
       {groups.map((group, i) => (
-        <div class={`reveal reveal-delay-${i + 1} panel rounded-2xl p-6 border`} style="border-color: rgba(255,255,255,0.08);">
-          <p class="font-display font-semibold text-base text-white mb-1">{group.label}</p>
-          <p class="text-xs text-white/35 font-mono mb-5">{group.blurb}</p>
+        <div class={`reveal reveal-delay-${i + 1} rounded-lg p-6 border`} style="border-color: var(--border); background-color: var(--bg);">
+          <p class="font-semibold text-base mb-1" style="color: var(--text);">{group.label}</p>
+          <p class="text-xs font-mono mb-5" style="color: var(--text-muted);">{group.blurb}</p>
           <div class="flex flex-wrap gap-2">
             {group.tools.map((tool) => (
-              <span class="tech-tag">{tool}</span>
+              <span class="px-2 py-1 text-xs rounded border" style="color: var(--accent); border-color: var(--accent);">{tool}</span>
             ))}
           </div>
         </div>

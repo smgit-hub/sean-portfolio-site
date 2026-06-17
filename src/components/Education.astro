@@ -38,21 +38,6 @@ const timeline = [
   },
 ];
 
-const statusStyles = {
-  completed: {
-    border: 'rgba(255, 255, 255, 0.15)',
-    text: 'rgba(255, 255, 255, 0.7)',
-    chipBorder: 'rgba(255, 255, 255, 0.15)',
-    chipBg: 'rgba(255, 255, 255, 0.04)',
-  },
-  ongoing: {
-    border: 'rgb(var(--accent-rgb) / 0.3)',
-    text: 'var(--accent)',
-    chipBorder: 'rgb(var(--accent-rgb) / 0.2)',
-    chipBg: 'rgb(var(--accent-rgb) / 0.06)',
-  },
-} as const;
-
 const statusLabels = {
   completed: 'Completed',
   ongoing: 'Ongoing',
@@ -67,10 +52,10 @@ const statusLabels = {
       <span class="section-label-line flex-1 max-w-[60px] h-px"></span>
     </div>
 
-    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
+    <h2 class="text-3xl font-bold mb-4 reveal" style="color: var(--text);">
       Learning with <span style="color: var(--accent);">purpose</span>
     </h2>
-    <p class="text-white/45 max-w-xl mb-14 reveal reveal-delay-1">
+    <p class="text-lg max-w-xl mb-14 reveal reveal-delay-1" style="color: var(--text-muted);">
       Formal study has given me structure, but the real education has come from building — and doing both at the same time.
     </p>
 
@@ -81,43 +66,43 @@ const statusLabels = {
 
       <div class="space-y-8">
         {timeline.map((item, i) => {
-          const statusStyle = statusStyles[item.status];
           const statusLabel = statusLabels[item.status];
+          const dotColor = item.status === 'ongoing' ? 'var(--accent)' : 'var(--text-muted)';
           return (
             <div class={`reveal reveal-delay-${i + 1} relative md:pl-20`}>
             <!-- Timeline dot -->
             <div
-              class="hidden md:flex absolute left-0 top-6 w-12 h-12 rounded-full panel border items-center justify-center"
-              style={`border-color: ${statusStyle.border};`}
+              class="hidden md:flex absolute left-0 top-6 w-12 h-12 rounded-full border items-center justify-center"
+              style={`border-color: ${dotColor}; background-color: var(--bg);`}
             >
               {item.status === 'completed' ? (
-                <svg width="16" height="16" fill="none" stroke={statusStyle.text} stroke-width="2.5" viewBox="0 0 24 24">
+                <svg width="16" height="16" fill="none" stroke={dotColor} stroke-width="2.5" viewBox="0 0 24 24">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
               ) : (
-                <span class="w-2 h-2 rounded-full inline-block" style={`background: ${statusStyle.text};`}></span>
+                <span class="w-2 h-2 rounded-full inline-block" style={`background: ${dotColor};`}></span>
               )}
             </div>
 
             <!-- Card -->
             <div
-              class="panel panel-hover rounded-2xl p-7 border group"
-              style="border-color: rgba(255,255,255,0.08);"
+              class="rounded-lg p-6 border group"
+              style={`border-color: var(--border); background-color: var(--bg);`}
             >
               <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
                 <div>
-                  <p class="font-mono text-xs text-white/35 mb-1">{item.institution}</p>
-                  <h3 class="font-display font-semibold text-xl text-white leading-snug">
+                  <p class="text-xs font-mono mb-1" style="color: var(--text-muted);">{item.institution}</p>
+                  <h3 class="text-xl font-semibold leading-snug" style="color: var(--text);">
                     {item.credential}
                   </h3>
-                  <p class="text-sm text-white/50 mt-0.5">{item.specialisation}</p>
+                  <p class="text-sm mt-0.5" style="color: var(--text-muted);">{item.specialisation}</p>
                 </div>
                 <span
                   class="flex-shrink-0 text-xs font-mono px-3 py-1 rounded-full border"
                   style={`
-                    color: ${statusStyle.text};
-                    border-color: ${statusStyle.chipBorder};
-                    background: ${statusStyle.chipBg};
+                    color: ${item.status === 'ongoing' ? 'var(--accent)' : 'var(--text-muted)'};
+                    border-color: var(--border);
+                    background-color: var(--bg);
                   `}
                 >
                   {statusLabel}
@@ -126,10 +111,10 @@ const statusLabels = {
 
               <ul class="space-y-2">
                 {item.highlights.map((point) => (
-                  <li class="flex items-start gap-3 text-sm text-white/45">
+                  <li class="flex items-start gap-3 text-sm" style="color: var(--text-muted);">
                     <span
                       class="mt-1.5 w-1 h-1 rounded-full flex-shrink-0"
-                      style={`background: ${statusStyle.text}; opacity: 0.6;`}
+                      style={`background: ${item.status === 'ongoing' ? 'var(--accent)' : 'var(--text-muted)'};`}
                     ></span>
                     {point}
                   </li>

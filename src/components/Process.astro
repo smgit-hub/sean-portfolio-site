@@ -41,10 +41,10 @@ const steps = [
       <span class="section-label-line flex-1 max-w-[60px] h-px"></span>
     </div>
 
-    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
+    <h2 class="text-3xl font-bold mb-4 reveal" style="color: var(--text);">
       How I <span style="color: var(--accent);">work</span>
     </h2>
-    <p class="text-white/45 max-w-xl mb-14 reveal reveal-delay-1">
+    <p class="text-lg max-w-xl mb-14 reveal reveal-delay-1" style="color: var(--text-muted);">
       A pragmatic, iterative approach focused on real outcomes, not process theatre.
     </p>
 
@@ -52,10 +52,10 @@ const steps = [
       {steps.map((step, i) => {
         const delayClass = `reveal-delay-${Math.min(i + 1, 5)}`;
         return (
-          <div class={`reveal ${delayClass} group panel panel-hover rounded-2xl p-6 border`} style="border-color: rgba(255,255,255,0.08);">
+          <div class={`reveal ${delayClass} group rounded-lg p-6 border transition-all`} style="border-color: var(--border); background-color: var(--bg);">
             <div class="flex items-center justify-between mb-5">
               <span
-                class="font-mono font-bold text-3xl leading-none opacity-35 group-hover:opacity-70 transition-opacity duration-300"
+                class="font-mono font-bold text-3xl leading-none opacity-40 group-hover:opacity-100 transition-opacity duration-300"
                 style="color: var(--accent);"
               >
                 {step.number}
@@ -67,10 +67,10 @@ const steps = [
                 <span class="w-1.5 h-1.5 rounded-full" style="background: var(--accent);"></span>
               </div>
             </div>
-            <h3 class="font-display font-semibold text-base text-white mb-2 group-hover:text-white transition-colors">
+            <h3 class="font-semibold text-base mb-2 transition-colors" style="color: var(--text);">
               {step.title}
             </h3>
-            <p class="text-sm text-white/40 leading-relaxed group-hover:text-white/55 transition-colors duration-300">
+            <p class="text-sm leading-relaxed transition-colors duration-300" style="color: var(--text-muted);">
               {step.body}
             </p>
           </div>
