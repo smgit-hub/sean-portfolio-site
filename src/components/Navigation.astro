@@ -28,9 +28,19 @@ const links = [
     </ul>
 
     <div class="flex items-center gap-4">
-      <button id="theme-toggle" class="p-2 transition-colors text-lg" title="Toggle theme" style="color: var(--text);">
-        <span id="briefcase-icon">💼</span>
-        <span id="party-icon" style="display: none;">🎉</span>
+      <button id="theme-toggle" class="p-2 transition-colors" title="Toggle theme" style="color: var(--text);">
+        <svg id="briefcase-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <path d="M6 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/>
+          <line x1="12" y1="12" x2="12" y2="16"/>
+        </svg>
+        <svg id="party-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="display: none;">
+          <path d="M6 9l3 5 3-5M15 9l3 5 3-5"/>
+          <circle cx="12" cy="18" r="3"/>
+          <path d="M12 2v4m0 8v4"/>
+          <line x1="8" y1="6" x2="5" y2="3"/>
+          <line x1="16" y1="6" x2="19" y2="3"/>
+        </svg>
       </button>
 
       <button id="nav-toggle" class="md:hidden p-2 text-gray-600" style="color: var(--text-muted);">
