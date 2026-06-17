@@ -32,44 +32,22 @@ const screenshotUrl = (url: string) =>
       const imageOnLeft = i % 2 === 0;
       return (
         <div class="mb-24 reveal" style={`animation-delay: ${i * 0.1}s`}>
-          <div class="grid md:gap-20 items-center" style="grid-template-columns: 1fr 1.1fr;">
-            {imageOnLeft ? (
-              <>
-                <div class="rounded-lg overflow-hidden border" style="aspect-ratio: 1365/860; background-color: var(--border-subtle); border-color: var(--border);">
-                  {project.url && (
-                    <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-contain" style="background-color: var(--border-subtle);" loading="lazy" />
-                  )}
-                </div>
-                <div>
-                  <p class="text-xs uppercase letter-spacing-wide mb-3 font-medium" style="color: var(--text-muted);">{project.type}</p>
-                  <h3 class="text-3xl font-bold mb-4" style="color: var(--text);">{project.title}</h3>
-                  <p class="leading-relaxed mb-6" style="color: var(--text-muted);">{project.summary}</p>
-                  {project.url && (
-                    <a href={project.url} target="_blank" rel="noopener noreferrer" class="font-medium" style="color: var(--accent);" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
-                      View live →
-                    </a>
-                  )}
-                </div>
-              </>
-            ) : (
-              <>
-                <div>
-                  <p class="text-xs uppercase letter-spacing-wide mb-3 font-medium" style="color: var(--text-muted);">{project.type}</p>
-                  <h3 class="text-3xl font-bold mb-4" style="color: var(--text);">{project.title}</h3>
-                  <p class="leading-relaxed mb-6" style="color: var(--text-muted);">{project.summary}</p>
-                  {project.url && (
-                    <a href={project.url} target="_blank" rel="noopener noreferrer" class="font-medium" style="color: var(--accent);" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
-                      View live →
-                    </a>
-                  )}
-                </div>
-                <div class="rounded-lg overflow-hidden border" style="aspect-ratio: 1365/860; background-color: var(--border-subtle); border-color: var(--border);">
-                  {project.url && (
-                    <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-contain" style="background-color: var(--border-subtle);" loading="lazy" />
-                  )}
-                </div>
-              </>
-            )}
+          <div class="project-grid items-center">
+            <div class={`project-image rounded-lg overflow-hidden border${imageOnLeft ? '' : ' md-order-2'}`} style="aspect-ratio: 1365/860; background-color: var(--border-subtle); border-color: var(--border);">
+              {project.url && (
+                <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-contain" style="background-color: var(--border-subtle);" loading="lazy" />
+              )}
+            </div>
+            <div class={`project-text${imageOnLeft ? '' : ' md-order-1'}`}>
+              <p class="text-xs uppercase letter-spacing-wide mb-3 font-medium" style="color: var(--text-muted);">{project.type}</p>
+              <h3 class="text-3xl font-bold mb-4" style="color: var(--text);">{project.title}</h3>
+              <p class="leading-relaxed mb-6" style="color: var(--text-muted);">{project.summary}</p>
+              {project.url && (
+                <a href={project.url} target="_blank" rel="noopener noreferrer" class="font-medium" style="color: var(--accent);" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                  View live →
+                </a>
+              )}
+            </div>
           </div>
         </div>
       );
@@ -80,5 +58,25 @@ const screenshotUrl = (url: string) =>
 <style>
   .letter-spacing-wide {
     letter-spacing: 0.1em;
+  }
+
+  .project-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  /* On mobile: image always first */
+  .project-image { order: 1; }
+  .project-text  { order: 2; }
+
+  @media (min-width: 768px) {
+    .project-grid {
+      grid-template-columns: 1fr 1.1fr;
+      gap: 5rem;
+    }
+    /* Restore desktop order for alternating layout */
+    .md-order-1 { order: 1; }
+    .md-order-2 { order: 2; }
   }
 </style>
