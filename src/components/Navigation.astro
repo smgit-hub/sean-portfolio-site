@@ -53,7 +53,7 @@ const links = [
       <!-- Mobile hamburger -->
       <button
         id="nav-toggle"
-        class="md:hidden text-gray-600 hover:text-gray-900 transition-colors p-2"
+        class="md:hidden text-white/60 hover:text-white transition-colors p-2"
         aria-label="Toggle menu"
       >
       <svg id="icon-open" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -69,7 +69,7 @@ const links = [
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="md:hidden hidden bg-white/95 backdrop-blur-xl border-t border-gray-200 px-6 pb-6 pt-4"
+    class="md:hidden hidden bg-black/95 backdrop-blur-xl border-t border-white/5 px-6 pb-6 pt-4"
   >
     <ul class="flex flex-col gap-4">
       {links.map((link) => (
@@ -108,10 +108,10 @@ const links = [
   const updateNavState = () => {
     if (!(mainNav instanceof HTMLElement)) return;
     const isScrolled = window.scrollY > 12;
-    mainNav.classList.toggle('bg-white/90', isScrolled);
+    mainNav.classList.toggle('bg-black/90', isScrolled);
     mainNav.classList.toggle('backdrop-blur-xl', isScrolled);
-    mainNav.classList.toggle('border-gray-200', isScrolled);
-    mainNav.classList.toggle('shadow-[0_8px_24px_rgba(0,0,0,0.08)]', isScrolled);
+    mainNav.classList.toggle('border-white/10', isScrolled);
+    mainNav.classList.toggle('shadow-[0_8px_24px_rgba(0,0,0,0.35)]', isScrolled);
     mainNav.classList.toggle('border-transparent', !isScrolled);
   };
 
@@ -133,7 +133,7 @@ const links = [
 
 <style is:global>
   /* ── Nav link base colours ── */
-  .nav-link { color: rgba(0, 0, 0, 0.6); }
+  .nav-link { color: rgba(255, 255, 255, 0.6); }
   .nav-link:hover { color: var(--accent); }
   .nav-link-underline { background: var(--accent); }
 
