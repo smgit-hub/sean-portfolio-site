@@ -35,7 +35,7 @@ const screenshotUrl = (url: string) =>
           <div class="grid md:gap-20 items-center" style="grid-template-columns: 1fr 1.1fr;">
             {imageOnLeft ? (
               <>
-                <div class="bg-gray-100 h-80 rounded-lg overflow-hidden border border-gray-200">
+                <div class="bg-gray-100 rounded-lg overflow-hidden border border-gray-200" style="aspect-ratio: 1365/860;">
                   {project.url && (
                     <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-contain bg-gray-50" loading="lazy" />
                   )}
@@ -63,7 +63,7 @@ const screenshotUrl = (url: string) =>
                     </a>
                   )}
                 </div>
-                <div class="bg-gray-100 h-80 rounded-lg overflow-hidden border border-gray-200">
+                <div class="bg-gray-100 rounded-lg overflow-hidden border border-gray-200" style="aspect-ratio: 1365/860;">
                   {project.url && (
                     <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-contain bg-gray-50" loading="lazy" />
                   )}
