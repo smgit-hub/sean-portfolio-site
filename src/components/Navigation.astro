@@ -6,17 +6,7 @@ const links = [
 ];
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 transition-all duration-300" data-theme="light">
-  <style is:global>
-    html[data-theme="dark"] nav {
-      background-color: var(--bg);
-      border-color: var(--border);
-    }
-    nav {
-      background-color: var(--bg);
-      border-color: var(--border);
-    }
-  </style>
+<nav class="fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300" style="background-color: var(--bg); border-color: var(--border);">
 
   <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
     <a href="#" class="flex items-center">
@@ -59,7 +49,7 @@ const links = [
     </div>
   </div>
 
-  <div id="mobile-menu" class="md:hidden hidden px-6 pb-6 pt-4" style="background-color: var(--bg); border-color: var(--border);">
+  <div id="mobile-menu" class="md:hidden hidden border-t px-6 pb-6 pt-4" style="background-color: var(--bg); border-color: var(--border);">
     <ul class="flex flex-col gap-4">
       {links.map((link) => (
         <li>
