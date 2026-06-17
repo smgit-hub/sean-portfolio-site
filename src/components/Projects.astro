@@ -32,10 +32,10 @@ const screenshotUrl = (url: string) =>
       const imageOnLeft = i % 2 === 0;
       return (
         <div class="mb-24 reveal" style={`animation-delay: ${i * 0.1}s`}>
-          <div class="grid md:grid-cols-2 gap-20 items-center">
+          <div class="grid md:gap-20 items-center" style="grid-template-columns: 1fr 1.1fr;">
             {imageOnLeft ? (
               <>
-                <div class="bg-gray-100 h-96 rounded-lg overflow-hidden border border-gray-200">
+                <div class="bg-gray-100 h-80 rounded-lg overflow-hidden border border-gray-200">
                   {project.url && (
                     <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-cover" loading="lazy" />
                   )}
@@ -63,7 +63,7 @@ const screenshotUrl = (url: string) =>
                     </a>
                   )}
                 </div>
-                <div class="bg-gray-100 h-96 rounded-lg overflow-hidden border border-gray-200">
+                <div class="bg-gray-100 h-80 rounded-lg overflow-hidden border border-gray-200">
                   {project.url && (
                     <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-cover" loading="lazy" />
                   )}
