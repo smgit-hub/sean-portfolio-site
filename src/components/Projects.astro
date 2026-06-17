@@ -20,8 +20,10 @@ const projects = [
   },
 ];
 
-const screenshotUrl = (url: string) =>
-  `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url&viewport.width=1365&viewport.height=860&refresh=true`;
+const screenshotUrl = (url: string) => {
+  const ts = new Date().getTime();
+  return `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url&viewport.width=1365&viewport.height=860&refresh=true&t=${ts}`;
+};
 ---
 
 <section id="projects" class="py-16">
