@@ -2,143 +2,83 @@
 const projects = [
   {
     title: 'StayConnex',
-    type: 'Web Application',
-    status: 'live',
-    summary: "Booking and cleaner-coordination tool for short-term rental hosts. Syncs Airbnb, Booking.com, and other platform calendars via iCal into one unified view, and automatically notifies cleaners (push + email) whenever a booking is added, changed, or cancelled — so nobody's chasing screenshots or group chats to know when a clean is needed.",
-    stack: ['React', 'TypeScript', 'Supabase', 'Stripe'],
+    type: 'SaaS · React · Supabase',
+    summary: "Booking and cleaner-coordination tool for short-term rental hosts. Syncs Airbnb, Booking.com calendars, auto-notifies cleaners on changes.",
     url: 'https://stayconnex.com/',
   },
   {
     title: 'Cosy Cowes Getaway',
-    type: 'Accommodation Website',
-    status: 'live',
-    summary: "A conversion-focused marketing site for a holiday rental on Phillip Island, Victoria. It's a lead-gen funnel rather than a transactional booking platform — actual reservations happen via Airbnb, Booking.com, and Vrbo — with availability pulled from Airbnb's iCal feed at build time and SEO content built in to drive qualified guest enquiries.",
-    stack: ['Astro', 'Tailwind CSS', 'Netlify'],
+    type: 'Marketing site · Astro · iCal',
+    summary: "Lead-gen marketing site for a holiday rental on Phillip Island. Availability synced from Airbnb at build time, SEO-focused for qualified guests.",
     url: 'https://cosycowesgetaway.com/',
   },
   {
     title: 'Jobwrap',
-    type: 'Web Application',
-    status: 'live',
-    summary: "AI-powered service reports for HVAC technicians. Instead of typing up paperwork after every job, technicians talk through what they did and Jobwrap turns it into a polished, branded PDF report — complete with customer history and next-service reminders. Built mobile-first as an installable PWA, so it works straight from the phone a technician already has on-site.",
-    stack: ['Next.js', 'Supabase', 'Stripe', 'Tailwind CSS'],
+    type: 'SaaS · React Native · PWA',
+    summary: "AI-powered service reports for HVAC technicians. Turns voice notes into polished, branded PDF reports with customer history and scheduling.",
     url: 'https://jobwrap.app/',
   },
 ];
 
-const getProjectStatus = (status: string) =>
-  status === 'live'
-    ? { label: 'Live', color: 'var(--accent)' }
-    : { label: 'In Progress', color: 'rgba(255,255,255,0.4)' };
-
-// Live screenshot, refreshed automatically by the service on each cache expiry —
-// no manual screenshot retakes needed when a live site's design changes.
 const screenshotUrl = (url: string) =>
   `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url&viewport.width=1365&viewport.height=860`;
 ---
 
-<section id="projects" class="section-padding relative overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6">
-    <!-- Label -->
-    <div class="flex items-center gap-3 mb-4 reveal">
-      <span class="section-label font-mono text-xs tracking-widest uppercase">Work</span>
-      <span class="section-label-line flex-1 max-w-[60px] h-px"></span>
-    </div>
+<section id="projects" class="py-16">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-xs uppercase letter-spacing-wide font-medium text-gray-600 mb-16 reveal">Featured work</h2>
 
-    <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 reveal">
-      Recent <span style="color: var(--accent);">releases</span>
-    </h2>
-    <p class="text-white/45 max-w-xl mb-16 reveal reveal-delay-1">
-      Live client sites, personal products, and projects currently in development.
-    </p>
-
-    <div class="grid md:grid-cols-3 gap-5">
-      {projects.map((project, i) => {
-        const status = getProjectStatus(project.status);
-        return (
-          <article
-            class={`project-card reveal reveal-delay-${i + 1} panel panel-hover rounded-2xl p-6 flex flex-col border transition-all duration-300`}
-            style="border-color: rgba(255,255,255,0.08);"
-          >
-            {project.url && (
-              <div class="project-thumb mb-5 rounded-xl overflow-hidden border" style="border-color: rgba(255,255,255,0.08);">
-                <img
-                  src={screenshotUrl(project.url)}
-                  alt={`${project.title} preview`}
-                  loading="lazy"
-                  class="w-full h-full object-cover object-top"
-                />
-              </div>
-            )}
-
-            <div class="flex items-start justify-between mb-4">
-              <span
-                class="text-xs font-mono px-2.5 py-1 rounded-full border"
-                style="color: var(--accent); border-color: rgb(var(--accent-rgb) / 0.2); background: rgb(var(--accent-rgb) / 0.08);"
-              >
-                {project.type}
-              </span>
-              <span
-                class="flex items-center gap-1.5 text-xs font-medium"
-                style={`color: ${status.color};`}
-              >
-                <span
-                  class="w-1.5 h-1.5 rounded-full inline-block"
-                  style={`background: ${status.color};`}
-                ></span>
-                {status.label}
-              </span>
-            </div>
-
-            <h3 class="project-card-title font-display font-semibold text-lg mb-2">
-              {project.title}
-            </h3>
-
-            <p class="text-sm text-white/45 leading-relaxed mb-5 flex-1">
-              {project.summary}
-            </p>
-
-            <div class="flex flex-wrap gap-1.5 mb-5">
-              {project.stack.map((tech) => (
-                <span class="tech-tag">{tech}</span>
-              ))}
-            </div>
-
-            {project.url ? (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-300 group/link"
-                style="color: var(--accent);"
-              >
-                Visit live site
-                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">
-                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                </svg>
-              </a>
+    {projects.map((project, i) => {
+      const imageOnLeft = i % 2 === 0;
+      return (
+        <div class="mb-24 reveal" style={`animation-delay: ${i * 0.1}s`}>
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            {imageOnLeft ? (
+              <>
+                <div class="bg-gray-100 h-64 rounded-lg overflow-hidden border border-gray-200">
+                  {project.url && (
+                    <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-cover" loading="lazy" />
+                  )}
+                </div>
+                <div>
+                  <p class="text-xs uppercase letter-spacing-wide text-gray-500 mb-3 font-medium">{project.type}</p>
+                  <h3 class="text-3xl font-bold mb-4">{project.title}</h3>
+                  <p class="text-gray-600 leading-relaxed mb-6">{project.summary}</p>
+                  {project.url && (
+                    <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-green-600 font-medium hover:text-green-700">
+                      View live →
+                    </a>
+                  )}
+                </div>
+              </>
             ) : (
-              <span class="text-sm text-white/30 font-medium">In development</span>
+              <>
+                <div>
+                  <p class="text-xs uppercase letter-spacing-wide text-gray-500 mb-3 font-medium">{project.type}</p>
+                  <h3 class="text-3xl font-bold mb-4">{project.title}</h3>
+                  <p class="text-gray-600 leading-relaxed mb-6">{project.summary}</p>
+                  {project.url && (
+                    <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-green-600 font-medium hover:text-green-700">
+                      View live →
+                    </a>
+                  )}
+                </div>
+                <div class="bg-gray-100 h-64 rounded-lg overflow-hidden border border-gray-200">
+                  {project.url && (
+                    <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-cover" loading="lazy" />
+                  )}
+                </div>
+              </>
             )}
-          </article>
-        );
-      })}
-    </div>
+          </div>
+        </div>
+      );
+    })}
   </div>
 </section>
 
 <style>
-  .project-card-title {
-    color: rgba(255, 255, 255, 0.9);
-  }
-  .project-card:hover .project-card-title {
-    color: var(--accent);
-  }
-  .project-card:hover {
-    border-color: rgb(var(--accent-rgb) / 0.3);
-  }
-  .project-thumb {
-    height: 200px;
-    background: rgba(255, 255, 255, 0.03);
+  .letter-spacing-wide {
+    letter-spacing: 0.1em;
   }
 </style>

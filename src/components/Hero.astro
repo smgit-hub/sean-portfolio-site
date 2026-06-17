@@ -1,96 +1,21 @@
 ---
-const techTags = ['React', 'Next.js', 'Astro', 'Supabase', 'Tailwind', 'Figma'];
 ---
 
-<section
-  id="hero"
-  class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black"
->
-  <!-- Background grid -->
-  <div class="absolute inset-0 bg-grid opacity-40 pointer-events-none"></div>
-
-  <!-- Ambient glow -->
-  <div
-    class="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full pointer-events-none"
-    style="background: radial-gradient(circle, rgb(var(--accent-rgb) / 0.06) 0%, transparent 70%);"
-  ></div>
-
-<!-- Content -->
-  <div class="relative z-10 max-w-5xl mx-auto px-6 pt-16 pb-20 text-center">
-
-    <!-- Location label -->
-    <p class="font-mono text-xs tracking-widest uppercase mb-10 text-white/40 animate-fade-up" style="animation-delay: 0.08s;">
-      Full-stack web development · Melbourne, AU
-    </p>
-
-    <!-- Headline -->
-    <h1 class="font-display font-bold leading-none mb-10 animate-fade-up" style="font-size: clamp(2.8rem, 9vw, 6rem); animation-delay: 0.15s;">
-      <span class="block text-white">Web apps and sites that work.</span>
-      <span class="block" style="color: var(--accent);">No excuses.</span>
-    </h1>
-
-    <!-- CTAs -->
-    <div class="flex flex-wrap items-center justify-center gap-4 mb-10 animate-fade-up" style="animation-delay: 0.28s;">
-      <a
-        href="#stack"
-        class="hero-cta-primary group relative inline-flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-sm transition-all duration-300"
-      >
-        See my stack
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform duration-300 group-hover:translate-y-0.5">
-          <path d="M12 5v14M5 12l7 7 7-7"/>
-        </svg>
-      </a>
-      <a
-        href="#projects"
-        class="hero-cta-secondary group inline-flex items-center gap-2 px-7 py-3 rounded-full border font-medium text-sm transition-all duration-300"
-      >
-        View work
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform duration-300 group-hover:translate-x-1">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
+<section id="hero" class="pt-32 pb-16">
+  <div class="max-w-2xl mx-auto px-6">
+    <div class="mb-8 reveal">
+      <p class="text-xs uppercase letter-spacing-wide font-medium text-green-600 mb-4">Full-Stack Web Developer</p>
+      <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">I build custom web applications that ship.</h1>
+      <p class="text-lg text-gray-600 leading-relaxed mb-8">Three shipped SaaS products. Full-stack: design to deployment. No templates, no shortcuts.</p>
+      <a href="#projects" class="inline-block px-6 py-3 border border-green-600 text-green-600 font-medium rounded hover:bg-green-50 transition-colors">
+        See the work →
       </a>
     </div>
-
-    <!-- Tech tags -->
-    <div class="flex flex-wrap items-center justify-center gap-3 mb-10 animate-fade-up" style="animation-delay: 0.4s;">
-      {techTags.map((tech) => (
-        <span class="tech-tag">{tech}</span>
-      ))}
-    </div>
-
-    <!-- Name -->
-    <p class="font-mono text-xs tracking-widest text-white/50 animate-fade-up" style="animation-delay: 0.5s;">
-      Sean Millard
-    </p>
   </div>
-
 </section>
 
 <style>
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .animate-fade-up {
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards;
-  }
-
-  /* ── Hero CTAs ── */
-  .hero-cta-primary {
-    background: var(--accent);
-    color: #000;
-  }
-  .hero-cta-primary:hover {
-    filter: brightness(1.1);
-  }
-
-  .hero-cta-secondary {
-    border-color: rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.7);
-  }
-  .hero-cta-secondary:hover {
-    border-color: rgb(var(--accent-rgb) / 0.4);
-    color: var(--accent);
+  .letter-spacing-wide {
+    letter-spacing: 0.1em;
   }
 </style>

@@ -1,112 +1,35 @@
 ---
-const credentials = [
-  { label: 'Cert IV — Web Development', sub: 'Holmesglen TAFE', done: true },
-  { label: 'Diploma — Back End Web Dev', sub: 'Lumify Learn', done: true },
-  { label: '5+ live projects shipped', sub: 'During study', done: true },
-];
 ---
 
-<section id="about" class="section-padding relative overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6">
-    <!-- Label -->
-    <div class="flex items-center gap-3 mb-4 reveal">
-      <span class="section-label font-mono text-xs tracking-widest uppercase">About</span>
-      <span class="section-label-line flex-1 max-w-[60px] h-px"></span>
+<section id="about" class="py-16 border-t border-gray-200">
+  <div class="max-w-2xl mx-auto px-6">
+    <h2 class="text-3xl font-bold mb-8 reveal">About</h2>
+
+    <div class="space-y-6 mb-12 text-gray-600 leading-relaxed reveal reveal-delay-1">
+      <p>
+        I'm Sean, a web developer based in Melbourne. For eight years I ran Level Design, designing bespoke timber tables for architects and private clients. That design discipline—understanding the problem, sketching solutions, not using templates—now shapes how I build web applications.
+      </p>
+      <p>
+        I work across the full stack: React, Next.js, Astro, Supabase day to day. Figma to think through structure before code. I care about shipping clean work over shipping fast.
+      </p>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-16 items-start">
-      <!-- Left: bio -->
-      <div>
-        <h2 class="font-display text-4xl md:text-5xl font-bold leading-tight mb-6 reveal">
-          I build things.<br />
-          <span style="color: var(--accent);">Then I ship them.</span>
-        </h2>
-
-        <div class="space-y-5 text-white/55 leading-relaxed reveal reveal-delay-1">
-          <p>
-            I'm Sean — a web developer based in Melbourne. For about eight years I've run <a href="https://leveldesign.com.au" target="_blank" rel="noopener noreferrer" class="about-inline-link">Level Design</a>, designing bespoke timber dining tables for private clients, architects, and interior designers — and I still run it today. That same design-first instinct now goes into the web applications and sites I build: not a template, not a page builder, something custom that fits the problem.
-          </p>
-          <p>
-            I recently completed a Diploma in Back End Development while building real products alongside it. StayConnex is one of them — I had the problem, so I built the fix.
-          </p>
-          <p>
-            I work across the full stack — React, Next.js, Astro, and Supabase day to day, PHP and WordPress when the project calls for it — use Figma to think through structure before I write a line of code, and care about shipping clean work over shipping fast work.
-          </p>
-        </div>
-
-        <div class="mt-8 flex items-center gap-4 reveal reveal-delay-2">
-          <a
-            href="#projects"
-            class="about-built-link text-sm font-medium flex items-center gap-2 group"
-          >
-            See what I've built
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover:translate-x-1">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Right: credentials -->
-      <div class="flex flex-col gap-4 reveal reveal-delay-1">
-        {credentials.map((c) => (
-          <div
-            class="panel panel-hover rounded-xl px-6 py-5 border flex items-center gap-5 group"
-            style="border-color: rgba(255,255,255,0.08);"
-          >
-            <div
-              class="w-9 h-9 rounded-full border flex-shrink-0 flex items-center justify-center"
-              style="border-color: rgb(var(--accent-rgb) / 0.3);"
-            >
-              <svg width="14" height="14" fill="none" stroke="var(--accent)" stroke-width="2.5" viewBox="0 0 24 24">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-            </div>
-            <div>
-              <p class="credential-label text-sm font-medium">
-                {c.label}
-              </p>
-              <p class="credential-sub text-xs font-mono mt-0.5">{c.sub}</p>
-            </div>
-          </div>
-        ))}
-
-        <!-- Stack note -->
-        <div class="panel rounded-xl p-5 border font-mono text-xs leading-relaxed mt-1" style="border-color: rgba(255,255,255,0.08);">
-          <div class="flex items-center gap-1.5 mb-3">
-            <span class="w-2.5 h-2.5 rounded-full bg-white/15"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-white/15"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-white/15"></span>
-            <span class="ml-2 text-white/20 text-[10px]">sean.ts</span>
-          </div>
-          <div class="space-y-1">
-            <p><span class="code-keyword">const</span> <span class="code-base">sean</span> <span class="code-muted">= &#123;</span></p>
-            <p>&nbsp;&nbsp;<span class="code-key">location</span><span class="code-muted">:</span> <span class="code-string">'Melbourne, AU'</span><span class="code-muted">,</span></p>
-            <p>&nbsp;&nbsp;<span class="code-key">status</span><span class="code-muted">:</span> <span class="code-string">'available'</span><span class="code-muted">,</span></p>
-            <p>&nbsp;&nbsp;<span class="code-key">stack</span><span class="code-muted">:</span> <span class="code-string">'full-stack'</span><span class="code-muted">,</span></p>
-            <p>&nbsp;&nbsp;<span class="code-key">ships</span><span class="code-muted">:</span> <span class="code-keyword">true</span><span class="code-muted">,</span></p>
-            <p><span class="code-muted">&#125;;</span></p>
-          </div>
-        </div>
-      </div>
+    <div class="border-t border-gray-200 pt-8 reveal reveal-delay-2">
+      <p class="text-xs uppercase font-medium text-gray-500 mb-6" style="letter-spacing: 0.1em;">Credentials</p>
+      <ul class="space-y-4">
+        <li class="flex items-start gap-3">
+          <span class="text-green-600 font-bold text-lg mt-0.5">✓</span>
+          <p class="font-medium text-gray-900">Diploma in Back End Development</p>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-green-600 font-bold text-lg mt-0.5">✓</span>
+          <p class="font-medium text-gray-900">Cert IV in Web Development</p>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-green-600 font-bold text-lg mt-0.5">→</span>
+          <p class="font-medium text-gray-900">Level Design (ongoing)</p>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
-
-<style is:global>
-  .about-built-link { color: var(--accent); }
-  .about-built-link:hover { color: #fff; }
-
-  .about-inline-link { color: var(--accent); text-decoration: underline; text-decoration-color: rgb(var(--accent-rgb) / 0.3); text-underline-offset: 2px; }
-  .about-inline-link:hover { color: #fff; text-decoration-color: currentColor; }
-
-  .credential-label { color: rgba(255, 255, 255, 0.8); }
-  .credential-sub   { color: rgba(255, 255, 255, 0.3); }
-
-  /* Code block tokens */
-  .code-keyword { color: rgb(var(--accent-rgb) / 0.85); }
-  .code-key     { color: rgba(255, 255, 255, 0.6); }
-  .code-string  { color: rgb(200 120 40 / 0.8); }
-  .code-base    { color: rgba(255, 255, 255, 0.75); }
-  .code-muted   { color: rgba(255, 255, 255, 0.3); }
-</style>

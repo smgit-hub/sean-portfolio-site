@@ -2,36 +2,8 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="relative border-t border-white/5 py-10">
-  <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div class="flex items-center gap-2.5">
-      <img
-        src="/logo-sm.svg"
-        alt="SM logo"
-        width="26"
-        height="26"
-        class="h-6 w-6"
-      />
-      <span class="font-display font-bold text-white/70 text-sm">Sean Millard</span>
-    </div>
-
-    <p class="text-xs text-white/25 font-mono text-center">
-      &copy; {year} — Built with Astro &amp; Tailwind CSS
-    </p>
-
-    <a
-      href="#hero"
-      class="footer-back-link group flex items-center gap-2 text-xs font-mono transition-colors duration-300"
-    >
-      Back to top
-      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="transition-transform group-hover:-translate-y-1">
-        <path d="M12 19V5M5 12l7-7 7 7"/>
-      </svg>
-    </a>
+<footer class="border-t border-gray-200 py-12 text-center text-sm text-gray-600">
+  <div class="max-w-7xl mx-auto px-6">
+    <p>Melbourne, Australia · {year}</p>
   </div>
 </footer>
-
-<style is:global>
-  .footer-back-link { color: rgba(255, 255, 255, 0.3); }
-  .footer-back-link:hover { color: var(--accent); }
-</style>

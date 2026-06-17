@@ -6,35 +6,27 @@
 :root {
   --accent: #22c55e;
   --accent-rgb: 34 197 94;
-  --bg: #000000;
 }
 
 html {
   scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: rgb(var(--accent-rgb) / 0.3) transparent;
 }
 
 body {
-  background-color: #000;
-  color: #f0f0f0;
+  background-color: #ffffff;
+  color: #1a1a1a;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-/* ─── Scrollbar (WebKit) ─────────────────────────────────── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgb(var(--accent-rgb) / 0.25); border-radius: 2px; }
-
 /* ─── Selection ─────────────────────────────────────────── */
-::selection { background: rgb(var(--accent-rgb) / 0.2); color: var(--accent); }
+::selection { background: rgb(var(--accent-rgb) / 0.2); color: #1a1a1a; }
 
 @layer utilities {
   .section-padding {
-    padding-top: 7rem;
-    padding-bottom: 7rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 }
 
@@ -54,55 +46,12 @@ body {
 .reveal-delay-4 { transition-delay: 0.4s; }
 .reveal-delay-5 { transition-delay: 0.5s; }
 
-/* ─── Grid background ────────────────────────────────────── */
-.bg-grid {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 60px 60px;
+/* ─── Section label ─────────────────────────────────────── */
+.section-label {
+  color: var(--accent);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
 }
-
-/* ─── Section count label ────────────────────────────────── */
-.section-label { color: rgb(var(--accent-rgb) / 0.7); }
-.section-label-line { background: rgb(var(--accent-rgb) / 0.2); }
-
-/* ─── Flat card panel (replaces former glassmorphism) ───── */
-.panel {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.panel-hover {
-  transition: background 0.3s ease, border-color 0.3s ease;
-}
-.panel-hover:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgb(var(--accent-rgb) / 0.3);
-}
-
-/* ─── Primary CTA button ─────────────────────────────────── */
-.contact-cta {
-  background: var(--accent);
-  color: #000;
-}
-.contact-cta:hover {
-  filter: brightness(1.1);
-}
-
-/* ─── Tag / badge ────────────────────────────────────────── */
-.tech-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.2rem 0.65rem;
-  font-size: 0.7rem;
-  font-family: 'JetBrains Mono', monospace;
-  letter-spacing: 0.03em;
-  border-radius: 4px;
-  background: rgb(var(--accent-rgb) / 0.07);
-  color: rgb(var(--accent-rgb) / 0.85);
-  border: 1px solid rgb(var(--accent-rgb) / 0.18);
-  transition: all 0.2s ease;
-}
-.tech-tag:hover {
-  background: rgb(var(--accent-rgb) / 0.14);
-  border-color: rgb(var(--accent-rgb) / 0.4);
-}
+.section-label-line { background: #e5e5e5; }
