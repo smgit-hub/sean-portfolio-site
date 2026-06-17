@@ -37,7 +37,7 @@ const screenshotUrl = (url: string) =>
               <>
                 <div class="bg-gray-100 h-80 rounded-lg overflow-hidden border border-gray-200">
                   {project.url && (
-                    <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-cover" loading="lazy" />
+                    <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-contain bg-gray-50" loading="lazy" />
                   )}
                 </div>
                 <div>
@@ -65,7 +65,7 @@ const screenshotUrl = (url: string) =>
                 </div>
                 <div class="bg-gray-100 h-80 rounded-lg overflow-hidden border border-gray-200">
                   {project.url && (
-                    <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-cover" loading="lazy" />
+                    <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-contain bg-gray-50" loading="lazy" />
                   )}
                 </div>
               </>
