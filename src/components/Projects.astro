@@ -35,7 +35,7 @@ const screenshotUrl = (url: string) =>
           <div class="grid md:grid-cols-2 gap-12 items-center">
             {imageOnLeft ? (
               <>
-                <div class="bg-gray-100 h-64 rounded-lg overflow-hidden border border-gray-200">
+                <div class="bg-gray-100 h-96 rounded-lg overflow-hidden border border-gray-200">
                   {project.url && (
                     <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-cover" loading="lazy" />
                   )}
@@ -63,7 +63,7 @@ const screenshotUrl = (url: string) =>
                     </a>
                   )}
                 </div>
-                <div class="bg-gray-100 h-64 rounded-lg overflow-hidden border border-gray-200">
+                <div class="bg-gray-100 h-96 rounded-lg overflow-hidden border border-gray-200">
                   {project.url && (
                     <img src={screenshotUrl(project.url)} alt={project.title} class="w-full h-full object-cover" loading="lazy" />
                   )}
