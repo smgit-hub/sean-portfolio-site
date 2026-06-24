@@ -7,7 +7,7 @@ export interface Props {
 
 const {
   title = 'Sean Millard — Full-Stack Web Developer',
-  description = 'Full-stack web developer building modern, scalable web applications and websites. Based in Melbourne, Australia.',
+  description = 'Full-stack web developer building modern, scalable web applications and websites.',
   image = '/logo-sm.svg',
 } = Astro.props;
 
@@ -56,13 +56,13 @@ const socialImageUrl = Astro.site
 
     <!-- Google tag (gtag.js) -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
-    <script is:inline>
+    <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
       window.dataLayer = window.dataLayer || [];
       window.gtag = function gtag() {
         window.dataLayer.push(arguments);
       };
       window.gtag('js', new Date());
-      window.gtag('config', 'G-PB0Z7X9EK2');
+      window.gtag('config', GA_MEASUREMENT_ID);
     </script>
   </head>
 
