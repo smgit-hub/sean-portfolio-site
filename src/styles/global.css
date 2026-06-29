@@ -93,6 +93,3 @@ html[data-theme="dark"] a {
   transition: all 0.3s ease;
 }
 
-/* ─── Hover utilities ────────────────────────────────────── */
-.hover-accent:hover { color: var(--hover-accent) !important; }
-.hover-accent-bg:hover { background-color: var(--hover-accent-bg) !important; }
