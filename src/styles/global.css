@@ -88,17 +88,3 @@ html[data-theme="dark"] nav {
 html[data-theme="dark"] a {
   transition: all 0.3s ease;
 }
-
-html[data-theme="dark"] a[style*="color: var(--accent)"],
-html[data-theme="dark"] a[style*="color: var(--text-muted)"] {
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-}
-
-html[data-theme="dark"] a[style*="color: var(--accent)"]:hover {
-  text-shadow: 0 0 20px rgba(34, 197, 94, 0.8);
-  color: var(--neon-green);
-}
-
-html[data-theme="dark"] button:hover {
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-}
