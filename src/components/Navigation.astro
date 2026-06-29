@@ -8,7 +8,7 @@ const links = [
 
 <nav class="fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300" style="background-color: var(--bg); border-color: var(--border);">
 
-  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative">
     <a href="#" class="flex items-center">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="h-8 w-8" role="img" aria-label="SM logo">
         <path d="M18.9 12C17.7 10.9 16.1 10.3 14.3 10.3C11.7 10.3 10 11.6 10 13.7C10 15.6 11.4 16.7 14.1 17.2L15.9 17.5C18 17.9 19.1 18.8 19.1 20.4C19.1 22.6 17.2 24.1 14.5 24.1C12.5 24.1 10.8 23.4 9.5 22.1" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
@@ -17,10 +17,10 @@ const links = [
       </svg>
     </a>
 
-    <ul class="hidden md:flex items-center gap-8">
+    <ul class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
       {links.map((link) => (
         <li>
-          <a href={link.href} class="text-sm transition-colors" style="color: var(--text-muted);" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">
+          <a href={link.href} class="text-sm transition-colors" style="color: var(--text-muted);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">
             {link.label}
           </a>
         </li>
@@ -28,7 +28,7 @@ const links = [
     </ul>
 
     <div class="flex items-center gap-4">
-      <button id="theme-toggle" class="p-2 transition-colors" title="Toggle theme" style="color: var(--text);">
+      <button id="theme-toggle" class="p-2 transition-colors" title="Toggle theme" style="color: var(--text-muted);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">
         <svg id="briefcase-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
           <rect width="20" height="14" x="2" y="6" rx="2" />
@@ -41,7 +41,7 @@ const links = [
         </svg>
       </button>
 
-      <a href="https://github.com/smgit-hub" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex p-2 transition-colors" style="color: var(--text-muted);" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'" aria-label="GitHub">
+      <a href="https://github.com/smgit-hub" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex p-2 transition-colors" style="color: var(--text-muted);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'" aria-label="GitHub">
         <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .269.18.579.688.481C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
       </a>
 
