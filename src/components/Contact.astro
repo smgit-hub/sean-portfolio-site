@@ -1,34 +1,207 @@
 ---
+const services = [
+  'Web apps and SaaS products, from first version to launch',
+  'Business websites that load fast and rank',
+  'AI features, payments and integrations added to an existing product',
+];
 ---
 
-<section id="contact" class="py-16 border-t" style="border-color: var(--border);">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="max-w-2xl">
-    <h2 class="text-3xl font-bold mb-8 reveal" style="color: var(--text);">Get in touch</h2>
-    <p class="text-lg mb-8 reveal reveal-delay-1" style="color: var(--text-muted);">Have a project or idea? I'm available for freelance projects and part-time opportunities.</p>
+<section id="contact" class="py-20 lg:py-24">
+  <div class="max-w-7xl mx-auto px-6 grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+    <div>
+      <h2 class="font-display text-3xl md:text-4xl font-bold tracking-tight mb-6 reveal" style="color: var(--text);">Let's build something</h2>
+      <p class="text-lg leading-relaxed mb-8 reveal reveal-delay-1" style="color: var(--text-muted);">I take on freelance builds and part-time roles, and I'll take a project from first brief to launch and keep it running after.</p>
+      <ul class="space-y-3 mb-10 reveal reveal-delay-1">
+        {services.map((service) => (
+          <li class="flex items-start gap-3" style="color: var(--text);">
+            <span class="font-bold mt-0.5" style="color: var(--accent);">✓</span>
+            <span>{service}</span>
+          </li>
+        ))}
+      </ul>
+      <div class="border-t pt-8 reveal reveal-delay-2" style="border-color: var(--border);">
+        <p class="mb-2" style="color: var(--text);">Send a message with the form and I'll get back to you, usually within one business day.</p>
+        <p class="text-sm" style="color: var(--text-muted);">
+          Prefer LinkedIn?
+          <a href="https://www.linkedin.com/in/sean-millard-dev" target="_blank" rel="noopener noreferrer" class="font-medium" style="color: var(--accent);" onmouseover="this.style.color='var(--hover-accent)'" onmouseout="this.style.color='var(--accent)'">Message me there →</a>
+        </p>
+      </div>
+    </div>
 
-    <form name="contact" method="POST" netlify action="/thank-you" class="reveal reveal-delay-2">
-      <input type="hidden" name="subject" value="New enquiry via seanmillard.com" />
-
-      <div class="mb-6">
-        <label for="name" class="block text-sm font-medium mb-2" style="color: var(--text);">Name</label>
-        <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text);" />
+    <div class="space-y-6 reveal reveal-delay-2">
+      <div id="scoper" class="shot p-6 md:p-8 scroll-mt-24" style="background-color: var(--bg);">
+        <p class="text-xs uppercase font-medium mb-2" style="letter-spacing: 0.1em; color: var(--accent);">Project scoper · AI</p>
+        <h3 class="font-display text-xl md:text-2xl font-bold tracking-tight mb-2" style="color: var(--text);">Not sure where to start?</h3>
+        <p class="text-sm leading-relaxed mb-5" style="color: var(--text-muted);">Describe your idea in a few sentences and get a quick brief: what to build first, the stack I'd use and the questions to answer before quoting. Built with the Claude API, the same way I build AI features for clients.</p>
+        <form id="scoper-form" novalidate>
+          <label for="scoper-idea" class="sr-only">Describe your project</label>
+          <textarea id="scoper-idea" name="idea" rows="4" maxlength="1500" required placeholder="e.g. A booking system for my dog grooming business, with deposits, reminders and a calendar for two groomers." class="w-full px-4 py-2.5 rounded border text-sm" style="border-color: var(--border); background-color: var(--bg); color: var(--text); resize: vertical;"></textarea>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <div class="flex flex-wrap items-center justify-between gap-3 mt-3">
+            <span id="scoper-count" class="text-xs" style="color: var(--text-muted);">0 / 1500</span>
+            <button type="submit" id="scoper-submit" class="btn btn-primary">Scope my project</button>
+          </div>
+        </form>
+        <p id="scoper-status" class="text-sm mt-4 hidden" role="status" aria-live="polite" style="color: var(--text-muted);"></p>
+        <div id="scoper-result" class="hidden mt-6 pt-6 border-t" style="border-color: var(--border);" aria-live="polite"></div>
       </div>
 
-      <div class="mb-6">
-        <label for="email" class="block text-sm font-medium mb-2" style="color: var(--text);">Email</label>
-        <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text);" />
-      </div>
-
-      <div class="mb-6">
-        <label for="message" class="block text-sm font-medium mb-2" style="color: var(--text);">Message</label>
-        <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text); resize: vertical;"></textarea>
-      </div>
-
-      <button type="submit" class="px-6 py-3 border font-medium rounded transition-colors" style="border-color: var(--accent); color: var(--accent);" onmouseover="this.style.backgroundColor='var(--hover-accent-bg)'" onmouseout="this.style.backgroundColor='transparent'">
-        Send message
-      </button>
-    </form>
+    <form name="contact" method="POST" netlify action="/thank-you" id="contact-form" class="shot p-6 md:p-8" style="background-color: var(--bg);">
+        <input type="hidden" name="subject" value="New enquiry via seanmillard.com" />
+        <div class="mb-6">
+          <label for="name" class="block text-sm font-medium mb-2" style="color: var(--text);">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required class="w-full px-4 py-2.5 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text);" />
+        </div>
+        <div class="mb-6">
+          <label for="email" class="block text-sm font-medium mb-2" style="color: var(--text);">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required class="w-full px-4 py-2.5 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text);" />
+        </div>
+        <div class="mb-6">
+          <label for="message" class="block text-sm font-medium mb-2" style="color: var(--text);">What are you working on?</label>
+          <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2.5 rounded border" style="border-color: var(--border); background-color: var(--bg); color: var(--text); resize: vertical;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send message</button>
+      </form>
     </div>
   </div>
 </section>
+
+<script>
+  type Brief = {
+    is_project: boolean;
+    title: string;
+    summary: string;
+    first_version: string[];
+    later: string[];
+    stack: string[];
+    open_questions: string[];
+    size: 'small' | 'medium' | 'large';
+    size_note: string;
+  };
+
+  const SIZE_LABELS = { small: 'Small build', medium: 'Medium build', large: 'Large build' };
+
+  const form = document.getElementById('scoper-form') as HTMLFormElement | null;
+  const idea = document.getElementById('scoper-idea') as HTMLTextAreaElement | null;
+  const count = document.getElementById('scoper-count');
+  const submit = document.getElementById('scoper-submit') as HTMLButtonElement | null;
+  const status = document.getElementById('scoper-status');
+  const result = document.getElementById('scoper-result');
+  const message = document.getElementById('message') as HTMLTextAreaElement | null;
+
+  const el = (tag: string, text?: string, className?: string, style?: string) => {
+    const node = document.createElement(tag);
+    if (text) node.textContent = text;
+    if (className) node.className = className;
+    if (style) node.setAttribute('style', style);
+    return node;
+  };
+
+  const section = (heading: string, items: string[]) => {
+    const wrap = el('div', undefined, 'mb-5');
+    wrap.append(el('p', heading, 'text-xs uppercase font-medium mb-2', 'letter-spacing: 0.1em; color: var(--text-muted);'));
+    const list = el('ul', undefined, 'space-y-1.5 text-sm');
+    for (const item of items) {
+      const li = el('li', undefined, 'flex items-start gap-2', 'color: var(--text);');
+      li.append(el('span', '–', '', 'color: var(--accent);'), el('span', item));
+      list.append(li);
+    }
+    wrap.append(list);
+    return wrap;
+  };
+
+  const briefToText = (brief: Brief, original: string) =>
+    [
+      `Project: ${brief.title}`,
+      '',
+      brief.summary,
+      '',
+      'First version:',
+      ...brief.first_version.map((item) => `- ${item}`),
+      ...(brief.later.length ? ['', 'Later:', ...brief.later.map((item) => `- ${item}`)] : []),
+      '',
+      'Open questions:',
+      ...brief.open_questions.map((item) => `- ${item}`),
+      '',
+      `My original description: ${original}`,
+    ].join('\n');
+
+  const showStatus = (text: string) => {
+    if (!status) return;
+    status.textContent = text;
+    status.classList.toggle('hidden', !text);
+  };
+
+  const render = (brief: Brief, original: string) => {
+    if (!result) return;
+    result.replaceChildren();
+    if (!brief.is_project) {
+      result.append(el('p', brief.summary, 'text-sm', 'color: var(--text);'));
+      result.classList.remove('hidden');
+      return;
+    }
+
+    const header = el('div', undefined, 'flex flex-wrap items-baseline justify-between gap-2 mb-2');
+    header.append(
+      el('h4', brief.title, 'font-display text-lg font-bold tracking-tight', 'color: var(--text);'),
+      el('span', SIZE_LABELS[brief.size] ?? brief.size, 'text-xs font-medium px-2 py-1 rounded', 'background: var(--hover-accent-bg); color: var(--accent);'),
+    );
+    result.append(
+      header,
+      el('p', brief.summary, 'text-sm leading-relaxed mb-1', 'color: var(--text-muted);'),
+      el('p', brief.size_note, 'text-xs mb-5', 'color: var(--text-muted);'),
+      section('First version', brief.first_version),
+    );
+    if (brief.later.length) result.append(section('Later', brief.later));
+    result.append(section('Stack', brief.stack), section('Questions before quoting', brief.open_questions));
+
+    const send = el('button', 'Send this brief to Sean →', 'btn btn-primary') as HTMLButtonElement;
+    send.type = 'button';
+    send.addEventListener('click', () => {
+      if (message) message.value = briefToText(brief, original);
+      document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      (document.getElementById('name') as HTMLInputElement | null)?.focus({ preventScroll: true });
+    });
+    result.append(send);
+    result.classList.remove('hidden');
+  };
+
+  idea?.addEventListener('input', () => {
+    if (count) count.textContent = `${idea.value.length} / 1500`;
+  });
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!idea || !submit) return;
+    const text = idea.value.trim();
+    if (text.length < 20) {
+      showStatus('Add a little more detail about what you want built.');
+      return;
+    }
+
+    submit.disabled = true;
+    submit.textContent = 'Scoping…';
+    showStatus('Thinking it through. This takes a few seconds.');
+    result?.classList.add('hidden');
+
+    try {
+      const res = await fetch('/api/scope', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ idea: text, website: (form.elements.namedItem('website') as HTMLInputElement).value }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.brief) {
+        showStatus(data.error ?? 'Something went wrong. Use the form below instead.');
+        return;
+      }
+      showStatus('');
+      render(data.brief as Brief, text);
+    } catch {
+      showStatus('Something went wrong. Use the form below instead.');
+    } finally {
+      submit.disabled = false;
+      submit.textContent = 'Scope my project';
+    }
+  });
+</script>

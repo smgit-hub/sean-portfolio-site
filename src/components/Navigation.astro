@@ -28,16 +28,13 @@ const links = [
     </ul>
 
     <div class="flex items-center gap-4">
-      <button id="theme-toggle" class="p-2 transition-colors" title="Toggle theme" style="color: var(--text-muted);" onmouseover="this.style.color='var(--hover-accent)'" onmouseout="this.style.color='var(--text-muted)'">
-        <svg id="briefcase-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-          <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-          <rect width="20" height="14" x="2" y="6" rx="2" />
+      <button id="theme-toggle" class="p-2 transition-colors" aria-label="Toggle dark mode" title="Toggle dark mode" style="color: var(--text-muted);" onmouseover="this.style.color='var(--hover-accent)'" onmouseout="this.style.color='var(--text-muted)'">
+        <svg id="moon-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
         </svg>
-        <svg id="party-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display: none;">
-          <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
-          <path d="M20 2v4" />
-          <path d="M22 4h-4" />
-          <circle cx="4" cy="20" r="2" />
+        <svg id="sun-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
         </svg>
       </button>
 
@@ -71,34 +68,14 @@ const links = [
 </nav>
 
 <script>
-  function initTheme() {
-    const stored = localStorage.getItem('theme') || 'light';
-    setTheme(stored);
-  }
-
   function setTheme(theme) {
-    const html = document.documentElement;
-    html.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    updateThemeIcon(theme);
-  }
-
-  function updateThemeIcon(theme) {
-    const briefcaseIcon = document.getElementById('briefcase-icon');
-    const partyIcon = document.getElementById('party-icon');
-    if (theme === 'dark') {
-      briefcaseIcon.style.display = 'inline';
-      partyIcon.style.display = 'none';
-    } else {
-      briefcaseIcon.style.display = 'none';
-      partyIcon.style.display = 'inline';
-    }
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('theme', theme); } catch (e) {}
   }
 
   function toggleTheme() {
     const current = document.documentElement.getAttribute('data-theme') || 'light';
-    const next = current === 'light' ? 'dark' : 'light';
-    setTheme(next);
+    setTheme(current === 'light' ? 'dark' : 'light');
   }
 
   document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
@@ -113,5 +90,10 @@ const links = [
     });
   });
 
-  initTheme();
 </script>
+
+<style>
+  #sun-icon { display: none; }
+  :global(html[data-theme="dark"]) #sun-icon { display: inline; }
+  :global(html[data-theme="dark"]) #moon-icon { display: none; }
+</style>

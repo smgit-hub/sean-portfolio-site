@@ -8,7 +8,7 @@ export interface Props {
 const {
   title = 'Sean Millard — Full-Stack Web Developer',
   description = 'Full-Stack Web Developer building SaaS products and custom web applications. Phillip Island, Australia.',
-  image = '/logo-sm.svg',
+  image = '/og.png',
 } = Astro.props;
 
 const GA_MEASUREMENT_ID = 'G-PB0Z7X9EK2';
@@ -26,7 +26,16 @@ const socialImageUrl = Astro.site
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c0d0c" media="(prefers-color-scheme: dark)" />
+    <script is:inline>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('theme'); } catch (e) {}
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
@@ -35,7 +44,9 @@ const socialImageUrl = Astro.site
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImageUrl} />
-    <meta property="og:image:alt" content="Sean Millard portfolio preview" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Sean Millard, Full-Stack Web Developer, with screenshots of Weblit, Reelbook and Seltra" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />

@@ -1,26 +1,53 @@
 ---
+const shot = (name: string) => `/images/projects/shots/${name}`;
+
+// Back to front: later entries sit on top
+const cluster = [
+  { image: 'seltra', alt: 'Seltra accounting app homepage', class: 'top-0 left-0 w-[74%] -rotate-[1.5deg]' },
+  { image: 'reelbook', alt: 'Reelbook private video galleries homepage', class: 'top-[12%] right-0 w-[74%] rotate-[1.5deg]' },
+  { image: 'weblit', alt: 'Weblit managed websites homepage', class: 'bottom-0 left-[10%] w-[80%]' },
+];
 ---
 
-<section id="hero" class="pt-32 pb-16">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="max-w-2xl reveal">
-      <p class="text-xs uppercase letter-spacing-wide font-medium mb-4" style="color: var(--accent);">Full-Stack Web Development</p>
-      <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6" style="color: var(--text);">Web products built end-to-end.</h1>
-      <p class="text-lg leading-relaxed mb-8" style="color: var(--text-muted);">Tailored to your needs. Not constrained by templates.</p>
-      <div class="flex flex-wrap gap-4">
-        <a href="#projects" class="inline-block px-6 py-3 border font-medium rounded transition-colors" style="border-color: var(--accent); color: var(--accent);" onmouseover="this.style.backgroundColor='var(--hover-accent-bg)'" onmouseout="this.style.backgroundColor='transparent'">
-          See the work →
-        </a>
-        <a href="#contact" class="inline-block px-6 py-3 border font-medium rounded transition-colors" style="border-color: var(--border); color: var(--text-muted);">
-          Get in touch
-        </a>
+<section id="hero" class="pt-28 pb-20 lg:pt-36 lg:pb-28">
+  <div class="max-w-7xl mx-auto px-6 grid gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-12 items-center">
+    <div class="reveal">
+      <p class="text-xs uppercase letter-spacing-wide font-medium mb-5" style="color: var(--accent);">Full-Stack Web Developer · Phillip Island, Australia</p>
+      <h1 class="font-display text-5xl sm:text-6xl xl:text-7xl font-bold leading-[1.02] tracking-tight mb-6" style="color: var(--text);">Web products built <span class="whitespace-nowrap">end-to-end.</span></h1>
+      <p class="text-lg leading-relaxed mb-9 max-w-xl" style="color: var(--text-muted);">I design, build and run the whole thing: database, auth, payments, AI and deployment. Right now that's my own SaaS products, Weblit, Seltra, JobWrap and StayConnex, plus custom builds for clients.</p>
+      <div class="flex flex-wrap gap-3">
+        <a href="#projects" class="btn btn-primary">See the work <span aria-hidden="true">→</span></a>
+        <a href="#contact" class="btn btn-secondary">Get in touch</a>
       </div>
+      <a href="#scoper" class="inline-block mt-6 text-sm font-medium" style="color: var(--text-muted);" onmouseover="this.style.color='var(--hover-accent)'" onmouseout="this.style.color='var(--text-muted)'">Got an idea? <span style="color: var(--accent);">Get a quick AI project brief →</span></a>
     </div>
+
+    <a href="#projects" class="hero-cluster relative block reveal reveal-delay-2" aria-label="See the work">
+      {cluster.map((item, i) => (
+        <div class={`shot absolute aspect-[1365/860] ${item.class}`}>
+          <img
+            src={`${shot(item.image)}.webp`}
+            srcset={`${shot(item.image)}.webp 1365w, ${shot(item.image)}@2x.webp 2730w`}
+            sizes="(min-width: 1280px) 520px, (min-width: 1024px) 40vw, 85vw"
+            width="1365"
+            height="860"
+            alt={item.alt}
+            loading="eager"
+            fetchpriority={i === cluster.length - 1 ? 'high' : 'auto'}
+            decoding="async"
+          />
+        </div>
+      ))}
+    </a>
   </div>
 </section>
 
 <style>
   .letter-spacing-wide {
     letter-spacing: 0.1em;
+  }
+
+  .hero-cluster {
+    aspect-ratio: 1 / 0.82;
   }
 </style>
